@@ -53,7 +53,7 @@ The topology information is stored as attributes to a dummy variable (in the exa
 
 The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a 1D network this should be 1. The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute `edge_node_connectivity` points to an index variable identifying for every edge to the indices of its begin and end nodes. The connectivity array will thus be a matrix of size nEdges x 2. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh1_edge_nodes in the example below). Consistent with the CF-conventions [compression](http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.4/cf-conventions.html#compression-by-gathering) option, the connectivity indices are 0-based by default.
 
-_The option to support both 0- and 1-based indexing was introduced to be able to support existing files with 1-based index tables using ncML._ See [this section on 0-/1-based indexing|#0/1basedindexing] for more details. 
+_The option to support both 0- and 1-based indexing was introduced to be able to support existing files with 1-based index tables using ncML._ See [this section on 0-/1-based indexing](#zero-or-one) for more details. 
 
 The mesh_topology may optionally include an `edge_coordinates` attribute which points to the auxiliary coordinate variables associated with the characteristic location of the edge (commonly the midpoint). These auxiliary coordinate variables will have length nEdges, and may have in turn a `bounds` attribute that specifies the bounding coordinates of the edge (thereby duplicating the data in the `node_coordinates` variables).
 
@@ -870,7 +870,7 @@ Mesh1_waterlevel:location_index_set = "Mesh1_set" ;
 Mesh1_waterlevel:coordinates = "Mesh1_set_x Mesh1_set_y" ;
 ```
 
-
+<a name="zero-or-one"/>
 ## Zero or One-based indexing
 The indexing using by the CF [compression](http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.4/cf-conventions.html#compression-by-gathering) option is 0-based. Therefore, it is most consistent for this CF extension for unstructured data to also use 0-based indexing, which means that points, edges, faces and volumes will be numbered starting with 0. This convention is consistent with languages like C and Java, but unlike FORTRAN and MATLAB. Since many of the unstructured models have been programed in FORTRAN and legacy netCDF files exist that use 1-based indexing (which could be upgraded to be consistent with this new proposal using ncML if 1-based indexing were allowed), we propose to support both 0- and 1-based indexing by means of the `start_index` attribute. You will find below two examples of the same network geometry using either 0- or 1-based indexing. Switching between 0- and 1-based indexing is as easy as adding 1 to or subtracting 1 from the indices upon reading or writing depending on the setting of `start_index`; allowing both options should only have a minor impact on the reading routines and no effect at all on the rest of your code.
 
