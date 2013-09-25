@@ -57,7 +57,7 @@ _The option to support both 0- and 1-based indexing was introduced to be able to
 
 The mesh_topology may optionally include an `edge_coordinates` attribute which points to the auxiliary coordinate variables associated with the characteristic location of the edge (commonly the midpoint). These auxiliary coordinate variables will have length nEdges, and may have in turn a `bounds` attribute that specifies the bounding coordinates of the edge (thereby duplicating the data in the `node_coordinates` variables).
 
-** This use of the `bounds` attribute is consistent with the CF-convention on the use of `bounds` for multi-dimensional coordinate variables with p-sided cells, but it may not strictly be supported by the CF-convention right now. **
+_This use of the `bounds` attribute is consistent with the CF-convention on the use of `bounds` for multi-dimensional coordinate variables with p-sided cells, but it may not strictly be supported by the CF-convention right now._
 
 ![image](./images/network.png)
 
@@ -453,7 +453,7 @@ Mesh2_surface:location = "face" ;
 Mesh2_surface:coordinates = "Mesh2_face_x Mesh2_face_y" ;
 ```
 
-### fully 3D unstructured (i.e. non-layered) mesh topology
+### Fully 3D unstructured (i.e. non-layered) mesh topology
 
 For a fully 3D unstructured mesh topology we extend the hierarchy of nodes, edges and faces to volumes. Contrary to layered case this type of mesh requires a fully 3D specification of the mesh; hence we not only need latitude and longitude coordinates but also some kind of elevation coordinate (_this probably requires a new standard name_).
 
