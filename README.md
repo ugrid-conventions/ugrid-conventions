@@ -8,12 +8,15 @@ This page describes a proposal for storing unstructured (or flexible mesh) model
 
 In its most basic form unstructured data may be stored as data defined at a series of points, the CF-conventions are then sufficient. However, it is often useful or even necessary to also know the topology of the underlying unstructured mesh: is it a one dimensional (1D) network, a two dimensional (2D) triangular mesh or more flexible mixed triangle/quadrilateral mesh, a 2D mesh with vertical layers, or a fully unstructured three dimensional (3D) mesh. This document describes the attribute conventions for storing the mesh topology and for associating variables with (specific locations on) the mesh topology. The conventions have been designed to store the output data of a combined 1D-2D-3D flow model with staggered data, but the metadata for a simple 1D network or 2D triangular mesh doesn't suffer from the genericity needed for the most complex models.
 
-Due to the wide variety in unstructured mesh models, some relevant concepts have not yet been worked out in detail. This includes the following concepts:
+Due to the complexity in unstructured mesh models, some concepts have not yet been worked out in this version.
+
+Known issues left for future versions include: 
 * adaptive mesh topology (this could be supported by defining a `time_concatenation` attribute for a time-series of mesh topologies)
 * higher order element data; for an idea how such data could be stored see this other [proposal](https://publicwiki.deltares.nl/display/NETCDF/Finite+Element+based+CF+proposal+for+Unstructured+Grid+data+model).
 * subgrid data; the NetCDF pages by the Bundesanstalt für Wasserbau (BAW) contain some proposals on this topic ([see their pages (in German)](http://www.baw.de/methoden/index.php5/NetCDF)).
-* 3D fully unstructured meshes (included but still limited in scope).
-See also a related [proposal](https://svn.pnl.gov/gcrm/wiki/DataModelProposal) for an unstructured mesh data model by Jeff Daily at Pacific Northwest National Laboratory (PNNL).
+* 3D fully unstructured meshes (some concepts are included here, but still somewhat limited in scope).
+* multiply-connected domains
+* ghost elements
 
 
 ## Topology
@@ -24,10 +27,10 @@ Inspired by Wikipedia's definition of [network topology](http://en.wikipedia.org
 
 | Dimensionality | Proposed Name | Comments |
 | --- | --- | --- |
-| 0 | node | A point, a coordinate pair or triplet: the most basic element of the topology. The word node seems to be more commonly used than the alternative "vertex". |
+| 0 | node | A point, a coordinate pair or triplet: the most basic element of the topology. The word "node" seems to be more commonly used than the alternative "vertex". |
 | 1 | edge | A line or curve bounded by two nodes. |
-| 2 | face | A plane or surface enclosed by a set of edges. In a 2D horizontal application one may consider the word "polygon", but in the hierarchy of elements the word face is most common. |
-| 3 | volume | A volume enclosed by a set of faces. |
+| 2 | face | A plane or surface enclosed by a set of edges. In a 2D horizontal application one may consider the word "polygon", but in the hierarchy of elements the word "face" is most common. |
+| 3 | volume | A volume enclosed by a set of faces.  The alternative word "cell" was considered, but "cell" is often used in the community to describe 2 dimensional structures.|
 
 _In favor of simpler code for interpreting compliant files, we have dropped to use of the `locations` attribute which allowed the user to specify his/her own names for nodes, edges, faces and volumes._
 
