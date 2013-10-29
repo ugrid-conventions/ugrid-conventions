@@ -1,4 +1,4 @@
-ugrid-conventions
+UGRID Conventions
 =================
 
 
