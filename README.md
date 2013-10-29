@@ -1,7 +1,7 @@
 UGRID Conventions
 =================
-* [Stable Versioned Releases (0.9,..)](https://github.com/ugrid-conventions/ugrid-conventions/releases)
-* [Development Version](https://github.com/ugrid-conventions/ugrid-conventions/blob/master/ugrid-conventions.md) 
+* [Stable Versions of UGRID Conventions Document (0.9,..)](https://github.com/ugrid-conventions/ugrid-conventions/releases)
+* [Development Version of UGRID Conventions Document](https://github.com/ugrid-conventions/ugrid-conventions/blob/master/ugrid-conventions.md) 
 
 This project contains a proposed standard for storing unstructured (or flexible mesh) model data in a network common data form (NetCDF) file. 
 
