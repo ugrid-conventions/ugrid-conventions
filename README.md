@@ -9,6 +9,7 @@ People who have contributed to this standard:
 
 * Bert Jagers
 * David Stuebe
+* Tom Gross
 * Chris Barker
 * Brian Zelenke
 * Rich Signell
@@ -16,6 +17,7 @@ People who have contributed to this standard:
 * Alex Crosby
 * Karen Schuchardt
 * David Ham
+* Brian Blanton
 * Cristina Forbes
 * Charles Seaton
 * Dave Forrest
