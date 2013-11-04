@@ -2,11 +2,7 @@ UGRID Conventions
 =================
 * [Version 0.9.0  (tagged 2013-11-04)](https://github.com/ugrid-conventions/ugrid-conventions/blob/v0.9.0/ugrid-conventions.md)
 
-This document is a standard for storing unstructured (or flexible mesh) model data in a Unidata Network Common Data Form (NetCDF) file. 
-
-The standard was developed over a period of several years through the [UGRID Google Group](https://groups.google.com/forum/#!forum/ugrid-interoperability) which had members from many different unstructured grid modeling communities (including SELFE, ELCIRC, FVCOM, ADCIRC).   Bert Jagers (Deltares) created the first draft of this document with help from the rest of the UGRID Google Group members. 
-
-We will likely propose this as a CF Standard once it has been fully tested by the community.
+This document is a standard for storing unstructured (or flexible mesh) model data in a Unidata Network Common Data Form (NetCDF) file. The standard was developed over a period of several years through the [UGRID Google Group](https://groups.google.com/forum/#!forum/ugrid-interoperability) which had members from many different unstructured grid modeling communities (including SELFE, ELCIRC, FVCOM, ADCIRC).  From these discusions Bert Jagers (Deltares) created the first draft of this document. We will likely propose this as a CF Standard once it has been fully tested by the community.
 
 People who have contributed to this standard:
 
