@@ -22,6 +22,7 @@ People who have contributed to this standard:
 * Charles Seaton
 * Dave Forrest
 * Bill Howe
+* Geoff Cowles
 
 
 
