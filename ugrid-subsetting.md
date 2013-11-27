@@ -26,7 +26,7 @@ Recent development builds of Hyrax include the new functionality, so it should b
 
 The source code for the Hyrax implementation is here:
 
-[Gyrax subsetting code](https://scm.opendap.org/svn/trunk/ugrid_functions/)
+[Hyrax subsetting code](https://scm.opendap.org/svn/trunk/ugrid_functions/)
 
 
 ## GridFields
