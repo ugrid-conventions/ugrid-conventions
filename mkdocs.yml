@@ -1,0 +1,24 @@
+site_name: UGRID
+pages:
+  - Home: index.md
+  - subsetting: ugrid-subsetting.md
+
+theme_dir: readthedocs/
+
+site_description: UGRID Conventions
+site_url: https://UGRID.github.io/ugrid-conventions
+repo_url: https://github.com/ugrid-conventions/ugrid-conventions
+#site_author:
+#site_favicon: favicon.png
+docs_dir: src
+site_dir: _site
+#copyright:
+markdown_extensions:
+    - toc:
+        permalink: ""
+    - extra
+    - smarty
+    - math
+    - markdown_checklist.extension
+extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML','js/mathjaxhelper.js']
+google_analytics: ['UA-9133259-16', 'UGRID.github.io']
