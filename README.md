@@ -1,4 +1,4 @@
-UGRID Conventions
+UGRID Conventions (v0.9)
 =================
 Note: NetCDF files using this convention can be be given the global attribute `Conventions = 'CF-1.6, UGRID-0.9'` if they are CF- and UGRID-compliant, or just `Conventions = 'UGRID-0.9'` if they are not CF-compliant. 
 * [Version 0.9.0 ](https://github.com/ugrid-conventions/ugrid-conventions/blob/v0.9.0/ugrid-conventions.md)
