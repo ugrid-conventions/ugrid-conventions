@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UGRID Conventions">
+  
+  
+  <title>UGRID</title>
+  
+
+  <link rel="shortcut icon" href="./img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "None";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script>
+  <script src="./js/theme.js"></script> 
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <script src="./js/mathjaxhelper.js"></script>
+
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-9133259-16', 'UGRID.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> UGRID</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href=".">Home</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#ugrid-conventions">UGRID Conventions</a></li>
+                
+                    <li><a class="toctree-l4" href="#introduction">Introduction</a></li>
+                
+                    <li><a class="toctree-l4" href="#topology">Topology</a></li>
+                
+                    <li><a class="toctree-l4" href="#data-defined-on-unstructured-meshes">Data defined on unstructured meshes</a></li>
+                
+                    <li><a class="toctree-l4" href="#zero-or-one-based-indexing">Zero or One-based indexing</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="ugrid-subsetting/">subsetting</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">UGRID</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/ugrid-conventions/ugrid-conventions" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="ugrid-conventions">UGRID Conventions<a class="headerlink" href="#ugrid-conventions" title="Permanent link"></a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link"></a></h2>
+<p>This page describes a proposal for storing unstructured (or flexible mesh) model data in the Unidata Network Common Data Form (NetCDF) file. Our focus is on data for environmental applications and hence we start from the <a href="http://cf-convention.github.io/">Climate &amp; Forecast (CF) Metadata Conventions</a>. The CF Conventions have been the standard in climate research for many years, and are  being adopted by others as the metadata standard (e.g. <a href="https://earthdata.nasa.gov/data/standards-and-references/metadata-standards">NASA</a>,<a href="http://www.opengeospatial.org/standards/netcdf">Open Geospatial Consortium</a>). The CF conventions allow you to provide the geospatial and temporal coordinates for scientific data, but currently assumes that the horizontal topology may be inferred from the i,j indices of structured grids.  This proposal adds conventions for specifying the topology for unstructured (e.g. triangular) grids.  </p>
+<p>In its most basic form unstructured data may be stored as data defined at a series of points, the CF-conventions are then sufficient. However, it is often useful or even necessary to also know the topology of the underlying unstructured mesh: is it a one dimensional (1D) network, a two dimensional (2D) triangular mesh or more flexible mixed triangle/quadrilateral mesh, a 2D mesh with vertical layers, or a fully unstructured three dimensional (3D) mesh. This document describes the attribute conventions for storing the mesh topology and for associating variables with (specific locations on) the mesh topology. The conventions have been designed to store the output data of a combined 1D-2D-3D flow model with staggered data, but the metadata for a simple 1D network or 2D triangular mesh doesn&rsquo;t suffer from the genericity needed for the most complex models.</p>
+<p>Due to the complexity in unstructured mesh models, some concepts have not yet been worked out in this version.</p>
+<p>Known issues left for future versions include: 
+<em> adaptive mesh topology (this could be supported by defining a <code>time_concatenation</code> attribute for a time-series of mesh topologies)
+</em> higher order element data; for an idea how such data could be stored see this other <a href="https://publicwiki.deltares.nl/display/NETCDF/Finite+Element+based+CF+proposal+for+Unstructured+Grid+data+model">proposal</a>.
+<em> subgrid data; the NetCDF pages by the Bundesanstalt für Wasserbau (BAW) contain some proposals on this topic (<a href="http://www.baw.de/methoden/index.php5/NetCDF">see their pages (in German)</a>).
+</em> 3D fully unstructured meshes (some concepts are included here, but still somewhat limited in scope).
+<em> multiply-connected domains
+</em> ghost elements</p>
+<h2 id="topology">Topology<a class="headerlink" href="#topology" title="Permanent link"></a></h2>
+<h3 id="naming-conventions-for-geometrical-elements">Naming conventions for geometrical elements<a class="headerlink" href="#naming-conventions-for-geometrical-elements" title="Permanent link"></a></h3>
+<p>Inspired by Wikipedia&rsquo;s definition of <a href="http://en.wikipedia.org/wiki/Network_topology">network topology</a>, we define the mesh topology here as the interconnection of various geometrical elements of the mesh. The pure interconnectivity is independent of georeferencing the individual geometrical elements, but for the practical applications for which we are defining this CF extension, we&rsquo;ll always add coordinate data. Within a mesh, one can distinguish 0-, 1-, 2- and 3-dimensional elements. We need some names to identify these four types of elements; after discussion we propose the following names:</p>
+<table>
+<thead>
+<tr>
+<th>Dimensionality</th>
+<th>Proposed Name</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>node</td>
+<td>A point, a coordinate pair or triplet: the most basic element of the topology. The word &ldquo;node&rdquo; seems to be more commonly used than the alternative &ldquo;vertex&rdquo;.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>edge</td>
+<td>A line or curve bounded by two nodes.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>face</td>
+<td>A plane or surface enclosed by a set of edges. In a 2D horizontal application one may consider the word &ldquo;polygon&rdquo;, but in the hierarchy of elements the word &ldquo;face&rdquo; is most common.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>volume</td>
+<td>A volume enclosed by a set of faces.  The alternative word &ldquo;cell&rdquo; was considered, but &ldquo;cell&rdquo; is often used in the community to describe 2 dimensional structures.</td>
+</tr>
+</tbody>
+</table>
+<p><em>In favor of simpler code for interpreting compliant files, we have dropped to use of the <code>locations</code> attribute which allowed the user to specify his/her own names for nodes, edges, faces and volumes.</em></p>
+<h3 id="1d-network-topology">1D network topology<a class="headerlink" href="#1d-network-topology" title="Permanent link"></a></h3>
+<p>The topology information is stored as attributes to a dummy variable (in the example below called &ldquo;Mesh1&rdquo;) with <code>cf_role</code> mesh_topology.</p>
+<table>
+<thead>
+<tr>
+<th>Required topology attributes</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cf_role</td>
+<td>mesh_topology</td>
+</tr>
+<tr>
+<td>topology_dimension</td>
+<td>1</td>
+</tr>
+<tr>
+<td>node_coordinates</td>
+<td></td>
+</tr>
+<tr>
+<td>edge_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Optional attributes</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>edge_coordinates</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 1D network this should be 1. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>edge_node_connectivity</code> points to an index variable identifying for every edge to the indices of its begin and end nodes. The connectivity array will thus be a matrix of size nEdges x 2. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh1_edge_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default.</p>
+<p><em>The option to support both 0- and 1-based indexing was introduced to be able to support existing files with 1-based index tables using ncML.</em> See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details. </p>
+<p>The mesh_topology may optionally include an <code>edge_coordinates</code> attribute which points to the auxiliary coordinate variables associated with the characteristic location of the edge (commonly the midpoint). These auxiliary coordinate variables will have length nEdges, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
+<p><em>This use of the <code>bounds</code> attribute is consistent with the CF-convention on the use of <code>bounds</code> for multi-dimensional coordinate variables with p-sided cells, but it may not strictly be supported by the CF-convention right now.</em></p>
+<p><img alt="image" src="./images/network.png" /></p>
+<p>Example:</p>
+<pre><code class="javascript">dimensions:
+nMesh1_node = 5 ; // nNodes
+nMesh1_edge = 4 ; // nEdges
+
+Two = 2;
+
+variables:
+// Mesh topology
+integer Mesh1 ;
+Mesh1:cf_role = &quot;mesh_topology&quot; ;
+Mesh1:long_name = &quot;Topology data of 1D network&quot; ;
+Mesh1:topology_dimension = 1 ;
+Mesh1:node_coordinates = &quot;Mesh1_node_x Mesh1_node_y&quot; ;
+Mesh1:edge_node_connectivity = &quot;Mesh1_edge_nodes&quot; ;
+Mesh1:edge_coordinates = &quot;Mesh1_edge_x Mesh1_edge_y&quot; ; // optional attribute
+integer Mesh1_edge_nodes(nMesh1_edge, Two) ;
+Mesh1_edge_nodes:cf_role = &quot;edge_node_connectivity&quot; ;
+Mesh1_edge_nodes:long_name = &quot;Maps every edge/link to the two nodes that it connects.&quot; ;
+Mesh1_edge_nodes:start_index = 1 ;
+
+// Mesh node coordinates
+double Mesh1_node_x(nMesh1_node) ;
+Mesh1_node_x:standard_name = &quot;longitude&quot; ;
+Mesh1_node_x:long_name = &quot;Longitude of 1D network nodes.&quot; ;
+Mesh1_node_x:units = &quot;degrees_east&quot; ;
+double Mesh1_node_y(nMesh1_node) ;
+Mesh1_node_y:standard_name = &quot;latitude&quot; ;
+Mesh1_node_y:long_name = &quot;Latitude of 1D network nodes.&quot; ;
+Mesh1_node_y:units = &quot;degrees_north&quot; ;
+
+// Optional mesh edge coordinate variables
+double Mesh1_edge_x(nMesh1_edge) ;
+Mesh1_edge_x:standard_name = &quot;longitude&quot; ;
+Mesh1_edge_x:long_name = &quot;Characteristic longitude of 1D network edge (e.g. midpoint of the edge).&quot; ;
+Mesh1_edge_x:units = &quot;degrees_east&quot; ;
+Mesh1_edge_x:bounds = &quot;Mesh1_edge_xbnds&quot; ;
+double Mesh1_edge_y(nMesh1_edge) ;
+Mesh1_edge_y:standard_name = &quot;latitude&quot; ;
+Mesh1_edge_y:long_name = &quot;Characteristic latitude of 1D network edge (e.g. midpoint of the edge).&quot; ;
+Mesh1_edge_y:units = &quot;degrees_north&quot; ;
+Mesh1_edge_y:bounds = &quot;Mesh1_edge_ybnds&quot; ;
+double Mesh1_edge_xbnds(nMesh1_edge,Two) ;
+Mesh1_edge_xbnds:standard_name = &quot;longitude&quot; ;
+Mesh1_edge_xbnds:long_name = &quot;Longitude bounds of 1D network edge (i.e. begin and end longitude).&quot; ;
+Mesh1_edge_xbnds:units = &quot;degrees_east&quot; ;
+double Mesh1_edge_ybnds(nMesh1_edge,Two) ;
+Mesh1_edge_ybnds:standard_name = &quot;latitude&quot; ;
+Mesh1_edge_ybnds:long_name = &quot;Latitude bounds of 1D network edge (i.e. begin and end latitude).&quot; ;
+Mesh1_edge_ybnds:units = &quot;degrees_north&quot; ;
+</code></pre>
+
+<h3 id="2d-triangular-mesh-topology">2D triangular mesh topology<a class="headerlink" href="#2d-triangular-mesh-topology" title="Permanent link"></a></h3>
+<p>The topology information is stored as attributes to a dummy variable (in the example below called &ldquo;Mesh2&rdquo;) with <code>cf_role</code> mesh_topology.</p>
+<table>
+<thead>
+<tr>
+<th>Required topology attributes</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cf_role</td>
+<td>mesh_topology</td>
+</tr>
+<tr>
+<td>topology_dimension</td>
+<td>2</td>
+</tr>
+<tr>
+<td>node_coordinates</td>
+<td></td>
+</tr>
+<tr>
+<td>face_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Optionally required attributes</strong>*</td>
+<td></td>
+</tr>
+<tr>
+<td>edge_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Optional attributes </strong></td>
+<td></td>
+</tr>
+<tr>
+<td>face_edge_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>face_face_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>boundary_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>face_coordinates</td>
+<td></td>
+</tr>
+<tr>
+<td>edge_coordinates</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>*The &ldquo;Optionally required&rdquo; attribute <code>edge_node_connectivity</code> is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).</p>
+<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 2-dimensional (triangular) mesh this should be 2. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>face_node_connectivity</code> points to an index variable identifying for every face (here consistently triangle) the indices of its three corner nodes. The corner nodes should be specified in anticlockwise (also referred to as counterclockwise) direction as viewed from above (consistent with the CF-convention for <code>bounds</code> of p-sided cells. The connectivity array will thus be a matrix of size nFaces x 3. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default. See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
+<p>In case you want to define variables on the edges of the triangular mesh topology you need to specify the <code>edge_node_connectivity</code> attribute to map edges to nodes. Although the face to node mapping implicitly also defines the location of the edges, it does not specify the global numbering of the edges. Again the indexing convention of <code>edge_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_edge_nodes in the example below) and 0-based indexing is the default.  Since it does not apply to edges globally, specifying the <code>boundary_node_connectivity</code> attribute described below does not (in and of itself) necessitate the need to specify the <code>edge_node_connectivity</code> attribute too.</p>
+<p>Optionally the topology may have the following attributes:
+<em> <code>face_edge_connectivity</code> pointing to an index variable identifying for every face (here consistently triangle) the indices of its three edges. The edges should be specified in anticlockwise direction as viewed from above. This connectivity array will thus be a matrix of size nFaces x 3. Again the indexing convention of <code>face_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_edges in the example below) and 0-based indexing is the default.
+</em> <code>face_face_connectivity</code> pointing to an index variable identifying all faces (here consistently triangle) that share an edge with each face, i.e. are neighbors. This connectivity array will thus be a matrix of size nFaces x 3 with a flag to note if the region &ldquo;out of mesh&rdquo; abuts an edge of a given face. Again the indexing convention of <code>face_face_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_links in the example below) and 0-based indexing is the default.
+<em> <code>boundary_node_connectivity</code> pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>edge_node_connectivity</code>.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
+</em> <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
+<p><img alt="image" src="./images/triangles.png" /></p>
+<p>Example:</p>
+<pre><code class="javascript">dimensions:
+nMesh2_node = 4 ; // nNodes
+nMesh2_edge = 5 ; // nEdges
+nMesh2_face = 2 ; // nFaces
+
+Two = 2 ;
+Three = 3 ;
+
+variables:
+// Mesh topology
+integer Mesh2 ;
+Mesh2:cf_role = &quot;mesh_topology&quot; ;
+Mesh2:long_name = &quot;Topology data of 2D unstructured mesh&quot; ;
+Mesh2:topology_dimension = 2 ;
+Mesh2:node_coordinates = &quot;Mesh2_node_x Mesh2_node_y&quot; ;
+Mesh2:face_node_connectivity = &quot;Mesh2_face_nodes&quot; ;
+Mesh2:edge_node_connectivity = &quot;Mesh2_edge_nodes&quot; ; // attribute required if variables will be defined on edges
+Mesh2:edge_coordinates = &quot;Mesh2_edge_x Mesh2_edge_y&quot; ; // optional attribute (requires edge_node_connectivity)
+Mesh2:face_coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ; // optional attribute
+Mesh2:face_edge_connectivity = &quot;Mesh2_face_edges&quot; ; // optional attribute (requires edge_node_connectivity)
+Mesh2:face_face_connectivity = &quot;Mesh2_face_links&quot; ; // optional attribute
+integer Mesh2_face_nodes(nMesh2_face, Three) ;
+Mesh2_face_nodes:cf_role = &quot;face_node_connectivity&quot; ;
+Mesh2_face_nodes:long_name = &quot;Maps every triangular face to its three corner nodes.&quot; ;
+Mesh2_face_nodes:start_index = 1 ;
+integer Mesh2_edge_nodes(nMesh2_edge, Two) ;
+Mesh2_edge_nodes:cf_role = &quot;edge_node_connectivity&quot; ;
+Mesh2_edge_nodes:long_name = &quot;Maps every edge to the two nodes that it connects.&quot; ;
+Mesh2_edge_nodes:start_index = 1 ;
+
+// Optional mesh topology variables
+integer Mesh2_face_edges(nMesh2_face, Three) ;
+Mesh2_face_edges:cf_role = &quot;face_edge_connectivity&quot; ;
+Mesh2_face_edges:long_name = &quot;Maps every triangular face to its three edges.&quot; ;
+Mesh2_face_edges:start_index = 1 ;
+integer Mesh2_face_links(nMesh2_face, Three) ;
+Mesh2_face_links:cf_role = &quot;face_face_connectivity&quot; ;
+Mesh2_face_links:long_name = &quot;Indicates which other faces neighbor each face.&quot; ;
+Mesh2_face_links:start_index = 1 ;
+Mesh2_face_links:flag_values = -1 ;
+Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+
+// Mesh node coordinates
+double Mesh2_node_x(nMesh2_node) ;
+Mesh2_node_x:standard_name = &quot;longitude&quot; ;
+Mesh2_node_x:long_name = &quot;Longitude of 2D mesh nodes.&quot; ;
+Mesh2_node_x:units = &quot;degrees_east&quot; ;
+double Mesh2_node_y(nMesh2_node) ;
+Mesh2_node_y:standard_name = &quot;latitude&quot; ;
+Mesh2_node_y:long_name = &quot;Latitude of 2D mesh nodes.&quot; ;
+Mesh2_node_y:units = &quot;degrees_north&quot; ;
+
+// Optional mesh face and edge coordinate variables
+double Mesh2_face_x(nMesh2_face) ;
+Mesh2_face_x:standard_name = &quot;longitude&quot; ;
+Mesh2_face_x:long_name = &quot;Characteristics longitude of 2D mesh triangle (e.g. circumcenter coordinate).&quot; ;
+Mesh2_face_x:units = &quot;degrees_east&quot; ;
+double Mesh2_face_y(nMesh2_face) ;
+Mesh2_face_y:standard_name = &quot;latitude&quot; ;
+Mesh2_face_y:long_name = &quot;Characteristics latitude of 2D mesh triangle (e.g. circumcenter coordinate).&quot; ;
+Mesh2_face_y:units = &quot;degrees_north&quot; ;
+double Mesh2_edge_x(nMesh2_edge) ;
+Mesh2_edge_x:standard_name = &quot;longitude&quot; ;
+Mesh2_edge_x:long_name = &quot;Characteristic longitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh2_edge_x:units = &quot;degrees_east&quot; ;
+double Mesh2_edge_y(nMesh2_edge) ;
+Mesh2_edge_y:standard_name = &quot;latitude&quot; ;
+Mesh2_edge_y:long_name = &quot;Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh2_edge_y:units = &quot;degrees_north&quot; ;
+</code></pre>
+
+<h3 id="2d-flexible-mesh-mixed-triangles-quadrilaterals-etc-topology">2D flexible mesh (mixed triangles, quadrilaterals, etc.) topology<a class="headerlink" href="#2d-flexible-mesh-mixed-triangles-quadrilaterals-etc-topology" title="Permanent link"></a></h3>
+<p>The case of a 2D mesh with mixed face sizes is identical to the 2D triangular mesh discussed above with the exception that not all faces have the same number of nodes. To support this variability we may use in the future a ragged array, but here we propose to use _FillValue to indicate faces with smaller number of nodes than the arrays allow.</p>
+<p>The topology information is stored as attributes to a dummy variable (in the example below called &ldquo;Mesh2&rdquo;) with <code>cf_role</code> mesh_topology.</p>
+<table>
+<thead>
+<tr>
+<th>Required topology attributes</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cf_role</td>
+<td>mesh_topology</td>
+</tr>
+<tr>
+<td>topology_dimension</td>
+<td>2</td>
+</tr>
+<tr>
+<td>node_coordinates</td>
+<td></td>
+</tr>
+<tr>
+<td>face_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Optionally required attributes</strong>*</td>
+<td></td>
+</tr>
+<tr>
+<td>edge_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Optional attributes</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>face_edge_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>face_face_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>boundary_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>face_coordinates</td>
+<td></td>
+</tr>
+<tr>
+<td>edge_coordinates</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>*The &ldquo;Optionally required&rdquo; attribute <code>edge_node_connectivity</code> is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).</p>
+<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 2-dimensional mesh this should be 2. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>face_node_connectivity</code> points to an index variable identifying for every face the indices of its corner nodes. The corner nodes should be specified in anticlockwise direction as viewed from above (consistent with the CF-convention for <code>bounds</code> of p-sided cells. The connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace; if a face has less corner nodes than MaxNumNodesPerFace then the last node indices shall be equal to <code>_FillValue</code> (which should obviously be larger than the number of nodes in the mesh). For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default. See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
+<p>In case you want to define variables on the edges of the 2D mesh topology you need to specify the <code>edge_node_connectivity</code> attribute to map edges to nodes. Although the face to node mapping implicitly also defines the location of the edges, it does not specify the global numbering of the edges. Again the indexing convention of <code>edge_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_edge_nodes in the example below) and 0-based indexing is the default. Since it does not apply to edges globally, specifying the <code>boundary_node_connectivity</code> attribute described below does not (in and of itself) necessitate the need to specify the <code>edge_node_connectivity</code> attribute too.</p>
+<p>Optionally the topology may have the following attributes:
+<em> <code>face_edge_connectivity</code> pointing to an index variable identifying for every face the indices of its edges. The edges should be specified in anticlockwise direction as viewed from above. This connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last edge indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_edges in the example below) and 0-based indexing is the default.
+</em> <code>face_face_connectivity</code> pointing to an index variable identifying all faces that share an edge with each face, i.e. are neighbors. This connectivity array will thus be a matrix of size nFaces x MaxNumNodesPerFace with a flag to note if the region &ldquo;out of mesh&rdquo; abuts an edge of a given face. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last face (column) indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_face_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_links in the example below) and 0-based indexing is the default.
+<em> <code>boundary_node_connectivity</code> pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>edge_node_connectivity</code>.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
+</em> <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
+<p><em>The use of <code>_FillValue</code> to indicate faces with less nodes than MaxNumNodesPerFace extends to the coordinate bounds variables; this is an extension of the current convention.</em></p>
+<p><img alt="image" src="./images/mixedmesh.png" /></p>
+<p>Example:</p>
+<pre><code class="javascript">dimensions:
+nMesh2_node = 5 ; // nNodes
+nMesh2_edge = 6 ; // nEdges
+nMesh2_face = 2 ; // nFaces
+nMaxMesh2_face_nodes = 4 ; // MaxNumNodesPerFace
+
+Two = 2 ;
+
+variables:
+// Mesh topology
+integer Mesh2 ;
+Mesh2:cf_role = &quot;mesh_topology&quot; ;
+Mesh2:long_name = &quot;Topology data of 2D unstructured mesh&quot; ;
+Mesh2:topology_dimension = 2 ;
+Mesh2:node_coordinates = &quot;Mesh2_node_x Mesh2_node_y&quot; ;
+Mesh2:face_node_connectivity = &quot;Mesh2_face_nodes&quot; ;
+Mesh2:edge_node_connectivity = &quot;Mesh2_edge_nodes&quot; ; // attribute required if variables will be defined on edges
+Mesh2:edge_coordinates = &quot;Mesh2_edge_x Mesh2_edge_y&quot; ; // optional attribute (requires edge_node_connectivity)
+Mesh2:face_coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ; // optional attribute
+Mesh2:face_edge_connectivity = &quot;Mesh2_face_edges&quot; ; // optional attribute (requires edge_node_connectivity)
+Mesh2:face_face_connectivity = &quot;Mesh2_face_links&quot; ; // optional attribute
+integer Mesh2_face_nodes(nMesh2_face, nMaxMesh2_face_nodes) ;
+Mesh2_face_nodes:cf_role = &quot;face_node_connectivity&quot; ;
+Mesh2_face_nodes:long_name = &quot;Maps every face to its corner nodes.&quot; ;
+Mesh2_face_nodes:_FillValue = 999999 ;
+Mesh2_face_nodes:start_index = 1 ;
+integer Mesh2_edge_nodes(nMesh2_edge, Two) ;
+Mesh2_edge_nodes:cf_role = &quot;edge_node_connectivity&quot; ;
+Mesh2_edge_nodes:long_name = &quot;Maps every edge to the two nodes that it connects.&quot; ;
+Mesh2_edge_nodes:start_index = 1 ;
+
+// Optional mesh topology variables
+integer Mesh2_face_edges(nMesh2_face, nMaxMesh2_face_nodes) ;
+Mesh2_face_edges:cf_role = &quot;face_edge_connectivity&quot; ;
+Mesh2_face_edges:long_name = &quot;Maps every face to its edges.&quot; ;
+Mesh2_face_edges:_FillValue = 999999 ;
+Mesh2_face_edges:start_index = 1 ;
+integer Mesh2_face_links(nMesh2_face, nMaxMesh2_face_nodes) ;
+Mesh2_face_links:cf_role = &quot;face_face_connectivity&quot; ;
+Mesh2_face_links:long_name = &quot;Indicates which other faces neighbor each face.&quot; ;
+Mesh2_face_links:_FillValue = 999999 ;
+Mesh2_face_links:start_index = 1 ;
+Mesh2_face_links:flag_values = -1 ;
+Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+
+// Mesh node coordinates
+double Mesh2_node_x(nMesh2_node) ;
+Mesh2_node_x:standard_name = &quot;longitude&quot; ;
+Mesh2_node_x:long_name = &quot;Longitude of 2D mesh nodes.&quot; ;
+Mesh2_node_x:units = &quot;degrees_east&quot; ;
+double Mesh2_node_y(nMesh2_node) ;
+Mesh2_node_y:standard_name = &quot;latitude&quot; ;
+Mesh2_node_y:long_name = &quot;Latitude of 2D mesh nodes.&quot; ;
+Mesh2_node_y:units = &quot;degrees_north&quot; ;
+
+// Optional mesh face and edge coordinate variables
+double Mesh2_face_x(nMesh2_face) ;
+Mesh2_face_x:standard_name = &quot;longitude&quot; ;
+Mesh2_face_x:long_name = &quot;Characteristics longitude of 2D mesh face.&quot; ;
+Mesh2_face_x:units = &quot;degrees_east&quot; ;
+Mesh2_face_x:bounds = &quot;Mesh2_face_xbnds&quot; ;
+double Mesh2_face_y(nMesh2_face) ;
+Mesh2_face_y:standard_name = &quot;latitude&quot; ;
+Mesh2_face_y:long_name = &quot;Characteristics latitude of 2D mesh face.&quot; ;
+Mesh2_face_y:units = &quot;degrees_north&quot; ;
+Mesh2_face_y:bounds = &quot;Mesh2_face_ybnds&quot; ;
+double Mesh2_face_xbnds(nMesh2_face,nMaxMesh2_face_nodes) ;
+Mesh2_face_xbnds:standard_name = &quot;longitude&quot; ;
+Mesh2_face_xbnds:long_name = &quot;Longitude bounds of 2D mesh face (i.e. corner coordinates).&quot; ;
+Mesh2_face_xbnds:units = &quot;degrees_east&quot; ;
+Mesh2_face_xbnds:_FillValue = 9.9692099683868690E36;
+double Mesh2_face_ybnds(nMesh2_face,nMaxMesh2_face_nodes) ;
+Mesh2_face_ybnds:standard_name = &quot;latitude&quot; ;
+Mesh2_face_ybnds:long_name = &quot;Latitude bounds of 2D mesh face (i.e. corner coordinates).&quot; ;
+Mesh2_face_ybnds:units = &quot;degrees_north&quot; ;
+Mesh2_face_ybnds:_FillValue = 9.9692099683868690E36;
+double Mesh2_edge_x(nMesh2_edge) ;
+Mesh2_edge_x:standard_name = &quot;longitude&quot; ;
+Mesh2_edge_x:long_name = &quot;Characteristic longitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh2_edge_x:units = &quot;degrees_east&quot; ;
+double Mesh2_edge_y(nMesh2_edge) ;
+Mesh2_edge_y:standard_name = &quot;latitude&quot; ;
+Mesh2_edge_y:long_name = &quot;Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh2_edge_y:units = &quot;degrees_north&quot; ;
+// bounds variables for edges skipped
+</code></pre>
+
+<h3 id="3d-layered-mesh-topology">3D layered mesh topology<a class="headerlink" href="#3d-layered-mesh-topology" title="Permanent link"></a></h3>
+<p>For a 3D layered unstructured mesh topology this proposal follows the approach of the existing CF-conventions for structured meshes: horizontal and vertical dimensions are treated separately. For the horizontal plane a 2D unstructured mesh topology is defined, which is extruded in the vertical direction by means of a <a href="http://cf-convention.github.io/1.4.html#vertical-coordinate">vertical coordinate</a>. The example below matches the example in the previous section combined with a vertical coordinate according CF-conventions. This example introduces also the attributes <code>mesh</code> and <code>location</code> on the 2D variables &ldquo;Mesh2_surface&rdquo; and &ldquo;Mesh2_depth&rdquo;. For more information about these attributes see the <a href="#data-defined-on-unstructured-meshes">data definition</a> section below.</p>
+<p><img alt="image" src="./images/layered.png" /></p>
+<p>Example:</p>
+<pre><code class="javascript">dimensions:
+nMesh2_node = 6 ; // nNodes
+nMesh2_edge = 7 ; // nEdges
+nMesh2_face = 2 ; // nFaces
+nMaxMesh2_face_nodes = 4 ; // MaxNumNodesPerFace
+Mesh2_layers = 10 ;
+
+Two = 2 ;
+
+variables:
+// Mesh topology
+integer Mesh2 ;
+Mesh2:cf_role = &quot;mesh_topology&quot; ;
+Mesh2:long_name = &quot;Topology data of 2D unstructured mesh&quot; ;
+Mesh2:topology_dimension = 2 ;
+Mesh2:node_coordinates = &quot;Mesh2_node_x Mesh2_node_y&quot; ;
+Mesh2:face_node_connectivity = &quot;Mesh2_face_nodes&quot; ;
+Mesh2:edge_node_connectivity = &quot;Mesh2_edge_nodes&quot; ; // attribute required if variables will be defined on edges
+Mesh2:edge_coordinates = &quot;Mesh2_edge_x Mesh2_edge_y&quot; ; // optional attribute (requires edge_node_connectivity)
+Mesh2:face_coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ; // optional attribute
+Mesh2:face_edge_connectivity = &quot;Mesh2_face_edges&quot; ; // optional attribute (requires edge_node_connectivity)
+Mesh2:face_face_connectivity = &quot;Mesh2_face_links&quot; ; // optional attribute
+integer Mesh2_face_nodes(nMesh2_face, nMaxMesh2_face_nodes) ;
+Mesh2_face_nodes:cf_role = &quot;face_node_connectivity&quot; ;
+Mesh2_face_nodes:long_name = &quot;Maps every face to its corner nodes.&quot; ;
+Mesh2_face_nodes:_FillValue = 999999 ;
+Mesh2_face_nodes:start_index = 1 ;
+integer Mesh2_edge_nodes(nMesh2_edge, Two) ;
+Mesh2_edge_nodes:cf_role = &quot;edge_node_connectivity&quot; ;
+Mesh2_edge_nodes:long_name = &quot;Maps every edge to the two nodes that it connects.&quot; ;
+Mesh2_edge_nodes:start_index = 1 ;
+
+// Optional mesh topology variables
+integer Mesh2_face_edges(nMesh2_face, nMaxMesh2_face_nodes) ;
+Mesh2_face_edges:cf_role = &quot;face_edge_connectivity&quot; ;
+Mesh2_face_edges:long_name = &quot;Maps every face to its edges.&quot; ;
+Mesh2_face_edges:_FillValue = 999999 ;
+Mesh2_face_edges:start_index = 1 ;
+integer Mesh2_face_links(nMesh2_face, nMaxMesh2_face_nodes) ;
+Mesh2_face_links:cf_role = &quot;face_face_connectivity&quot; ;
+Mesh2_face_links:long_name = &quot;Indicates which other faces neighbor each face.&quot; ;
+Mesh2_face_links:_FillValue = 999999 ;
+Mesh2_face_links:start_index = 1 ;
+Mesh2_face_links:flag_values = -1 ;
+Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+
+// Mesh node coordinates
+double Mesh2_node_x(nMesh2_node) ;
+Mesh2_node_x:standard_name = &quot;longitude&quot; ;
+Mesh2_node_x:long_name = &quot;Longitude of 2D mesh nodes.&quot; ;
+Mesh2_node_x:units = &quot;degrees_east&quot; ;
+double Mesh2_node_y(nMesh2_node) ;
+Mesh2_node_y:standard_name = &quot;latitude&quot; ;
+Mesh2_node_y:long_name = &quot;Latitude of 2D mesh nodes.&quot; ;
+Mesh2_node_y:units = &quot;degrees_north&quot; ;
+
+// Optional mesh face and edge coordinate variables
+double Mesh2_face_x(nMesh2_face) ;
+Mesh2_face_x:standard_name = &quot;longitude&quot; ;
+Mesh2_face_x:long_name = &quot;Characteristics longitude of 2D mesh face.&quot; ;
+Mesh2_face_x:units = &quot;degrees_east&quot; ;
+Mesh2_face_x:bounds = &quot;Mesh2_face_xbnds&quot; ;
+double Mesh2_face_y(nMesh2_face) ;
+Mesh2_face_y:standard_name = &quot;latitude&quot; ;
+Mesh2_face_y:long_name = &quot;Characteristics latitude of 2D mesh face.&quot; ;
+Mesh2_face_y:units = &quot;degrees_north&quot; ;
+Mesh2_face_y:bounds = &quot;Mesh2_face_ybnds&quot; ;
+double Mesh2_face_xbnds(nMesh2_face,nMaxMesh2_face_nodes) ;
+Mesh2_face_xbnds:standard_name = &quot;longitude&quot; ;
+Mesh2_face_xbnds:long_name = &quot;Longitude bounds of 2D mesh face (i.e. corner coordinates).&quot; ;
+Mesh2_face_xbnds:units = &quot;degrees_east&quot; ;
+Mesh2_face_xbnds:_FillValue = 9.9692099683868690E36;
+double Mesh2_face_ybnds(nMesh2_face,nMaxMesh2_face_nodes) ;
+Mesh2_face_ybnds:standard_name = &quot;latitude&quot; ;
+Mesh2_face_ybnds:long_name = &quot;Latitude bounds of 2D mesh face (i.e. corner coordinates).&quot; ;
+Mesh2_face_ybnds:units = &quot;degrees_north&quot; ;
+Mesh2_face_ybnds:_FillValue = 9.9692099683868690E36;
+double Mesh2_edge_x(nMesh2_edge) ;
+Mesh2_edge_x:standard_name = &quot;longitude&quot; ;
+Mesh2_edge_x:long_name = &quot;Characteristic longitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh2_edge_x:units = &quot;degrees_east&quot; ;
+double Mesh2_edge_y(nMesh2_edge) ;
+Mesh2_edge_y:standard_name = &quot;latitude&quot; ;
+Mesh2_edge_y:long_name = &quot;Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh2_edge_y:units = &quot;degrees_north&quot; ;
+// bounds variables for edges skipped
+
+// Vertical coordinate
+double Mesh2_layers(Mesh2_layers) ;
+Mesh2_layers:standard_name = &quot;ocean_sigma_coordinate&quot; ;
+Mesh2_layers:long_name = &quot;sigma at layer midpoints&quot; ;
+Mesh2_layers:positive = &quot;up&quot; ;
+Mesh2_layers:formula_terms = &quot;sigma: Mesh2_layers eta: Mesh2_surface depth: Mesh2_depth&quot; ;
+double Mesh2_depth(nMesh2_node) ;
+Mesh2_depth:standard_name = &quot;sea_floor_depth_below_geoid&quot; ;
+Mesh2_depth:units = &quot;m&quot; ;
+Mesh2_depth:positive = &quot;down&quot; ;
+Mesh2_depth:mesh = &quot;Mesh2&quot;
+Mesh2_depth:location = &quot;node&quot; ;
+Mesh2_depth:coordinates = &quot;Mesh2_node_x Mesh2_node_y&quot; ;
+double Mesh2_surface(nMesh2_node) ;
+Mesh2_surface:standard_name = &quot;sea_surface_height_above_geoid&quot; ;
+Mesh2_surface:units = &quot;m&quot; ;
+Mesh2_surface:mesh = &quot;Mesh2&quot;
+Mesh2_surface:location = &quot;face&quot; ;
+Mesh2_surface:coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ;
+</code></pre>
+
+<h3 id="fully-3d-unstructured-ie-non-layered-mesh-topology">Fully 3D unstructured (i.e. non-layered) mesh topology<a class="headerlink" href="#fully-3d-unstructured-ie-non-layered-mesh-topology" title="Permanent link"></a></h3>
+<p>For a fully 3D unstructured mesh topology we extend the hierarchy of nodes, edges and faces to volumes. Contrary to layered case this type of mesh requires a fully 3D specification of the mesh; hence we not only need latitude and longitude coordinates but also some kind of elevation coordinate (<em>this probably requires a new standard name</em>).</p>
+<p>The topology information is stored as attributes to a dummy variable (in the example below called &ldquo;Mesh3D&rdquo;) with <code>cf_role</code> mesh_topology.</p>
+<table>
+<thead>
+<tr>
+<th>Required topology attributes</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cf_role</td>
+<td>mesh_topology</td>
+</tr>
+<tr>
+<td>topology_dimension</td>
+<td>3</td>
+</tr>
+<tr>
+<td>node_coordinates</td>
+<td></td>
+</tr>
+<tr>
+<td>volume_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>volume_shape_type</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Optionally-required attributes</strong>*</td>
+<td></td>
+</tr>
+<tr>
+<td>face_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>edge_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Optional attributes</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>volume_edge_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>volume_face_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>volume_volume_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>face_edge_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>boundary_node_connectivity</td>
+<td></td>
+</tr>
+<tr>
+<td>volume_coordinates</td>
+<td></td>
+</tr>
+<tr>
+<td>face_coordinates</td>
+<td></td>
+</tr>
+<tr>
+<td>edge_coordinates</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>*The &ldquo;Optionally required&rdquo; attributes <code>edge_node_connectivity</code> and <code>face_node_connectivity</code> are required only if you want to store data on the edges or faces respectively (i.e. if you mind the numbering order of the edges/faces).</p>
+<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a fully 3-dimensional unstructured mesh this should be 3. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, elevation and optional other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>volume_node_connectivity</code> points to an index variable identifying for every volume the indices of its corner nodes. For faces in the horizontal plane, it was possible to prescribe the order of the nodes, but this is not possible for the nodes of generic 3D volumes. For this reason we introduce an additional attribute <code>volume_shape_type</code> which points to a flag variable that specifies for every volume its shape:</p>
+<table>
+<thead>
+<tr>
+<th>flag_meaning name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tetrahedron</td>
+<td>pyramid with triangular base, 4 nodes</td>
+</tr>
+<tr>
+<td>pyramid</td>
+<td>pyramid with square base, a pentahedron, 5 nodes</td>
+</tr>
+<tr>
+<td>wedge</td>
+<td>prism with triangular base, a pentahedron, 6 nodes</td>
+</tr>
+<tr>
+<td>hexahedron</td>
+<td>distorted cube, 8 nodes</td>
+</tr>
+</tbody>
+</table>
+<p>These four volume shapes are the ones most commonly used. More shapes can be added; and if necessary, it&rsquo;s possible to add a generic shape type which allows for specification of the volume shape indirectly via <code>volume_face_connectivity</code> and <code>face_node_connectivity</code> variables. Such a generic shape is not included in this proposal since there is no practical need for such feature at this time.</p>
+<p><em>If all volumes have the same shape type, then the shape typed could be determined based on the number of nodes per volume. Another option could be to allow the <code>volume_shape_type</code> to specify the shape type directly rather than pointing to a variable. However, for the time being we assume that the currently proposed volume shape type variable doesn&rsquo;t have too much impact on the performance.</em></p>
+<p>The order in which the corner nodes of a volume are specified is fixed given its shape; this approach is common in 3D modeling, see e.g. <a href="http://www.openfoam.org/docs/user/mesh-description.php#x23-1350072">this graph in the OpenFOAM documentation</a> and <a href="http://www.vtk.org/Wiki/index.php?title=ParaView/Users_Guide/VTK_Data_Model">ParaView</a> or <a href="http://www.vtk.org/doc/release/5.8/html/a00294.html">VTK</a> documentation. The <code>volume_node_connectivity</code> array will be a matrix of size nVolumes x MaxNumNodesPerVolume; if a volume has less corner nodes than MaxNumNodesPerVolume then the last node indices shall be equal to <code>_FillValue</code> (which should obviously be larger than the number of nodes in the mesh). For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh3D_vol_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default. See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
+<p>In case you want to define variables on the faces or edges of the 3D mesh topology you need to specify the <code>face_node_connectivity</code> or <code>edge_node_connectivity</code> attribute, respectively, to map faces or edges to nodes. Although the volume to node mapping implicitly also defines the location of the faces and edges, it does not specify their global numbering. Again the indexing convention of <code>face_node_connectivity</code> and <code>edge_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable and 0-based indexing is the default. Since it does not apply to either nodes or edges globally, specifying the <code>boundary_node_connectivity</code> attribute described below does not (in and of itself) necessitate the need to specify <code>edge_node_connectivity</code> nor <code>face_node_connectivity</code>.</p>
+<p>Optionally the topology may have the following attributes:
+<em> <code>volume_face_connectivity</code> pointing to an index variable identifying for every volume the indices of its faces. The order in which the face indices should be specified is determined by the volume geometry type. This connectivity array will be a matrix of size nVolumes x MaxNumFacesPerVolume. If a volume has less faces than MaxNumFacesPerVolume then the last face indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>volume_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable and 0-based indexing is the default.
+</em> <code>volume_edge_connectivity</code> pointing to an index variable identifying for every volume the indices of its edges. The order in which the edge indices should be specified is determined by the volume geometry type. This connectivity array will be a matrix of size nVolumes x MaxNumEdgesPerVolume. Again, if a volume has less edges than MaxNumEdgesPerVolume then the last edge indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>volume_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable and 0-based indexing is the default.
+<em> <code>volume_volume_connectivity</code> pointing to an index variable identifying all volumes that share a face with each volume, i.e. are neighbors. This connectivity array will thus be a matrix of size nVolumes x MaxNumFacesPerVolume with a flag to note if the region &ldquo;out of mesh&rdquo; abuts a face of a given volume. Again, if a volume has less sides/faces than MaxNumFacesPerVolume then the last volume (column) indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>volume_volume_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh3D_vol_links in the example below) and 0-based indexing is the default.
+</em> <code>face_edge_connectivity</code> pointing to an index variable identifying for every face the indices of its edges. The edges should be specified in anticlockwise direction as viewed from above. This connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace. As always, if a face has less corners/edges than MaxNumNodesPerFace then the last edge indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable and 0-based indexing is the default.
+<em> <code>face_node_connectivity</code> pointing to an index variable identifying for every face the indices of its nodes. The nodes should be specified in either clockwise or anticlockwise order. This connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last node indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable and 0-based indexing is the default.
+</em> <code>boundary_node_connectivity</code> pointing to an index variable identifying for every face of each boundary the indices of its nodes. The nodes should be specified in either clockwise or anticlockwise order. This connectivity array will be a matrix of size nBoundaryFaces x MaxNumNodesPerFace. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last node indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh3D_boundary_nodes) and 0-based indexing is the default. Although constructed of faces, boundaries represent a different quantity than general face data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>face_node_connectivity</code>.  Information about the nature of each boundary face (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryFaces X 1.
+* <code>volume_coordinates</code>, <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the volumes, faces and edges. These auxiliary coordinate variables will have length nVolumes, nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the corner coordinates of the volume, face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables). The order in which the corner coordinates of the volumes is given by the volume geometry type.</p>
+<p><img alt="image" src="./images/mesh3d.png" /></p>
+<p>Example:</p>
+<pre><code class="python">dimensions:
+nMesh3D_node = 12 ; // nNodes
+nMesh3D_edge = 23 ; // nEdges
+nMesh3D_face = 16 ; // nFaces
+nMesh3D_vol = 4 ; // nVolumes
+nMaxMesh3D_face_nodes = 4 ; // MaxNumNodesPerFace
+nMaxMesh3D_vol_nodes = 8 ; // MaxNumNodesPerVolume
+nMaxMesh3D_vol_edges = 12 ; // MaxNumEdgesPerVolume
+nMaxMesh3D_vol_faces = 6 ; // MaxNumFacesPerVolume
+
+Two = 2 ;
+
+variables:
+// Mesh topology
+integer Mesh3D ;
+Mesh3D:cf_role = &quot;mesh_topology&quot; ;
+Mesh3D:long_name = &quot;Topology data of 3D unstructured mesh&quot; ;
+Mesh3D:topology_dimension = 3 ;
+Mesh3D:node_coordinates = &quot;Mesh3D_node_x Mesh3D_node_y Mesh3D_node_z&quot; ;
+Mesh3D:volume_shape_type = &quot;Mesh3D_vol_types&quot; ;
+Mesh3D:volume_node_connectivity = &quot;Mesh3D_vol_nodes&quot; ;
+Mesh3D:face_node_connectivity = &quot;Mesh3D_face_nodes&quot; ; // attribute required if variables will be defined on faces
+Mesh3D:edge_node_connectivity = &quot;Mesh3D_edge_nodes&quot; ; // attribute required if variables will be defined on edges
+Mesh3D:edge_coordinates = &quot;Mesh3D_edge_x Mesh3D_edge_y Mesh3D_edge_z&quot; ; // optional attribute (requires edge_node_connectivity)
+Mesh3D:face_coordinates = &quot;Mesh3D_face_x Mesh3D_face_y Mesh3D_face_z&quot; ; // optional attribute (requires face_node_connectivity)
+Mesh3D:volume_coordinates = &quot;Mesh3D_vol_x Mesh3D_vol_y Mesh3D_vol_z&quot; ; // optional attribute
+Mesh3D:volume_face_connectivity = &quot;Mesh3D_vol_faces&quot; ; // optional attribute (requires face_node_connectivity)
+Mesh3D:volume_edge_connectivity = &quot;Mesh3D_vol_edges&quot; ; // optional attribute (requires edge_node_connectivity)
+Mesh3D:face_edge_connectivity = &quot;Mesh3D_face_edges&quot; ; // optional attribute (requires face_node_connectivity and edge_node_connectivity)
+Mesh3D:volume_volume_connectivity = &quot;Mesh3D_vol_links&quot; ; // optional attribute
+integer Mesh3D_vol_types(nMesh3D_vol) ;
+Mesh3D_vol_types:cf_role = &quot;volume_shape_type&quot; ;
+Mesh3D_vol_types:long_name = &quot;Specifies the shape of the individual volumes.&quot; ;
+Mesh3D_vol_types:flag_range = 0b, 2b ;
+Mesh3D_vol_types:flag_values = 0b, 1b, 2b ;
+Mesh3D_vol_types:flag_meanings = &quot;tetrahedron wedge hexahedron&quot; ;
+integer Mesh3D_vol_nodes(nMesh3D_vol, nMaxMesh3D_vol_nodes) ;
+Mesh3D_vol_nodes:cf_role = &quot;volume_node_connectivity&quot; ;
+Mesh3D_vol_nodes:long_name = &quot;Maps every volume to its corner nodes.&quot; ;
+Mesh3D_vol_nodes:_FillValue = 999999 ;
+Mesh3D_vol_nodes:start_index = 1 ;
+
+// Optional mesh topology variables
+integer Mesh3D_edge_nodes(nMesh3D_edge, Two) ;
+Mesh3D_edge_nodes:cf_role = &quot;edge_node_connectivity&quot; ;
+Mesh3D_edge_nodes:long_name = &quot;Maps every edge to the two nodes that it connects.&quot; ;
+Mesh3D_edge_nodes:start_index = 1 ;
+integer Mesh3D_face_nodes(nMesh3D_face, nMaxMesh3D_face_nodes) ;
+Mesh3D_face_nodes:cf_role = &quot;face_node_connectivity&quot; ;
+Mesh3D_face_nodes:long_name = &quot;Maps every face to its corner nodes.&quot; ;
+Mesh3D_face_nodes:_FillValue = 999999 ;
+Mesh3D_face_nodes:start_index = 1 ;
+integer Mesh3D_vol_faces(nMesh3D_vol, nMaxMesh3D_vol_faces) ;
+Mesh3D_vol_faces:cf_role = &quot;volume_face_connectivity&quot; ;
+Mesh3D_vol_faces:long_name = &quot;Maps every volume to its faces.&quot; ;
+Mesh3D_vol_faces:_FillValue = 999999 ;
+Mesh3D_vol_faces:start_index = 1 ;
+integer Mesh3D_vol_edges(nMesh3D_vol, nMaxMesh3D_vol_edges) ;
+Mesh3D_vol_edges:cf_role = &quot;volume_edge_connectivity&quot; ;
+Mesh3D_vol_edges:long_name = &quot;Maps every volume to its edges.&quot; ;
+Mesh3D_vol_edges:_FillValue = 999999 ;
+Mesh3D_vol_edges:start_index = 1 ;
+integer Mesh3D_face_edges(nMesh3D_face, nMaxMesh3D_face_nodes) ;
+Mesh3D_face_edges:cf_role = &quot;face_edge_connectivity&quot; ;
+Mesh3D_face_edges:long_name = &quot;Maps every face to its edges.&quot; ;
+Mesh3D_face_edges:_FillValue = 999999 ;
+Mesh3D_face_edges:start_index = 1 ;
+integer Mesh3D_vol_links(nMesh3D_vol, nMaxMesh3D_vol_faces) ;
+Mesh3D_vol_links:cf_role = &quot;volume_volume_connectivity&quot; ;
+Mesh3D_vol_links:long_name = &quot;Indicates which other volumes neighbor each volume.&quot; ;
+Mesh3D_vol_links:_FillValue = 999999 ;
+Mesh3D_vol_links:start_index = 1 ;
+Mesh3D_vol_links:flag_values = -1 ;
+Mesh3D_vol_links:flag_meanings = &quot;out_of_mesh&quot; ;
+
+// Mesh node coordinates
+double Mesh3D_node_x(nMesh3D_node) ;
+Mesh3D_node_x:standard_name = &quot;longitude&quot; ;
+Mesh3D_node_x:long_name = &quot;Longitude of 3D mesh nodes.&quot; ;
+Mesh3D_node_x:units = &quot;degrees_east&quot; ;
+double Mesh3D_node_y(nMesh3D_node) ;
+Mesh3D_node_y:standard_name = &quot;latitude&quot; ;
+Mesh3D_node_y:long_name = &quot;Latitude of 3D mesh nodes.&quot; ;
+Mesh3D_node_y:units = &quot;degrees_north&quot; ;
+double Mesh3D_node_z(nMesh3D_node) ;
+Mesh3D_node_z:standard_name = &quot;elevation&quot; ;
+Mesh3D_node_z:long_name = &quot;Elevation of 3D mesh nodes.&quot; ;
+Mesh3D_node_z:units = &quot;m&quot; ;
+
+// Optional mesh volume, face and edge coordinate variables
+double Mesh3D_vol_x(nMesh3D_vol) ;
+Mesh3D_vol_x:standard_name = &quot;longitude&quot; ;
+Mesh3D_vol_x:long_name = &quot;Characteristics longitude of mesh volumes.&quot; ;
+Mesh3D_vol_x:units = &quot;degrees_east&quot; ;
+Mesh3D_vol_x:bounds = &quot;Mesh3D_vol_xbnds&quot; ;
+double Mesh3D_vol_y(nMesh3D_vol) ;
+Mesh3D_vol_y:standard_name = &quot;latitude&quot; ;
+Mesh3D_vol_y:long_name = &quot;Characteristics latitude of mesh volumes.&quot; ;
+Mesh3D_vol_y:units = &quot;degrees_north&quot; ;
+Mesh3D_vol_y:bounds = &quot;Mesh3D_vol_ybnds&quot; ;
+double Mesh3D_vol_z(nMesh3D_vol) ;
+Mesh3D_vol_z:standard_name = &quot;elevation&quot; ;
+Mesh3D_vol_z:long_name = &quot;Characteristics elevation of mesh volumes.&quot; ;
+Mesh3D_vol_z:units = &quot;m&quot; ;
+Mesh3D_vol_z:bounds = &quot;Mesh3D_vol_zbnds&quot; ;
+double Mesh3D_vol_xbnds(nMesh3D_vol,nMaxMesh3D_vol_nodes) ;
+Mesh3D_vol_xbnds:standard_name = &quot;longitude&quot; ;
+Mesh3D_vol_xbnds:long_name = &quot;Longitude bounds of mesh volumes (i.e. corner coordinates).&quot; ;
+Mesh3D_vol_xbnds:units = &quot;degrees_east&quot; ;
+Mesh3D_vol_xbnds:_FillValue = 9.9692099683868690E36;
+double Mesh3D_vol_ybnds(nMesh3D_vol,nMaxMesh3D_vol_nodes) ;
+Mesh3D_vol_ybnds:standard_name = &quot;latitude&quot; ;
+Mesh3D_vol_ybnds:long_name = &quot;Latitude bounds of mesh volumes (i.e. corner coordinates).&quot; ;
+Mesh3D_vol_ybnds:units = &quot;degrees_north&quot; ;
+Mesh3D_vol_ybnds:_FillValue = 9.9692099683868690E36;
+double Mesh3D_vol_zbnds(nMesh3D_vol,nMaxMesh3D_vol_nodes) ;
+Mesh3D_vol_zbnds:standard_name = &quot;elevation&quot; ;
+Mesh3D_vol_zbnds:long_name = &quot;Elevation bounds of mesh volumes (i.e. corner coordinates).&quot; ;
+Mesh3D_vol_zbnds:units = &quot;m&quot; ;
+Mesh3D_vol_zbnds:_FillValue = 9.9692099683868690E36;
+double Mesh3D_face_x(nMesh3D_face) ;
+Mesh3D_face_x:standard_name = &quot;longitude&quot; ;
+Mesh3D_face_x:long_name = &quot;Characteristics longitude of mesh faces.&quot; ;
+Mesh3D_face_x:units = &quot;degrees_east&quot; ;
+double Mesh3D_face_y(nMesh3D_face) ;
+Mesh3D_face_y:standard_name = &quot;latitude&quot; ;
+Mesh3D_face_y:long_name = &quot;Characteristics latitude of mesh faces.&quot; ;
+Mesh3D_face_y:units = &quot;degrees_north&quot; ;
+double Mesh3D_face_z(nMesh3D_face) ;
+Mesh3D_face_z:standard_name = &quot;elevation&quot; ;
+Mesh3D_face_z:long_name = &quot;Characteristics elevation of mesh faces.&quot; ;
+Mesh3D_face_z:units = &quot;m&quot; ;
+// bounds variables for faces skipped
+double Mesh3D_edge_x(nMesh3D_edge) ;
+Mesh3D_edge_x:standard_name = &quot;longitude&quot; ;
+Mesh3D_edge_x:long_name = &quot;Characteristic longitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh3D_edge_x:units = &quot;degrees_east&quot; ;
+double Mesh3D_edge_y(nMesh3D_edge) ;
+Mesh3D_edge_y:standard_name = &quot;latitude&quot; ;
+Mesh3D_edge_y:long_name = &quot;Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh3D_edge_y:units = &quot;degrees_north&quot; ;
+double Mesh3D_edge_z(nMesh3D_edge) ;
+Mesh3D_edge_z:standard_name = &quot;latitude&quot; ;
+Mesh3D_edge_z:long_name = &quot;Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge).&quot; ;
+Mesh3D_edge_z:units = &quot;degrees_north&quot; ;
+// bounds variables for edges skipped
+</code></pre>
+
+<h2 id="data-defined-on-unstructured-meshes">Data defined on unstructured meshes<a class="headerlink" href="#data-defined-on-unstructured-meshes" title="Permanent link"></a></h2>
+<p>According to CF-conventions a variable defined on a <em>structured</em> mesh is specified as</p>
+<pre><code class="javascript">double waterlevel(time,nmax,mmax) ;
+waterlevel:standard_name = &quot;sea_surface_height_above_geoid&quot; ;
+waterlevel:units = &quot;m&quot; ;
+waterlevel:coordinates = &quot;lat lon&quot; ;
+</code></pre>
+
+<p>The <code>coordinates</code> attribute refers to the variables that contain the latitude and longitude coordinates. For a curvilinear grid these variables will share two spatial dimensions, here <code>nmax</code> and <code>mmax</code>: lat(nmax,mmax) and lon(nmax,mmax). In numerical models the various quantities are often computed at different locations of the mesh: staggered data. The standard CF-conventions don&rsquo;t offer specific support for this functionality and thus for every stagger location coordinates need to be provided separately: cell center coordinates, corner point coordinates, u-flux point coordinates, and v-flux point coordinates. The underlying topology of the mesh, i.e. how these coordinates (variable definition locations) relate to each other isn&rsquo;t stored in the file. This shortcoming is to some degree solved by the <a href="http://www.gfdl.noaa.gov/~vb/gridstd/gridstd.html">gridspec</a> proposal by <a href="http://www.gfdl.noaa.gov/~vb/">Venkatramani Balaji</a> and Zhi Liang. We introduce here attributes that link to the topological data defined above.</p>
+<h3 id="data-variables">Data variables<a class="headerlink" href="#data-variables" title="Permanent link"></a></h3>
+<p>The use of the <code>coordinates</code> attribute is copied from the CF-conventions. It is used to map the values of variables defined on the unstructured meshes directly to their location: latitude, longitude and optional elevation. To map the variable onto the topology of the underlying mesh, two new attributes have been introduced. First, the attribute <code>mesh</code> points to the mesh_topology variable containing the meta-data attributes of the mesh on which the variable has been defined. Second, the attribute <code>location</code> points to the (stagger) location within the mesh at which the variable is defined. Note that in this example the <code>coordinates</code> attribute is redundant since the coordinates could also be obtained by using the <code>face_coordinates</code> attribute of the &ldquo;Mesh2&rdquo; variable.</p>
+<pre><code class="javascript">double Mesh2_waterlevel(time,nMesh2_face) ;
+Mesh2_waterlevel:standard_name = &quot;sea_surface_height_above_geoid&quot; ;
+Mesh2_waterlevel:units = &quot;m&quot; ;
+Mesh2_waterlevel:mesh = &quot;Mesh2&quot;
+Mesh2_waterlevel:location = &quot;face&quot; ;
+Mesh2_waterlevel:coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ;
+</code></pre>
+
+<h3 id="volume-and-flux-variables">Volume and flux variables<a class="headerlink" href="#volume-and-flux-variables" title="Permanent link"></a></h3>
+<p>The same mesh geometry can be used in different ways to schematize the hydrodynamic volumes and fluxes. Let&rsquo;s take a simple triangular mesh. From a finite volume point of view this mesh will generally be interpreted as consisting of two volumes with triangular base. However, others may use a continuous Galerkin finite element method that can be shown to be equivalent to a subdivision into four volumes. In the former case the two faces correspond to volumes and the fluxes <em>cross</em> the edges. In the latter case the volumes are defined surrounding the four nodes and the fluxes are directed <em>along</em> the edges. The two abbreviated &ldquo;ncdumps&rdquo; below show how the basic 2D triangular mesh definition can be extended to include this data. The coordinate variables for the volume data now include <code>bounds</code> attributes to define the surface area of the volumes. Note the subtle difference in the long names between the flux variables in the two cases; the <code>standard_name</code> attribute has to make a more formal distinction between the two cases.</p>
+<p><img alt="image" src="./images/fv_triangles.png" /> <img alt="image" src="./images/fv_nodes.png" /></p>
+<p>Variant 1: Volume at faces:</p>
+<pre><code class="javascript">dimensions:
+nMesh2_node = 4 ; // nNodes
+nMesh2_edge = 5 ; // nEdges
+nMesh2_face = 2 ; // nFaces
+
+Two = 2 ;
+Three = 3 ;
+
+variables:
+// Mesh topology
+integer Mesh2 ;
+// as in 2D triangular mesh example
+integer Mesh2_face_nodes(nMesh2_face, Three) ;
+// as in 2D triangular mesh example
+integer Mesh2_edge_nodes(nMesh2_edge, Two) ;
+// as in 2D triangular mesh example
+
+// Optional mesh topology variables
+integer Mesh2_face_edges(nMesh2_face, Three) ;
+// as in 2D triangular mesh example
+integer Mesh2_face_links(nMesh2_face, Three) ;
+// as in 2D triangular mesh example
+
+// Mesh node coordinates
+double Mesh2_node_x(nMesh2_node) ;
+// as in 2D triangular mesh example
+double Mesh2_node_y(nMesh2_node) ;
+// as in 2D triangular mesh example
+
+// Optional mesh face and edge coordinate variables
+double Mesh2_face_x(nMesh2_face) ;
+Mesh2_face_x:standard_name = &quot;longitude&quot; ;
+Mesh2_face_x:long_name = &quot;Characteristics longitude of 2D mesh triangle (e.g. circumcenter coordinate).&quot; ;
+Mesh2_face_x:units = &quot;degrees_east&quot; ;
+Mesh2_face_x:bounds = &quot;Mesh2_face_xbnds&quot; ;
+double Mesh2_face_y(nMesh2_face) ;
+Mesh2_face_y:standard_name = &quot;latitude&quot; ;
+Mesh2_face_y:long_name = &quot;Characteristics latitude of 2D mesh triangle (e.g. circumcenter coordinate).&quot; ;
+Mesh2_face_y:units = &quot;degrees_north&quot; ;
+Mesh2_face_y:bounds = &quot;Mesh2_face_ybnds&quot; ;
+double Mesh2_face_xbnds(nMesh2_face,Three) ;
+Mesh2_face_xbnds:standard_name = &quot;longitude&quot; ;
+Mesh2_face_xbnds:long_name = &quot;Longitude bounds of 2D mesh triangle (i.e. corner coordinates).&quot; ;
+Mesh2_face_xbnds:units = &quot;degrees_east&quot; ;
+double Mesh2_face_ybnds(nMesh2_face,Three) ;
+Mesh2_face_ybnds:standard_name = &quot;latitude&quot; ;
+Mesh2_face_ybnds:long_name = &quot;Latitude bounds of 2D mesh triangle (i.e. corner coordinates).&quot; ;
+Mesh2_face_ybnds:units = &quot;degrees_north&quot; ;
+double Mesh2_edge_x(nMesh2_edge) ;
+// as in 2D triangular mesh example
+double Mesh2_edge_y(nMesh2_edge) ;
+// as in 2D triangular mesh example
+
+// Volume and flux data
+double Mesh2_volumes(nMesh2_face) ;
+Mesh2_volumes:long_name = &quot;volumes&quot; ;
+Mesh2_volumes:units = &quot;m3&quot; ;
+Mesh2_volumes:mesh = &quot;Mesh2&quot; ;
+Mesh2_volumes:location = &quot;face&quot; ;
+Mesh2_volumes:coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ;
+double Mesh2_fluxes(nMesh2_edge) ;
+Mesh2_fluxes:long_name = &quot;flux across edge&quot; ;
+Mesh2_fluxes:units = &quot;m3 s-1&quot; ;
+Mesh2_fluxes:mesh = &quot;Mesh2&quot;
+Mesh2_fluxes:location = &quot;edge&quot; ;
+Mesh2_fluxes:coordinates = &quot;Mesh2_edge_x Mesh2_edge_y&quot; ;
+</code></pre>
+
+<p>Variant 2: Volume at nodes:</p>
+<pre><code class="javascript">dimensions:
+nMesh2_node = 4 ; // nNodes
+nMesh2_edge = 5 ; // nEdges
+nMesh2_face = 2 ; // nFaces
+nMaxMesh2_bnds = 6 ;
+
+Two = 2 ;
+Three = 3 ;
+
+variables:
+// Mesh topology
+integer Mesh2 ;
+// as in 2D triangular mesh example
+integer Mesh2_face_nodes(nMesh2_face, Three) ;
+// as in 2D triangular mesh example
+integer Mesh2_edge_nodes(nMesh2_edge, Two) ;
+// as in 2D triangular mesh example
+
+// Optional mesh topology variables
+integer Mesh2_face_edges(nMesh2_face, Three) ;
+// as in 2D triangular mesh example
+integer Mesh2_face_links(nMesh2_face, Three) ;
+// as in 2D triangular mesh example
+
+// Mesh node coordinates
+double Mesh2_node_x(nMesh2_node) ;
+Mesh2_node_x:standard_name = &quot;longitude&quot; ;
+Mesh2_node_x:long_name = &quot;Longitude of 2D mesh nodes.&quot; ;
+Mesh2_node_x:units = &quot;degrees_east&quot; ;
+Mesh2_node_x:bounds = &quot;Mesh2_node_xbnds&quot; ;
+double Mesh2_node_y(nMesh2_node) ;
+Mesh2_node_y:standard_name = &quot;latitude&quot; ;
+Mesh2_node_y:long_name = &quot;Latitude of 2D mesh nodes.&quot; ;
+Mesh2_node_y:units = &quot;degrees_north&quot; ;
+Mesh2_node_y:bounds = &quot;Mesh2_node_ybnds&quot; ;
+double Mesh2_node_xbnds(nMesh2_node, nMaxMesh2_bnds) ;
+Mesh2_node_xbnds:standard_name = &quot;longitude&quot; ;
+Mesh2_node_xbnds:long_name = &quot;List of x-points that form outline of flow volume&quot; ;
+Mesh2_node_xbnds:units = &quot;degrees_east&quot; ;
+Mesh2_node_xbnds:_FillValue = 9.9692099683868690E36;
+double Mesh2_node_ybnds(nMesh2_node, nMaxMesh2_bnds) ;
+Mesh2_node_ybnds:standard_name = &quot;latitude&quot; ;
+Mesh2_node_ybnds:units = &quot;degrees_north&quot; ;
+Mesh2_node_ybnds:long_name = &quot;List of y-points that form outline of flow volume&quot; ;
+Mesh2_node_xbnds:_FillValue = 9.9692099683868690E36;
+
+// Optional mesh face and edge coordinate variables
+double Mesh2_face_x(nMesh2_face) ;
+// as in 2D triangular mesh example
+double Mesh2_face_y(nMesh2_face) ;
+// as in 2D triangular mesh example
+double Mesh2_edge_x(nMesh2_edge) ;
+// as in 2D triangular mesh example
+double Mesh2_edge_y(nMesh2_edge) ;
+// as in 2D triangular mesh example
+
+// Volume and flux data
+double Mesh2_volumes(nMesh2_node) ;
+Mesh2_volumes:long_name = &quot;volumes&quot; ;
+Mesh2_volumes:units = &quot;m3&quot; ;
+Mesh2_volumes:mesh = &quot;Mesh2&quot; ;
+Mesh2_volumes:location = &quot;node&quot; ;
+Mesh2_volumes:coordinates = &quot;Mesh2_node_x Mesh2_node_y&quot; ;
+double Mesh2_fluxes(nMesh2_edge) ;
+Mesh2_fluxes:long_name = &quot;flux along edge&quot; ;
+Mesh2_fluxes:units = &quot;m3 s-1&quot; ;
+Mesh2_fluxes:mesh = &quot;Mesh2&quot;
+Mesh2_fluxes:location = &quot;edge&quot; ;
+Mesh2_fluxes:coordinates = &quot;Mesh2_edge_x Mesh2_edge_y&quot; ;
+</code></pre>
+
+<h3 id="location-index-set">Location index set<a class="headerlink" href="#location-index-set" title="Permanent link"></a></h3>
+<p>Some variables may only be defined at specific locations within the mesh, e.g. only at boundary points or at special locations like weirs and gates. To save space and to improve readability, the concept of a location_index_set is introduced. It is basically identical to the <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option in the the CF-conventions except for the fact that the compression works on a (set of) orthogonal coordinate dimension(s) and the location_index_set works on a topology location.</p>
+<p>The location index set is an integer variable that contains the indices of the locations at which a specific quantity is defined. The example below defines a location index set &ldquo;Mesh1_set&rdquo; as a subset of the &ldquo;node&rdquo;s of Mesh1 (red points). The attribute <code>location_index_set</code> of the variable &ldquo;Mesh_waterlevel&rdquo; points to this index set and the <code>coordinates</code> attribute points to the corresponding (subset) of latitude and longitude coordinates. The <code>mesh</code> and <code>location</code> attributes of the location_index_set variable are required; the <code>coordinates</code> attribute is optional. Note that the <code>coordinates</code> attributes on both &ldquo;Mesh1_cell&rdquo; and &ldquo;Mesh1_waterlevel&rdquo; are again redundant since the coordinates could also be obtained by using the index set &ldquo;Mesh1_set&rdquo; and the <code>node_coordinates</code> attribute of the &ldquo;Mesh1&rdquo; variable. Consistent with all other index variables defined here, the indexing convention of the location index set should be specified using the <code>start_index</code> attribute to the index variable and 0-based indexing is the default. See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
+<p>Contrary to a coordinate variable, the index set doesn&rsquo;t have to be monotonic. So, it can be used for creating subsets of the original locations as well as for renumbering the locations. If the <code>location_index_set</code> attribute is used on a variable, then the <code>mesh</code> and <code>location</code> attributes should not also be used on that variable.</p>
+<p><img alt="image" src="./images/network_location_map.png" /></p>
+<pre><code class="javascript">dimensions:
+nMesh1_set = 4 ;
+
+variables:
+integer Mesh1_set(nMesh1_set) ;
+Mesh1_set:cf_role = &quot;location_index_set&quot; ;
+Mesh1_set:long_name = &quot;Defines Mesh1_set as subset of the nodes of Mesh1.&quot; ;
+Mesh1_set:mesh = &quot;Mesh1&quot; ;
+Mesh1_set:location = &quot;node&quot; ;
+Mesh1_set:start_index = 1 ;
+Mesh1_set:coordinates = &quot;Mesh1_set_x Mesh1_set_y&quot; ;
+double Mesh1_set_x(nMesh1_set) ;
+Mesh1_set_x:standard_name = &quot;longitude&quot; ;
+Mesh1_set_x:long_name = &quot;Characteristic longitude of set (e.g. longitude of node).&quot; ;
+Mesh1_set_x:units = &quot;degrees_east&quot; ;
+double Mesh1_set_y(nMesh1_set) ;
+Mesh1_set_y:standard_name = &quot;latitude&quot; ;
+Mesh1_set_y:long_name = &quot;Characteristic latitude of set (e.g. latitude of node)&quot; ;
+Mesh1_set_y:units = &quot;degrees_north&quot; ;
+
+double Mesh1_waterlevel(time, nMesh1_set) ;
+Mesh1_waterlevel:standard_name = &quot;sea_surface_height_above_geoid&quot; ;
+Mesh1_waterlevel:units = &quot;m&quot; ;
+Mesh1_waterlevel:location_index_set = &quot;Mesh1_set&quot; ;
+Mesh1_waterlevel:coordinates = &quot;Mesh1_set_x Mesh1_set_y&quot; ;
+</code></pre>
+
+<p><a name="zero-or-one"/></p>
+<h2 id="zero-or-one-based-indexing">Zero or One-based indexing<a class="headerlink" href="#zero-or-one-based-indexing" title="Permanent link"></a></h2>
+<p>The indexing using by the CF <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option is 0-based. Therefore, it is most consistent for this CF extension for unstructured data to also use 0-based indexing, which means that points, edges, faces and volumes will be numbered starting with 0. This convention is consistent with languages like C and Java, but unlike Fortran and MATLAB. Since many of the unstructured models have been programmed in Fortran and legacy NetCDF files exist that use 1-based indexing (which could be upgraded to be consistent with this new proposal using ncML if 1-based indexing were allowed), we propose to support both 0- and 1-based indexing by means of the <code>start_index</code> attribute. You will find below two examples of the same network geometry using either 0- or 1-based indexing. Switching between 0- and 1-based indexing is as easy as adding 1 to or subtracting 1 from the indices upon reading or writing depending on the setting of <code>start_index</code>; allowing both options should only have a minor impact on the reading routines and no effect at all on the rest of your code.</p>
+<p>Example of 0-based indexing:</p>
+<p><img alt="image" src="./images/0-based_index.png" /></p>
+<pre><code class="javascript">dimensions:
+nMesh1_node = 5 ; // nNodes
+nMesh1_edge = 4 ; // nEdges
+
+Two = 2;
+
+variables:
+// Mesh topology
+integer Mesh1 ;
+Mesh1:cf_role = &quot;mesh_topology&quot; ;
+Mesh1:long_name = &quot;Topology data of 1D network&quot; ;
+Mesh1:topology_dimension = 1 ;
+Mesh1:node_coordinates = &quot;Mesh1_node_x Mesh1_node_y&quot; ;
+Mesh1:edge_node_connectivity = &quot;Mesh1_edge_nodes&quot; ;
+Mesh1:edge_coordinates = &quot;Mesh1_edge_x Mesh1_edge_y&quot; ; // optional attribute
+integer Mesh1_edge_nodes(nMesh1_edge, Two) ;
+Mesh1_edge_nodes:cf_role = &quot;edge_node_connectivity&quot; ;
+Mesh1_edge_nodes:long_name = &quot;Maps every edge/link to the two nodes that it connects.&quot; ;
+Mesh1_edge_nodes:start_index = 0 ; // default setting, attribute could have been skipped.
+
+// Coordinate variables skipped
+
+data:
+
+Mesh1 = 0 ; // dummy
+
+Mesh1_edge_nodes =
+0, 2,
+1, 2,
+2, 3,
+3, 4 ;
+</code></pre>
+
+<p>Example of 1-based indexing:</p>
+<p><img alt="image" src="./images/1-based_index.png" /></p>
+<pre><code class="javascript">dimensions:
+nMesh1_node = 5 ; // nNodes
+nMesh1_edge = 4 ; // nEdges
+
+Two = 2;
+
+variables:
+// Mesh topology
+integer Mesh1 ;
+Mesh1:cf_role = &quot;mesh_topology&quot; ;
+Mesh1:long_name = &quot;Topology data of 1D network&quot; ;
+Mesh1:topology_dimension = 1 ;
+Mesh1:node_coordinates = &quot;Mesh1_node_x Mesh1_node_y&quot; ;
+Mesh1:edge_node_connectivity = &quot;Mesh1_edge_nodes&quot; ;
+Mesh1:edge_coordinates = &quot;Mesh1_edge_x Mesh1_edge_y&quot; ; // optional attribute
+integer Mesh1_edge_nodes(nMesh1_edge, Two) ;
+Mesh1_edge_nodes:cf_role = &quot;edge_node_connectivity&quot; ;
+Mesh1_edge_nodes:long_name = &quot;Maps every edge/link to the two nodes that it connects.&quot; ;
+Mesh1_edge_nodes:start_index = 1 ;
+
+// Coordinate variables skipped
+
+data:
+
+Mesh1 = 0 ; // dummy
+
+Mesh1_edge_nodes =
+1, 3,
+2, 3,
+3, 4,
+4, 5 ;
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ugrid-subsetting/" class="btn btn-neutral float-right" title="subsetting">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/ugrid-conventions/ugrid-conventions" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+        <span style="margin-left: 15px"><a href="ugrid-subsetting/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.15.2
+Build Date UTC : 2016-02-11 18:42:08.833685
+-->
