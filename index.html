@@ -72,7 +72,7 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#ugrid-conventions">UGRID Conventions</a></li>
+                <li class="toctree-l3"><a href="#ugrid-conventions-v09">UGRID Conventions (v0.9)</a></li>
                 
                     <li><a class="toctree-l4" href="#introduction">Introduction</a></li>
                 
@@ -131,7 +131,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="ugrid-conventions">UGRID Conventions<a class="headerlink" href="#ugrid-conventions" title="Permanent link"></a></h1>
+                <h1 id="ugrid-conventions-v09">UGRID Conventions (v0.9)<a class="headerlink" href="#ugrid-conventions-v09" title="Permanent link"></a></h1>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link"></a></h2>
 <p>This page describes a proposal for storing unstructured (or flexible mesh) model data in the Unidata Network Common Data Form (NetCDF) file. Our focus is on data for environmental applications and hence we start from the <a href="http://cf-convention.github.io/">Climate &amp; Forecast (CF) Metadata Conventions</a>. The CF Conventions have been the standard in climate research for many years, and are  being adopted by others as the metadata standard (e.g. <a href="https://earthdata.nasa.gov/data/standards-and-references/metadata-standards">NASA</a>,<a href="http://www.opengeospatial.org/standards/netcdf">Open Geospatial Consortium</a>). The CF conventions allow you to provide the geospatial and temporal coordinates for scientific data, but currently assumes that the horizontal topology may be inferred from the i,j indices of structured grids.  This proposal adds conventions for specifying the topology for unstructured (e.g. triangular) grids.  </p>
 <p>In its most basic form unstructured data may be stored as data defined at a series of points, the CF-conventions are then sufficient. However, it is often useful or even necessary to also know the topology of the underlying unstructured mesh: is it a one dimensional (1D) network, a two dimensional (2D) triangular mesh or more flexible mixed triangle/quadrilateral mesh, a 2D mesh with vertical layers, or a fully unstructured three dimensional (3D) mesh. This document describes the attribute conventions for storing the mesh topology and for associating variables with (specific locations on) the mesh topology. The conventions have been designed to store the output data of a combined 1D-2D-3D flow model with staggered data, but the metadata for a simple 1D network or 2D triangular mesh doesn&rsquo;t suffer from the genericity needed for the most complex models.</p>
@@ -1268,5 +1268,5 @@ Mesh1_edge_nodes =
 
 <!--
 MkDocs version : 0.15.2
-Build Date UTC : 2016-02-11 18:42:08.833685
+Build Date UTC : 2016-02-12 15:24:04.190050
 -->
