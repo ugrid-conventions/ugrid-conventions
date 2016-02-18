@@ -118,6 +118,7 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | topology_dimension | 2 |
 | node_coordinates |
 | face_node_connectivity |
+| face_dimension |
 | **Optionally required attributes*** |
 | edge_node_connectivity |
 | **Optional attributes **|
@@ -126,10 +127,14 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | boundary_node_connectivity |
 | face_coordinates |
 | edge_coordinates |
+| edge_dimension |
 
 *The "Optionally required" attribute `edge_node_connectivity` is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).
 
 The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a 2-dimensional (triangular) mesh this should be 2. The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute `face_node_connectivity` points to an index variable identifying for every face (here consistently triangle) the indices of its three corner nodes. The corner nodes should be specified in anticlockwise (also referred to as counterclockwise) direction as viewed from above (consistent with the CF-convention for `bounds` of p-sided cells. The connectivity array will thus be a matrix of size nFaces x 3. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option, the connectivity indices are 0-based by default. See [this section on zero or one-based indexing](#zero-or-one) for more details.
+
+The `face_dimension` attribute specifies with netcdf dimension is used to indicate the index of the face. This is needed because some applications store the data with the fastest varying index first, and some with that index last. The default is to use a (num_faces, 3) array for triangles, but some applications might use a (3, num_faces) order, in which case the `face_dimension` attribute can help the client code disambiguate. The `edge_dimension` attribute is similar for the edge_coordinates array.
+
 
 In case you want to define variables on the edges of the triangular mesh topology you need to specify the `edge_node_connectivity` attribute to map edges to nodes. Although the face to node mapping implicitly also defines the location of the edges, it does not specify the global numbering of the edges. Again the indexing convention of `edge_node_connectivity` should be specified using the `start_index` attribute to the index variable (i.e. Mesh2_edge_nodes in the example below) and 0-based indexing is the default.  Since it does not apply to edges globally, specifying the `boundary_node_connectivity` attribute described below does not (in and of itself) necessitate the need to specify the `edge_node_connectivity` attribute too.
 
@@ -159,7 +164,9 @@ Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
 Mesh2:topology_dimension = 2 ;
 Mesh2:node_coordinates = "Mesh2_node_x Mesh2_node_y" ;
 Mesh2:face_node_connectivity = "Mesh2_face_nodes" ;
+Mesh2:face_dimension = "nMesh2_face" ;
 Mesh2:edge_node_connectivity = "Mesh2_edge_nodes" ; // attribute required if variables will be defined on edges
+Mesh2:edge_dimension = "nMesh2_edge" ;
 Mesh2:edge_coordinates = "Mesh2_edge_x Mesh2_edge_y" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
@@ -226,6 +233,7 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | topology_dimension | 2 |
 | node_coordinates |
 | face_node_connectivity |
+| face_dimension |
 | **Optionally required attributes*** |
 | edge_node_connectivity |
 | **Optional attributes** |
@@ -234,6 +242,7 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | boundary_node_connectivity |
 | face_coordinates |
 | edge_coordinates |
+| edge_dimension |
 
 *The "Optionally required" attribute `edge_node_connectivity` is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).
 
@@ -269,7 +278,9 @@ Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
 Mesh2:topology_dimension = 2 ;
 Mesh2:node_coordinates = "Mesh2_node_x Mesh2_node_y" ;
 Mesh2:face_node_connectivity = "Mesh2_face_nodes" ;
+Mesh2:face_dimension = "nMesh2_face" ;
 Mesh2:edge_node_connectivity = "Mesh2_edge_nodes" ; // attribute required if variables will be defined on edges
+Mesh2:edge_dimension = "nMesh2_edge" ;
 Mesh2:edge_coordinates = "Mesh2_edge_x Mesh2_edge_y" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
@@ -365,7 +376,9 @@ Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
 Mesh2:topology_dimension = 2 ;
 Mesh2:node_coordinates = "Mesh2_node_x Mesh2_node_y" ;
 Mesh2:face_node_connectivity = "Mesh2_face_nodes" ;
+Mesh2:face_dimension = "nMesh2_face" ;
 Mesh2:edge_node_connectivity = "Mesh2_edge_nodes" ; // attribute required if variables will be defined on edges
+Mesh2:edge_dimension = "nMesh2_edge" ;
 Mesh2:edge_coordinates = "Mesh2_edge_x Mesh2_edge_y" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
@@ -468,10 +481,13 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | topology_dimension | 3 |
 | node_coordinates |
 | volume_node_connectivity |
-| volume_shape_type | 
+| volume_shape_type |
+| volume_dimension = | ; 
 | **Optionally-required attributes*** | 
 | face_node_connectivity |
+| face_dimension = | ; 
 | edge_node_connectivity |
+| edge_dimension = | ; 
 | **Optional attributes** |
 | volume_edge_connectivity |
 | volume_face_connectivity |
@@ -535,8 +551,11 @@ Mesh3D:topology_dimension = 3 ;
 Mesh3D:node_coordinates = "Mesh3D_node_x Mesh3D_node_y Mesh3D_node_z" ;
 Mesh3D:volume_shape_type = "Mesh3D_vol_types" ;
 Mesh3D:volume_node_connectivity = "Mesh3D_vol_nodes" ;
+Mesh3D:volume_dimension = nMesh3D_vol ; 
 Mesh3D:face_node_connectivity = "Mesh3D_face_nodes" ; // attribute required if variables will be defined on faces
+Mesh3D:face_dimension = nMesh3D_face ; 
 Mesh3D:edge_node_connectivity = "Mesh3D_edge_nodes" ; // attribute required if variables will be defined on edges
+Mesh3D:edge_dimension = nMesh3D_edge ; 
 Mesh3D:edge_coordinates = "Mesh3D_edge_x Mesh3D_edge_y Mesh3D_edge_z" ; // optional attribute (requires edge_node_connectivity)
 Mesh3D:face_coordinates = "Mesh3D_face_x Mesh3D_face_y Mesh3D_face_z" ; // optional attribute (requires face_node_connectivity)
 Mesh3D:volume_coordinates = "Mesh3D_vol_x Mesh3D_vol_y Mesh3D_vol_z" ; // optional attribute
