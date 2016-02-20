@@ -484,12 +484,12 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | node_coordinates |
 | volume_node_connectivity |
 | volume_shape_type |
-| volume_dimension = | ; 
+| volume_dimension |  
 | **Optionally-required attributes*** | 
 | face_node_connectivity |
-| face_dimension = | ; 
+| face_dimension  |  
 | edge_node_connectivity |
-| edge_dimension = | ; 
+| edge_dimension  |  
 | **Optional attributes** |
 | volume_edge_connectivity |
 | volume_face_connectivity |
