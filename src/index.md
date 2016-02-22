@@ -1,4 +1,4 @@
-# UGRID Conventions (v0.10)
+# UGRID Conventions (v1.0)
 
 ## Introduction
 
