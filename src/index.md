@@ -1,4 +1,4 @@
-# UGRID Conventions (v0.9)
+# UGRID Conventions (v1.0)
 
 ## Introduction
 
@@ -118,6 +118,7 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | topology_dimension | 2 |
 | node_coordinates |
 | face_node_connectivity |
+| face_dimension |
 | **Optionally required attributes*** |
 | edge_node_connectivity |
 | **Optional attributes **|
@@ -126,10 +127,14 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | boundary_node_connectivity |
 | face_coordinates |
 | edge_coordinates |
+| edge_dimension |
 
 *The "Optionally required" attribute `edge_node_connectivity` is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).
 
 The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a 2-dimensional (triangular) mesh this should be 2. The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute `face_node_connectivity` points to an index variable identifying for every face (here consistently triangle) the indices of its three corner nodes. The corner nodes should be specified in anticlockwise (also referred to as counterclockwise) direction as viewed from above (consistent with the CF-convention for `bounds` of p-sided cells. The connectivity array will thus be a matrix of size nFaces x 3. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option, the connectivity indices are 0-based by default. See [this section on zero or one-based indexing](#zero-or-one) for more details.
+
+The `face_dimension` attribute specifies which netcdf dimension is used to indicate the index of the face in the connectivity arrays. This is needed because some applications store the data with the fastest varying index first, and some with that index last. The default is to use the num_faces as fastest dimension; e.g. a (num_faces, 3) array for triangles, but some applications might use a (3, num_faces) order, in which case the `face_dimension` attribute is required to help the client code disambiguate. The `edge_dimension` attribute is similar for the edge connectivity arrays.
+
 
 In case you want to define variables on the edges of the triangular mesh topology you need to specify the `edge_node_connectivity` attribute to map edges to nodes. Although the face to node mapping implicitly also defines the location of the edges, it does not specify the global numbering of the edges. Again the indexing convention of `edge_node_connectivity` should be specified using the `start_index` attribute to the index variable (i.e. Mesh2_edge_nodes in the example below) and 0-based indexing is the default.  Since it does not apply to edges globally, specifying the `boundary_node_connectivity` attribute described below does not (in and of itself) necessitate the need to specify the `edge_node_connectivity` attribute too.
 
@@ -159,7 +164,9 @@ Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
 Mesh2:topology_dimension = 2 ;
 Mesh2:node_coordinates = "Mesh2_node_x Mesh2_node_y" ;
 Mesh2:face_node_connectivity = "Mesh2_face_nodes" ;
+Mesh2:face_dimension = "nMesh2_face" ;
 Mesh2:edge_node_connectivity = "Mesh2_edge_nodes" ; // attribute required if variables will be defined on edges
+Mesh2:edge_dimension = "nMesh2_edge" ;
 Mesh2:edge_coordinates = "Mesh2_edge_x Mesh2_edge_y" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
@@ -226,6 +233,7 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | topology_dimension | 2 |
 | node_coordinates |
 | face_node_connectivity |
+| face_dimension |
 | **Optionally required attributes*** |
 | edge_node_connectivity |
 | **Optional attributes** |
@@ -234,10 +242,13 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | boundary_node_connectivity |
 | face_coordinates |
 | edge_coordinates |
+| edge_dimension |
 
 *The "Optionally required" attribute `edge_node_connectivity` is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).
 
 The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a 2-dimensional mesh this should be 2. The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute `face_node_connectivity` points to an index variable identifying for every face the indices of its corner nodes. The corner nodes should be specified in anticlockwise direction as viewed from above (consistent with the CF-convention for `bounds` of p-sided cells. The connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace; if a face has less corner nodes than MaxNumNodesPerFace then the last node indices shall be equal to `_FillValue` (which should obviously be larger than the number of nodes in the mesh). For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option, the connectivity indices are 0-based by default. See [this section on zero or one-based indexing](#zero-or-one) for more details.
+
+The `face_dimension` attribute specifies which netcdf dimension is used to indicate the index of the face in the connectivity arrays. This is needed because some applications store the data with the fastest varying index first, and some with that index last. The default is to use the num_faces as fastest dimension; e.g. a (num_faces, 4) array for quads, but some applications might use a (4, num_faces) order, in which case the `face_dimension` attribute is required to help the client code disambiguate. The `edge_dimension` attribute is similar for the edge connectivity arrays.
 
 In case you want to define variables on the edges of the 2D mesh topology you need to specify the `edge_node_connectivity` attribute to map edges to nodes. Although the face to node mapping implicitly also defines the location of the edges, it does not specify the global numbering of the edges. Again the indexing convention of `edge_node_connectivity` should be specified using the `start_index` attribute to the index variable (i.e. Mesh2_edge_nodes in the example below) and 0-based indexing is the default. Since it does not apply to edges globally, specifying the `boundary_node_connectivity` attribute described below does not (in and of itself) necessitate the need to specify the `edge_node_connectivity` attribute too.
 
@@ -269,7 +280,9 @@ Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
 Mesh2:topology_dimension = 2 ;
 Mesh2:node_coordinates = "Mesh2_node_x Mesh2_node_y" ;
 Mesh2:face_node_connectivity = "Mesh2_face_nodes" ;
+Mesh2:face_dimension = "nMesh2_face" ;
 Mesh2:edge_node_connectivity = "Mesh2_edge_nodes" ; // attribute required if variables will be defined on edges
+Mesh2:edge_dimension = "nMesh2_edge" ;
 Mesh2:edge_coordinates = "Mesh2_edge_x Mesh2_edge_y" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
@@ -365,7 +378,9 @@ Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
 Mesh2:topology_dimension = 2 ;
 Mesh2:node_coordinates = "Mesh2_node_x Mesh2_node_y" ;
 Mesh2:face_node_connectivity = "Mesh2_face_nodes" ;
+Mesh2:face_dimension = "nMesh2_face" ;
 Mesh2:edge_node_connectivity = "Mesh2_edge_nodes" ; // attribute required if variables will be defined on edges
+Mesh2:edge_dimension = "nMesh2_edge" ;
 Mesh2:edge_coordinates = "Mesh2_edge_x Mesh2_edge_y" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
@@ -468,10 +483,13 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | topology_dimension | 3 |
 | node_coordinates |
 | volume_node_connectivity |
-| volume_shape_type | 
+| volume_shape_type |
+| volume_dimension |  
 | **Optionally-required attributes*** | 
 | face_node_connectivity |
+| face_dimension  |  
 | edge_node_connectivity |
+| edge_dimension  |  
 | **Optional attributes** |
 | volume_edge_connectivity |
 | volume_face_connectivity |
@@ -499,15 +517,24 @@ _If all volumes have the same shape type, then the shape typed could be determin
 
 The order in which the corner nodes of a volume are specified is fixed given its shape; this approach is common in 3D modeling, see e.g. [this graph in the OpenFOAM documentation](http://www.openfoam.org/docs/user/mesh-description.php#x23-1350072) and [ParaView](http://www.vtk.org/Wiki/index.php?title=ParaView/Users_Guide/VTK_Data_Model) or [VTK](http://www.vtk.org/doc/release/5.8/html/a00294.html) documentation. The `volume_node_connectivity` array will be a matrix of size nVolumes x MaxNumNodesPerVolume; if a volume has less corner nodes than MaxNumNodesPerVolume then the last node indices shall be equal to `_FillValue` (which should obviously be larger than the number of nodes in the mesh). For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh3D_vol_nodes in the example below). Consistent with the CF-conventions [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option, the connectivity indices are 0-based by default. See [this section on zero or one-based indexing](#zero-or-one) for more details.
 
+The `volume_dimension` attribute specifies which netcdf dimension is used to indicate the index of the volume in the connectivity arrays. This is needed because some applications store the data with the fastest varying index first, and some with that index last. The default is to use the num_volumes as fastest dimension; e.g. a (num_volumes, 4) array for tetrahedrons, but some applications might use a (4, num_volumes) order, in which case the `volume_dimension` attribute is required to help the client code disambiguate.  The `face_dimension` and `edge_dimension` attributes are similar for the face and edge connectivity arrays.
+
 In case you want to define variables on the faces or edges of the 3D mesh topology you need to specify the `face_node_connectivity` or `edge_node_connectivity` attribute, respectively, to map faces or edges to nodes. Although the volume to node mapping implicitly also defines the location of the faces and edges, it does not specify their global numbering. Again the indexing convention of `face_node_connectivity` and `edge_node_connectivity` should be specified using the `start_index` attribute to the index variable and 0-based indexing is the default. Since it does not apply to either nodes or edges globally, specifying the `boundary_node_connectivity` attribute described below does not (in and of itself) necessitate the need to specify `edge_node_connectivity` nor `face_node_connectivity`.
 
 Optionally the topology may have the following attributes:
+
 * `volume_face_connectivity` pointing to an index variable identifying for every volume the indices of its faces. The order in which the face indices should be specified is determined by the volume geometry type. This connectivity array will be a matrix of size nVolumes x MaxNumFacesPerVolume. If a volume has less faces than MaxNumFacesPerVolume then the last face indices shall be equal to `_FillValue`, and the indexing convention of `volume_edge_connectivity` should be specified using the `start_index` attribute to the index variable and 0-based indexing is the default.
+
 * `volume_edge_connectivity` pointing to an index variable identifying for every volume the indices of its edges. The order in which the edge indices should be specified is determined by the volume geometry type. This connectivity array will be a matrix of size nVolumes x MaxNumEdgesPerVolume. Again, if a volume has less edges than MaxNumEdgesPerVolume then the last edge indices shall be equal to `_FillValue`, and the indexing convention of `volume_edge_connectivity` should be specified using the `start_index` attribute to the index variable and 0-based indexing is the default.
+
 * `volume_volume_connectivity` pointing to an index variable identifying all volumes that share a face with each volume, i.e. are neighbors. This connectivity array will thus be a matrix of size nVolumes x MaxNumFacesPerVolume with a flag to note if the region "out of mesh" abuts a face of a given volume. Again, if a volume has less sides/faces than MaxNumFacesPerVolume then the last volume (column) indices shall be equal to `_FillValue`, and the indexing convention of `volume_volume_connectivity` should be specified using the `start_index` attribute to the index variable (i.e. Mesh3D_vol_links in the example below) and 0-based indexing is the default.
+
 * `face_edge_connectivity` pointing to an index variable identifying for every face the indices of its edges. The edges should be specified in anticlockwise direction as viewed from above. This connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace. As always, if a face has less corners/edges than MaxNumNodesPerFace then the last edge indices shall be equal to `_FillValue`, and the indexing convention of `face_edge_connectivity` should be specified using the `start_index` attribute to the index variable and 0-based indexing is the default.
+
 * `face_node_connectivity` pointing to an index variable identifying for every face the indices of its nodes. The nodes should be specified in either clockwise or anticlockwise order. This connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last node indices shall be equal to `_FillValue`, and the indexing convention of `face_node_connectivity` should be specified using the `start_index` attribute to the index variable and 0-based indexing is the default.
+
 * `boundary_node_connectivity` pointing to an index variable identifying for every face of each boundary the indices of its nodes. The nodes should be specified in either clockwise or anticlockwise order. This connectivity array will be a matrix of size nBoundaryFaces x MaxNumNodesPerFace. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last node indices shall be equal to `_FillValue`, and the indexing convention of `boundary_node_connectivity` should be specified using the `start_index` attribute to the index variable (i.e. Mesh3D_boundary_nodes) and 0-based indexing is the default. Although constructed of faces, boundaries represent a different quantity than general face data and thus the `boundary_node_connectivity` attribute may be specified independent of `face_node_connectivity`.  Information about the nature of each boundary face (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryFaces X 1.
+
 * `volume_coordinates`, `face_coordinates` and/or `edge_coordinates` pointing to the auxiliary coordinate variables associated with the characteristic location of the volumes, faces and edges. These auxiliary coordinate variables will have length nVolumes, nFaces and nEdges respectively, and may have in turn a `bounds` attribute that specifies the corner coordinates of the volume, face or edge (thereby duplicating the data in the `node_coordinates` variables). The order in which the corner coordinates of the volumes is given by the volume geometry type.
 
 ![image](./images/mesh3d.png)
@@ -535,8 +562,11 @@ Mesh3D:topology_dimension = 3 ;
 Mesh3D:node_coordinates = "Mesh3D_node_x Mesh3D_node_y Mesh3D_node_z" ;
 Mesh3D:volume_shape_type = "Mesh3D_vol_types" ;
 Mesh3D:volume_node_connectivity = "Mesh3D_vol_nodes" ;
+Mesh3D:volume_dimension = nMesh3D_vol ; 
 Mesh3D:face_node_connectivity = "Mesh3D_face_nodes" ; // attribute required if variables will be defined on faces
+Mesh3D:face_dimension = nMesh3D_face ; 
 Mesh3D:edge_node_connectivity = "Mesh3D_edge_nodes" ; // attribute required if variables will be defined on edges
+Mesh3D:edge_dimension = nMesh3D_edge ; 
 Mesh3D:edge_coordinates = "Mesh3D_edge_x Mesh3D_edge_y Mesh3D_edge_z" ; // optional attribute (requires edge_node_connectivity)
 Mesh3D:face_coordinates = "Mesh3D_face_x Mesh3D_face_y Mesh3D_face_z" ; // optional attribute (requires face_node_connectivity)
 Mesh3D:volume_coordinates = "Mesh3D_vol_x Mesh3D_vol_y Mesh3D_vol_z" ; // optional attribute
@@ -687,6 +717,8 @@ Mesh2_waterlevel:mesh = "Mesh2"
 Mesh2_waterlevel:location = "face" ;
 Mesh2_waterlevel:coordinates = "Mesh2_face_x Mesh2_face_y" ;
 ```
+
+The order of dimensions on a data variable is arbitrary, so nTimeSteps x nLayers x nFaces, nTimeSteps x nFaces x nLayers, nFaces x nLayers x nTimeSeps, etc would all be valid. In line with CF/COARDS and OGC NetCDF-CF we recommend to use the T,Z,Y,X [c order notation] order as much as possible where the unstructured horizontal dimension should be read for Y,X. That is, the order nTimeSteps x nLayers x nFaces [c order notation] is recommended: the nFaces is the fastest increasing dimension, then the nLayers, and finally the nTimeSteps.
 
 ### Volume and flux variables
 
@@ -877,7 +909,7 @@ Mesh1_waterlevel:coordinates = "Mesh1_set_x Mesh1_set_y" ;
 
 <a name="zero-or-one"/>
 ## Zero or One-based indexing
-The indexing using by the CF [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option is 0-based. Therefore, it is most consistent for this CF extension for unstructured data to also use 0-based indexing, which means that points, edges, faces and volumes will be numbered starting with 0. This convention is consistent with languages like C and Java, but unlike Fortran and MATLAB. Since many of the unstructured models have been programmed in Fortran and legacy NetCDF files exist that use 1-based indexing (which could be upgraded to be consistent with this new proposal using ncML if 1-based indexing were allowed), we propose to support both 0- and 1-based indexing by means of the `start_index` attribute. You will find below two examples of the same network geometry using either 0- or 1-based indexing. Switching between 0- and 1-based indexing is as easy as adding 1 to or subtracting 1 from the indices upon reading or writing depending on the setting of `start_index`; allowing both options should only have a minor impact on the reading routines and no effect at all on the rest of your code.
+The indexing using by the CF [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option is 0-based. Therefore, it is most consistent for this CF extension for unstructured data to also use 0-based indexing, which means that points, edges, faces and volumes will be numbered starting with 0. This convention is consistent with languages like C, Java and Python, but unlike Fortran and MATLAB. Since many of the unstructured models have been programmed in Fortran and legacy NetCDF files exist that use 1-based indexing (which could be upgraded to be consistent with this new proposal using ncML if 1-based indexing were allowed), we propose to support both 0- and 1-based indexing by means of the `start_index` attribute. You will find below two examples of the same network geometry using either 0- or 1-based indexing. Switching between 0- and 1-based indexing is as easy as adding 1 to or subtracting 1 from the indices upon reading or writing depending on the setting of `start_index`; allowing both options should only have a minor impact on the reading routines and no effect at all on the rest of your code.
 
 Example of 0-based indexing:
 
