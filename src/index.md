@@ -122,7 +122,7 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | face_dimension |
 | edge_node_connectivity |
 | edge_dimension |
-| **Optional attributes **|
+| **Optional attributes**|
 | face_edge_connectivity |
 | face_face_connectivity |
 | boundary_node_connectivity |
