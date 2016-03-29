@@ -118,18 +118,20 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | topology_dimension | 2 |
 | node_coordinates |
 | face_node_connectivity |
-| face_dimension |
 | **Optionally required attributes*** |
+| face_dimension |
 | edge_node_connectivity |
+| edge_dimension |
 | **Optional attributes **|
 | face_edge_connectivity |
 | face_face_connectivity |
 | boundary_node_connectivity |
 | face_coordinates |
 | edge_coordinates |
-| edge_dimension |
 
 *The "Optionally required" attribute `edge_node_connectivity` is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).
+
+*The "Optionally required" attributes `face_dimension` and  `edge_dimension` are required only if the dimension ordering is nonstandard in any of the connectivity variables for faces and edges, respectively.
 
 The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a 2-dimensional (triangular) mesh this should be 2. The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute `face_node_connectivity` points to an index variable identifying for every face (here consistently triangle) the indices of its three corner nodes. The corner nodes should be specified in anticlockwise (also referred to as counterclockwise) direction as viewed from above (consistent with the CF-convention for `bounds` of p-sided cells. The connectivity array will thus be a matrix of size nFaces x 3. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option, the connectivity indices are 0-based by default. See [this section on zero or one-based indexing](#zero-or-one) for more details.
 
@@ -233,18 +235,20 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | topology_dimension | 2 |
 | node_coordinates |
 | face_node_connectivity |
-| face_dimension |
 | **Optionally required attributes*** |
+| face_dimension |
 | edge_node_connectivity |
+| edge_dimension |
 | **Optional attributes** |
 | face_edge_connectivity |
 | face_face_connectivity |
 | boundary_node_connectivity |
 | face_coordinates |
 | edge_coordinates |
-| edge_dimension |
 
 *The "Optionally required" attribute `edge_node_connectivity` is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).
+
+*The "Optionally required" attributes `face_dimension` and  `edge_dimension` are required only if the dimension ordering is nonstandard in any of the connectivity variables for faces and edges, respectively.
 
 The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a 2-dimensional mesh this should be 2. The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute `face_node_connectivity` points to an index variable identifying for every face the indices of its corner nodes. The corner nodes should be specified in anticlockwise direction as viewed from above (consistent with the CF-convention for `bounds` of p-sided cells. The connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace; if a face has less corner nodes than MaxNumNodesPerFace then the last node indices shall be equal to `_FillValue` (which should obviously be larger than the number of nodes in the mesh). For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option, the connectivity indices are 0-based by default. See [this section on zero or one-based indexing](#zero-or-one) for more details.
 
@@ -484,8 +488,8 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | node_coordinates |
 | volume_node_connectivity |
 | volume_shape_type |
-| volume_dimension |  
 | **Optionally-required attributes*** | 
+| volume_dimension |  
 | face_node_connectivity |
 | face_dimension  |  
 | edge_node_connectivity |
@@ -501,6 +505,8 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | edge_coordinates |
 
 *The "Optionally required" attributes `edge_node_connectivity` and `face_node_connectivity` are required only if you want to store data on the edges or faces respectively (i.e. if you mind the numbering order of the edges/faces).
+
+*The "Optionally required" attributes `volume_dimension`, `face_dimension` and  `edge_dimension` are required only if the dimension ordering is nonstandard in any of the connectivity variables for volumes, faces and nodes, respectively.
 
 The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a fully 3-dimensional unstructured mesh this should be 3. The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, elevation and optional other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute `volume_node_connectivity` points to an index variable identifying for every volume the indices of its corner nodes. For faces in the horizontal plane, it was possible to prescribe the order of the nodes, but this is not possible for the nodes of generic 3D volumes. For this reason we introduce an additional attribute `volume_shape_type` which points to a flag variable that specifies for every volume its shape:
 
