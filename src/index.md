@@ -407,6 +407,7 @@ Mesh2:edge_coordinates = "Mesh2_edge_x Mesh2_edge_y" ; // optional attribute (re
 Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_face_connectivity = "Mesh2_face_links" ; // optional attribute
+Mesh2:edge_face_connectivity = "Mesh2_edge_face_links" ; // optional attribute (requires edge_node_connectivity)
 integer Mesh2_face_nodes(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_nodes:cf_role = "face_node_connectivity" ;
 Mesh2_face_nodes:long_name = "Maps every face to its corner nodes." ;
@@ -430,6 +431,12 @@ Mesh2_face_links:_FillValue = 999999 ;
 Mesh2_face_links:start_index = 1 ;
 Mesh2_face_links:flag_values = -1 ;
 Mesh2_face_links:flag_meanings = "out_of_mesh" ;
+integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
+Mesh2_edge_face_links:cf_role = "edge_face_connectivity" ;
+Mesh2_edge_face_links:long_name = "neighbor faces for edges" ;
+Mesh2_edge_face_links:start_index = 1 ;
+Mesh2_edge_face_links:_FillValue = -999 ;
+Mesh2_edge_face_links:comment = "missing neighbor faces are indicated using _FillValue" ;
 
 // Mesh node coordinates
 double Mesh2_node_x(nMesh2_node) ;
