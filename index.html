@@ -326,6 +326,10 @@ Mesh1_edge_ybnds:units = &quot;degrees_north&quot; ;
 <td></td>
 </tr>
 <tr>
+<td>edge_face_connectivity</td>
+<td></td>
+</tr>
+<tr>
 <td>boundary_node_connectivity</td>
 <td></td>
 </tr>
@@ -347,8 +351,9 @@ Mesh1_edge_ybnds:units = &quot;degrees_north&quot; ;
 <p>Optionally the topology may have the following attributes:
 <em> <code>face_edge_connectivity</code> pointing to an index variable identifying for every face (here consistently triangle) the indices of its three edges. The edges should be specified in anticlockwise direction as viewed from above. This connectivity array will thus be a matrix of size nFaces x 3. Again the indexing convention of <code>face_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_edges in the example below) and 0-based indexing is the default.
 </em> <code>face_face_connectivity</code> pointing to an index variable identifying all faces (here consistently triangle) that share an edge with each face, i.e. are neighbors. This connectivity array will thus be a matrix of size nFaces x 3 with a flag to note if the region &ldquo;out of mesh&rdquo; abuts an edge of a given face. Again the indexing convention of <code>face_face_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_links in the example below) and 0-based indexing is the default.
-<em> <code>boundary_node_connectivity</code> pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>edge_node_connectivity</code>.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
-</em> <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
+<em> <code>edge_face_connectivity</code> pointing to an index variable identifying all faces that share the same edge, i. e. are neighbors to an edge. This connectivity array is thus a matrix of size nEdges x 2. It is intended to be used in combination with data defined on edges. The <code>start_index</code> attribute should be used to specify the indexing convention and 0-based indexing is the default. Attribute <code>_FillValue</code> must be present. Missing neighbor faces are expressed using _FillValue, e.g for edges at the boundary with only one neighbor face present. For details see definition of variable Mesh2_edge_face_links below.
+</em> <code>boundary_node_connectivity</code> pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>edge_node_connectivity</code>.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
+* <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
 <p><img alt="image" src="./images/triangles.png" /></p>
 <p>Example:</p>
 <pre><code class="javascript">dimensions:
@@ -374,6 +379,7 @@ Mesh2:edge_coordinates = &quot;Mesh2_edge_x Mesh2_edge_y&quot; ; // optional att
 Mesh2:face_coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ; // optional attribute
 Mesh2:face_edge_connectivity = &quot;Mesh2_face_edges&quot; ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_face_connectivity = &quot;Mesh2_face_links&quot; ; // optional attribute
+Mesh2:edge_face_connectivity = &quot;Mesh2_edge_face_links&quot; ; // optional attribute (requires edge_node_connectivity)
 integer Mesh2_face_nodes(nMesh2_face, Three) ;
 Mesh2_face_nodes:cf_role = &quot;face_node_connectivity&quot; ;
 Mesh2_face_nodes:long_name = &quot;Maps every triangular face to its three corner nodes.&quot; ;
@@ -394,6 +400,12 @@ Mesh2_face_links:long_name = &quot;Indicates which other faces neighbor each fac
 Mesh2_face_links:start_index = 1 ;
 Mesh2_face_links:flag_values = -1 ;
 Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
+Mesh2_edge_face_links:cf_role = &quot;edge_face_connectivity&quot; ;
+Mesh2_edge_face_links:long_name = &quot;neighbor faces for edges&quot; ;
+Mesh2_edge_face_links:start_index = 1 ;
+Mesh2_edge_face_links:_FillValue = -999 ;
+Mesh2_edge_face_links:comment = &quot;missing neighbor faces are indicated using _FillValue&quot; ;
 
 // Mesh node coordinates
 double Mesh2_node_x(nMesh2_node) ;
@@ -480,6 +492,10 @@ Mesh2_edge_y:units = &quot;degrees_north&quot; ;
 <td></td>
 </tr>
 <tr>
+<td>edge_face_connectivity</td>
+<td></td>
+</tr>
+<tr>
 <td>boundary_node_connectivity</td>
 <td></td>
 </tr>
@@ -501,8 +517,9 @@ Mesh2_edge_y:units = &quot;degrees_north&quot; ;
 <p>Optionally the topology may have the following attributes:
 <em> <code>face_edge_connectivity</code> pointing to an index variable identifying for every face the indices of its edges. The edges should be specified in anticlockwise direction as viewed from above. This connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last edge indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_edges in the example below) and 0-based indexing is the default.
 </em> <code>face_face_connectivity</code> pointing to an index variable identifying all faces that share an edge with each face, i.e. are neighbors. This connectivity array will thus be a matrix of size nFaces x MaxNumNodesPerFace with a flag to note if the region &ldquo;out of mesh&rdquo; abuts an edge of a given face. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last face (column) indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_face_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_links in the example below) and 0-based indexing is the default.
-<em> <code>boundary_node_connectivity</code> pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>edge_node_connectivity</code>.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
-</em> <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
+<em> <code>edge_face_connectivity</code> pointing to an index variable identifying all faces that share the same edge, i. e. are neighbors to an edge. This connectivity array is thus a matrix of size nEdges x 2. It is intended to be used in combination with data defined on edges. The <code>start_index</code> attribute should be used to specify the indexing convention and 0-based indexing is the default. Attribute <code>_FillValue</code> must be present. Missing neighbor faces are expressed using _FillValue, e.g for edges at the boundary with only one neighbor face present. For details see definition of variable Mesh2_edge_face_links below.
+</em> <code>boundary_node_connectivity</code> pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>edge_node_connectivity</code>.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
+* <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
 <p><em>The use of <code>_FillValue</code> to indicate faces with less nodes than MaxNumNodesPerFace extends to the coordinate bounds variables; this is an extension of the current convention.</em></p>
 <p><img alt="image" src="./images/mixedmesh.png" /></p>
 <p>Example:</p>
@@ -529,6 +546,7 @@ Mesh2:edge_coordinates = &quot;Mesh2_edge_x Mesh2_edge_y&quot; ; // optional att
 Mesh2:face_coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ; // optional attribute
 Mesh2:face_edge_connectivity = &quot;Mesh2_face_edges&quot; ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_face_connectivity = &quot;Mesh2_face_links&quot; ; // optional attribute
+Mesh2:edge_face_connectivity = &quot;Mesh2_edge_face_links&quot; ; // optional attribute (requires edge_node_connectivity)
 integer Mesh2_face_nodes(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_nodes:cf_role = &quot;face_node_connectivity&quot; ;
 Mesh2_face_nodes:long_name = &quot;Maps every face to its corner nodes.&quot; ;
@@ -552,6 +570,12 @@ Mesh2_face_links:_FillValue = 999999 ;
 Mesh2_face_links:start_index = 1 ;
 Mesh2_face_links:flag_values = -1 ;
 Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
+Mesh2_edge_face_links:cf_role = &quot;edge_face_connectivity&quot; ;
+Mesh2_edge_face_links:long_name = &quot;neighbor faces for edges&quot; ;
+Mesh2_edge_face_links:start_index = 1 ;
+Mesh2_edge_face_links:_FillValue = -999 ;
+Mesh2_edge_face_links:comment = &quot;missing neighbor faces are indicated using _FillValue&quot; ;
 
 // Mesh node coordinates
 double Mesh2_node_x(nMesh2_node) ;
@@ -623,6 +647,7 @@ Mesh2:edge_coordinates = &quot;Mesh2_edge_x Mesh2_edge_y&quot; ; // optional att
 Mesh2:face_coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ; // optional attribute
 Mesh2:face_edge_connectivity = &quot;Mesh2_face_edges&quot; ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_face_connectivity = &quot;Mesh2_face_links&quot; ; // optional attribute
+Mesh2:edge_face_connectivity = &quot;Mesh2_edge_face_links&quot; ; // optional attribute (requires edge_node_connectivity)
 integer Mesh2_face_nodes(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_nodes:cf_role = &quot;face_node_connectivity&quot; ;
 Mesh2_face_nodes:long_name = &quot;Maps every face to its corner nodes.&quot; ;
@@ -646,6 +671,12 @@ Mesh2_face_links:_FillValue = 999999 ;
 Mesh2_face_links:start_index = 1 ;
 Mesh2_face_links:flag_values = -1 ;
 Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
+Mesh2_edge_face_links:cf_role = &quot;edge_face_connectivity&quot; ;
+Mesh2_edge_face_links:long_name = &quot;neighbor faces for edges&quot; ;
+Mesh2_edge_face_links:start_index = 1 ;
+Mesh2_edge_face_links:_FillValue = -999 ;
+Mesh2_edge_face_links:comment = &quot;missing neighbor faces are indicated using _FillValue&quot; ;
 
 // Mesh node coordinates
 double Mesh2_node_x(nMesh2_node) ;
@@ -1328,5 +1359,5 @@ Mesh1_edge_nodes =
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-03-29 21:45:15.776163
+Build Date UTC : 2016-04-06 21:08:26.032391
 -->
