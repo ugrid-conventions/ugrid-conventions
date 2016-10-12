@@ -1,0 +1,293 @@
+netcdf C:/Users/rsignell/Downloads/S8_map.nc {
+  dimensions:
+    nNetNode = 189166;
+    nNetLink = 391502;
+    nNetLinkPts = 2;
+    nBndLink = 30336;
+    nNetElem = 202096;
+    nNetElemMaxNode = 4;
+    nNetLinkContourPts = 4;
+    nFlowElem = 202096;
+    nFlowElemMaxNode = 4;
+    nFlowElemContourPts = 4;
+    nFlowLink = 361553;
+    nFlowLinkPts = 2;
+    time = UNLIMITED;   // (5 currently)
+  variables:
+    int Mesh2D;
+      :cf_type = "mesh_topology";
+      :topology_dimension = 2; // int
+      :node_coordinates = "NetNode_x NetNode_y";
+      :face_node_connectivity = "NetElemNode";
+      :edge_node_connectivity = "NetLink";
+
+    double NetNode_x(nNetNode=189166);
+      :units = "m";
+      :standard_name = "projection_x_coordinate";
+      :long_name = "x-coordinate of net nodes";
+
+    double NetNode_y(nNetNode=189166);
+      :units = "m";
+      :standard_name = "projection_y_coordinate";
+      :long_name = "y-coordinate of net nodes";
+
+    int projected_coordinate_system;
+      :name = "Unknown projected";
+      :epsg = 28992; // int
+      :grid_mapping_name = "Unknown projected";
+      :longitude_of_prime_meridian = 0.0; // double
+      :semi_major_axis = 6378137.0; // double
+      :semi_minor_axis = 6356752.314245; // double
+      :inverse_flattening = 298.257223563; // double
+      :epsg_code = "EPGS:28992";
+      :value = "value is equal to EPSG code";
+
+    double NetNode_lon(nNetNode=189166);
+      :units = "degrees_east";
+      :standard_name = "longitude";
+      :long_name = "longitude";
+
+    double NetNode_lat(nNetNode=189166);
+      :units = "degrees_north";
+      :standard_name = "latitude";
+      :long_name = "latitude";
+
+    double NetNode_z(nNetNode=189166);
+      :units = "m";
+      :positive = "up";
+      :standard_name = "sea_floor_depth";
+      :long_name = "Bottom level at net nodes (flow element\'s corners)";
+      :coordinates = "NetNode_x NetNode_y";
+      :mesh = "Mesh2D";
+      :location = "node";
+
+    int NetLink(nNetLink=391502, nNetLinkPts=2);
+      :standard_name = "netlink";
+      :long_name = "link between two netnodes";
+
+    int NetLinkType(nNetLink=391502);
+      :long_name = "type of netlink";
+      :flag_values = 0, 1, 2; // int
+      :flag_meanings = "closed_link_between_2D_nodes link_between_1D_nodes link_between_2D_nodes";
+
+    int NetElemNode(nNetElem=202096, nNetElemMaxNode=4);
+      :long_name = "Mapping from net cell to net nodes.";
+
+    double NetLinkContour_x(nNetLink=391502, nNetLinkContourPts=4);
+      :units = "m";
+      :standard_name = "projection_x_coordinate";
+      :long_name = "List of x-contour points of momentum control volume surrounding each net/flow link.";
+      :_FillValue = -999.0; // double
+
+    double NetLinkContour_y(nNetLink=391502, nNetLinkContourPts=4);
+      :units = "m";
+      :standard_name = "projection_y_coordinate";
+      :long_name = "List of y-contour points of momentum control volume surrounding each net/flow link.";
+      :_FillValue = -999.0; // double
+
+    double NetLink_xu(nNetLink=391502);
+      :units = "m";
+      :standard_name = "projection_x_coordinate";
+      :long_name = "Center coordinate of net link (velocity point).";
+
+    double NetLink_yu(nNetLink=391502);
+      :units = "m";
+      :standard_name = "projection_y_coordinate";
+      :long_name = "Center coordinate of net link (velocity point).";
+
+    int BndLink(nBndLink=30336);
+      :long_name = "Netlinks that compose the net boundary.";
+
+    double FlowElem_xcc(nFlowElem=202096);
+      :units = "m";
+      :standard_name = "projection_x_coordinate";
+      :long_name = "Flow element circumcenter x";
+      :bounds = "FlowElemContour_x";
+
+    double FlowElem_ycc(nFlowElem=202096);
+      :units = "m";
+      :standard_name = "projection_y_coordinate";
+      :long_name = "Flow element circumcenter y";
+      :bounds = "FlowElemContour_y";
+
+    double FlowElem_zcc(nFlowElem=202096);
+      :long_name = "Flow element average bottom level (average of all corners).";
+      :positive = "down";
+
+    double FlowElem_bac(nFlowElem=202096);
+      :long_name = "Flow element area";
+      :units = "m2";
+      :standard_name = "cell_area";
+
+    double FlowElemContour_x(nFlowElem=202096, nFlowElemContourPts=4);
+      :units = "m";
+      :standard_name = "projection_x_coordinate";
+      :long_name = "List of x-points forming flow element";
+      :_FillValue = -999.0; // double
+
+    double FlowElemContour_y(nFlowElem=202096, nFlowElemContourPts=4);
+      :units = "m";
+      :standard_name = "projection_y_coordinate";
+      :long_name = "List of y-points forming flow element";
+      :_FillValue = -999.0; // double
+
+    double FlowElem_bl(nFlowElem=202096);
+      :units = "m";
+      :positive = "up";
+      :standard_name = "sea_floor_depth";
+      :long_name = "Bottom level at flow element\'s circumcenter.";
+      :grid_mapping = "projected_coordinate_system";
+
+    int FlowLink(nFlowLink=361553, nFlowLinkPts=2);
+      :long_name = "link/interface between two flow elements";
+
+    int FlowLinkType(nFlowLink=361553);
+      :long_name = "type of flowlink";
+      :valid_range = 1, 2; // int
+      :flag_values = 1, 2; // int
+      :flag_meanings = "link_between_1D_flow_elements link_between_2D_flow_elements";
+
+    double FlowLink_xu(nFlowLink=361553);
+      :units = "m";
+      :standard_name = "projection_x_coordinate";
+      :long_name = "Center coordinate of net link (velocity point).";
+
+    double FlowLink_yu(nFlowLink=361553);
+      :units = "m";
+      :standard_name = "projection_y_coordinate";
+      :long_name = "Center coordinate of net link (velocity point).";
+
+    double FlowLink_lonu(nFlowLink=361553);
+      :units = "degrees_east";
+      :standard_name = "longitude";
+      :long_name = "longitude";
+
+    double FlowLink_latu(nFlowLink=361553);
+      :units = "degrees_north";
+      :standard_name = "latitude";
+      :long_name = "latitude";
+
+    double time(time=5);
+      :units = "seconds since 2010-01-01 00:00:00";
+      :standard_name = "time";
+
+    double timestep(time=5);
+      :units = "seconds";
+      :standard_name = "timestep";
+
+    double s1(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :standard_name = "sea_surface_height";
+      :long_name = "waterlevel";
+      :units = "m";
+      :grid_mapping = "projected_coordinate_system";
+
+    double s0(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :standard_name = "sea_surface_height";
+      :long_name = "waterlevel old";
+      :units = "m";
+      :grid_mapping = "projected_coordinate_system";
+
+    double waterdepth(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :standard_name = "*waterdepth";
+      :long_name = "waterdepth";
+      :units = "m";
+      :grid_mapping = "projected_coordinate_system";
+
+    int Numlimdt(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :standard_name = "*Numlimdt";
+      :long_name = "Nr of times cell was Courant limiting";
+      :units = "( )";
+      :grid_mapping = "projected_coordinate_system";
+
+    double taus(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :standard_name = "taucurrent";
+      :long_name = "taucurrent in cell center";
+      :units = "N/m2";
+      :grid_mapping = "projected_coordinate_system";
+
+    double unorm(time=5, nFlowLink=361553);
+      :coordinates = "FlowLink_xu FlowLink_yu";
+      :standard_name = "sea_water_speed";
+      :units = "m s-1";
+      :grid_mapping = "projected_coordinate_system";
+
+    double u0(time=5, nFlowLink=361553);
+      :coordinates = "FlowLink_xu FlowLink_yu";
+      :standard_name = "sea_water_speed_old";
+      :units = "m s-1";
+
+    double q1(time=5, nFlowLink=361553);
+      :coordinates = "FlowLink_xu FlowLink_yu";
+      :standard_name = "flow_flux";
+      :long_name = "Flow flux";
+      :units = "m3/s";
+
+    double viu(time=5, nFlowLink=361553);
+      :coordinates = "FlowLink_xu FlowLink_yu";
+      :standard_name = "Horizontal viscosity";
+      :units = "m2/s";
+
+    double diu(time=5, nFlowLink=361553);
+      :coordinates = "FlowLink_xu FlowLink_yu";
+      :standard_name = "Horizontal diffusivity";
+      :units = "m2/s";
+
+    double ucx(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :standard_name = "eastward_sea_water_velocity";
+      :long_name = "eastward velocity on cell center";
+      :units = "m s-1";
+      :grid_mapping = "projected_coordinate_system";
+
+    double ucy(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :standard_name = "northward_sea_water_velocity";
+      :long_name = "northward velocity on cell center";
+      :units = "m s-1";
+      :grid_mapping = "projected_coordinate_system";
+
+    double czs(time=5, nFlowElem=202096);
+      :long_name = "Chezy roughness";
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :units = "m0.5s-1";
+
+    double windx(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :long_name = "eastward air velocity on cell center";
+      :units = "m s-1";
+      :grid_mapping = "projected_coordinate_system";
+
+    double windy(time=5, nFlowElem=202096);
+      :coordinates = "FlowElem_xcc FlowElem_ycc";
+      :long_name = "northward air velocity on cell center";
+      :units = "m s-1";
+      :grid_mapping = "projected_coordinate_system";
+
+    double windxu(time=5, nFlowLink=361553);
+      :coordinates = "FlowLink_xu FlowLink_yu";
+      :long_name = "eastward air velocity on flow links";
+      :standard_name = "eastward_wind";
+      :units = "m s-1";
+      :grid_mapping = "projected_coordinate_system";
+
+    double windyu(time=5, nFlowLink=361553);
+      :coordinates = "FlowElem_xu FlowElem_yu";
+      :long_name = "northward air velocity on flow links";
+      :standard_name = "northward_wind";
+      :units = "m s-1";
+      :grid_mapping = "projected_coordinate_system";
+
+  // global attributes:
+  :institution = "Deltares";
+  :references = "http://www.deltares.nl";
+  :source = "Deltares, D-Flow FM Version 1.1.154.42806, Oct 30 2015, 12:26:53, model";
+  :history = "Created on 2016-10-11T14:26:56-0700, D-Flow FM";
+  :date_created = "2016-10-11T14:26:56-0700";
+  :date_modified = "2016-10-11T14:26:56-0700";
+  :Conventions = "UGRID-0.9";
+}
