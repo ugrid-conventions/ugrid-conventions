@@ -15,7 +15,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
     time = UNLIMITED;   // (5 currently)
   variables:
     int Mesh2D;
-      :cf_type = "mesh_topology";
+      :cf_role = "mesh_topology";
       :topology_dimension = 2; // int
       :node_coordinates = "NetNode_x NetNode_y";
       :face_node_connectivity = "NetElemNode";
@@ -64,6 +64,8 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
     int NetLink(nNetLink=391502, nNetLinkPts=2);
       :standard_name = "netlink";
       :long_name = "link between two netnodes";
+      :cf_role = "edge_node_connectivity";
+      :start_index = 1;  // int
 
     int NetLinkType(nNetLink=391502);
       :long_name = "type of netlink";
@@ -72,6 +74,9 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
 
     int NetElemNode(nNetElem=202096, nNetElemMaxNode=4);
       :long_name = "Mapping from net cell to net nodes.";
+      :cf_role = "edge_node_connectivity";
+      :start_index = 1; // int
+      :_FillValue = -2147483647; // int
 
     double NetLinkContour_x(nNetLink=391502, nNetLinkContourPts=4);
       :units = "m";
@@ -181,6 +186,8 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :long_name = "waterlevel";
       :units = "m";
       :grid_mapping = "projected_coordinate_system";
+      :mesh = "Mesh2D";
+      :location = "face";
 
     double s0(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
@@ -188,6 +195,8 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :long_name = "waterlevel old";
       :units = "m";
       :grid_mapping = "projected_coordinate_system";
+      :mesh = "Mesh2D";
+      :location = "face";
 
     double waterdepth(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
@@ -195,47 +204,63 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :long_name = "waterdepth";
       :units = "m";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "face";
+      
     int Numlimdt(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :standard_name = "*Numlimdt";
       :long_name = "Nr of times cell was Courant limiting";
-      :units = "( )";
+      :units = "1";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "face";
+      
     double taus(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :standard_name = "taucurrent";
       :long_name = "taucurrent in cell center";
       :units = "N/m2";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "face";
+      
     double unorm(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :standard_name = "sea_water_speed";
       :units = "m s-1";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "node";
+      
     double u0(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :standard_name = "sea_water_speed_old";
       :units = "m s-1";
+      :mesh = "Mesh2D";
+      :location = "node";
 
     double q1(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :standard_name = "flow_flux";
       :long_name = "Flow flux";
       :units = "m3/s";
+      :mesh = "Mesh2D";
+      :location = "node";
 
     double viu(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :standard_name = "Horizontal viscosity";
       :units = "m2/s";
+      :mesh = "Mesh2D";
+      :location = "node";
 
     double diu(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :standard_name = "Horizontal diffusivity";
       :units = "m2/s";
+      :mesh = "Mesh2D";
+      :location = "node";
 
     double ucx(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
@@ -243,45 +268,59 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :long_name = "eastward velocity on cell center";
       :units = "m s-1";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "face";
+      
     double ucy(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :standard_name = "northward_sea_water_velocity";
       :long_name = "northward velocity on cell center";
       :units = "m s-1";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "face";
+      
     double czs(time=5, nFlowElem=202096);
       :long_name = "Chezy roughness";
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :units = "m0.5s-1";
-
+      :mesh = "Mesh2D";
+      :location = "face";
+      
     double windx(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :long_name = "eastward air velocity on cell center";
       :units = "m s-1";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "face";
+      
     double windy(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :long_name = "northward air velocity on cell center";
       :units = "m s-1";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "face";
+      
     double windxu(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :long_name = "eastward air velocity on flow links";
       :standard_name = "eastward_wind";
       :units = "m s-1";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "node";
+      
     double windyu(time=5, nFlowLink=361553);
       :coordinates = "FlowElem_xu FlowElem_yu";
       :long_name = "northward air velocity on flow links";
       :standard_name = "northward_wind";
       :units = "m s-1";
       :grid_mapping = "projected_coordinate_system";
-
+      :mesh = "Mesh2D";
+      :location = "node";
+      
   // global attributes:
   :institution = "Deltares";
   :references = "http://www.deltares.nl";
@@ -289,5 +328,5 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
   :history = "Created on 2016-10-11T14:26:56-0700, D-Flow FM";
   :date_created = "2016-10-11T14:26:56-0700";
   :date_modified = "2016-10-11T14:26:56-0700";
-  :Conventions = "UGRID-0.9";
+  :Conventions = "UGRID-1.0";
 }
