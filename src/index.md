@@ -2,9 +2,16 @@
 
 ## Introduction
 
-This page describes a proposal for storing unstructured (or flexible mesh) model data in the Unidata Network Common Data Form (NetCDF) file. Our focus is on data for environmental applications and hence we start from the [Climate & Forecast (CF) Metadata Conventions](http://cf-convention.github.io/). The CF Conventions have been the standard in climate research for many years, and are  being adopted by others as the metadata standard (e.g. [NASA](https://earthdata.nasa.gov/data/standards-and-references/metadata-standards),[Open Geospatial Consortium](http://www.opengeospatial.org/standards/netcdf)). The CF conventions allow you to provide the geospatial and temporal coordinates for scientific data, but currently assumes that the horizontal topology may be inferred from the i,j indices of structured grids.  This proposal adds conventions for specifying the topology for unstructured (e.g. triangular) grids.
+This page describes a proposal for storing unstructured (or flexible mesh) model data in the Unidata Network Common Data Form (NetCDF) file.
 
-In its most basic form unstructured data may be stored as data defined at a series of points, the CF-conventions are then sufficient. However, it is often useful or even necessary to also know the topology of the underlying unstructured mesh: is it a one dimensional (1D) network, a two dimensional (2D) triangular mesh or more flexible mixed triangle/quadrilateral mesh, a 2D mesh with vertical layers, or a fully unstructured three dimensional (3D) mesh. This document describes the attribute conventions for storing the mesh topology and for associating variables with (specific locations on) the mesh topology. The conventions have been designed to store the output data of a combined 1D-2D-3D flow model with staggered data, but the metadata for a simple 1D network or 2D triangular mesh doesn't suffer from the genericity needed for the most complex models.
+Our focus is on data for environmental applications and hence we start from the [Climate & Forecast (CF) Metadata Conventions](http://cf-convention.github.io/).
+The CF Conventions have been the standard in climate research for many years, and are  being adopted by others as the metadata standard (e.g. [NASA](https://earthdata.nasa.gov/data/standards-and-references/metadata-standards),[Open Geospatial Consortium](http://www.opengeospatial.org/standards/netcdf)).
+The CF conventions allow you to provide the geospatial and temporal coordinates for scientific data, but currently assumes that the horizontal topology may be inferred from the i,j indices of structured grids.
+This proposal adds conventions for specifying the topology for unstructured (e.g. triangular) grids.
+
+In its most basic form unstructured data may be stored as data defined at a series of points, the CF-conventions are then sufficient.
+However, it is often useful or even necessary to also know the topology of the underlying unstructured mesh: is it a one dimensional (1D) network, a two dimensional (2D) triangular mesh or more flexible mixed triangle/quadrilateral mesh, a 2D mesh with vertical layers, or a fully unstructured three dimensional (3D) mesh.
+This document describes the attribute conventions for storing the mesh topology and for associating variables with (specific locations on) the mesh topology. The conventions have been designed to store the output data of a combined 1D-2D-3D flow model with staggered data, but the metadata for a simple 1D network or 2D triangular mesh doesn't suffer from the genericity needed for the most complex models.
 
 Due to the complexity in unstructured mesh models, some concepts have not yet been worked out in this version.
 
@@ -45,11 +52,18 @@ The topology information is stored as attributes to a dummy variable (in the exa
 | **Optional attributes** |
 | edge_coordinates |
 
-The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a 1D network this should be 1. The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, or other spatial coordinates, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute `edge_node_connectivity` points to an index variable identifying for every edge to the indices of its begin and end nodes. The connectivity array will thus be a matrix of size nEdges x 2. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh1_edge_nodes in the example below). Consistent with the CF-conventions [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option, the connectivity indices are 0-based by default.
+The attribute `topology_dimension` indicates the highest dimensionality of the geometric elements; for a 1D network this should be 1.
+The attribute `node_coordinates` points to the auxiliary coordinate variables representing the node locations (latitude, longitude, or other spatial coordinates, and optional elevation or other coordinates).
+These auxiliary coordinate variables will have length nNodes.
+The attribute `edge_node_connectivity` points to an index variable identifying for every edge to the indices of its begin and end nodes.
+The connectivity array will thus be a matrix of size nEdges x 2.
+For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a `start_index` attribute to the index variable (i.e. Mesh1_edge_nodes in the example below).
+Consistent with the CF-conventions [compression](http://cf-convention.github.io/1.4.html#compression-by-gathering) option, the connectivity indices are 0-based by default.
 
 _The option to support both 0- and 1-based indexing was introduced to be able to support existing files with 1-based index tables using ncML._ See [this section on zero or one-based indexing](#zero-or-one) for more details.
 
-The mesh_topology may optionally include an `edge_coordinates` attribute which points to the auxiliary coordinate variables associated with the characteristic location of the edge (commonly the midpoint). These auxiliary coordinate variables will have length nEdges, and may have in turn a `bounds` attribute that specifies the bounding coordinates of the edge (thereby duplicating the data in the `node_coordinates` variables).
+The mesh_topology may optionally include an `edge_coordinates` attribute which points to the auxiliary coordinate variables associated with the characteristic location of the edge (commonly the midpoint).
+These auxiliary coordinate variables will have length nEdges, and may have in turn a `bounds` attribute that specifies the bounding coordinates of the edge (thereby duplicating the data in the `node_coordinates` variables).
 
 _This use of the `bounds` attribute is consistent with the CF-convention on the use of `bounds` for multi-dimensional coordinate variables with p-sided cells, but it may not strictly be supported by the CF-convention right now._
 
