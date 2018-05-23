@@ -1,5 +1,27 @@
 # UGRID Conventions (v1.0)
 
+<!-- TOC generated with "md_toc github index.md -i" -->
+[](TOC)
+
+- [UGRID Conventions (v1.0)](#ugrid-conventions-v10)
+    - [Introduction](#introduction)
+    - [Known issues](#known-issues)
+    - [Topology](#topology)
+        - [Naming conventions for geometrical elements](#naming-conventions-for-geometrical-elements)
+        - [1D network topology](#1d-network-topology)
+        - [2D triangular mesh topology](#2d-triangular-mesh-topology)
+        - [2D flexible mesh (mixed triangles, quadrilaterals, etc.) topology](#2d-flexible-mesh-mixed-triangles-quadrilaterals-etc-topology)
+        - [3D layered mesh topology](#3d-layered-mesh-topology)
+        - [Fully 3D unstructured (i.e. non-layered) mesh topology](#fully-3d-unstructured-ie-non-layered-mesh-topology)
+    - [Data defined on unstructured meshes](#data-defined-on-unstructured-meshes)
+        - [Data variables](#data-variables)
+        - [Volume and flux variables](#volume-and-flux-variables)
+        - [Location index set](#location-index-set)
+    - [Zero or One-based indexing](#zero-or-one-based-indexing)
+
+[](TOC)
+
+
 ## Introduction
 
 This page describes a proposal for storing unstructured (or flexible mesh) model data in the Unidata Network Common Data Form (NetCDF) file.
@@ -15,7 +37,11 @@ This document describes the attribute conventions for storing the mesh topology 
 
 Due to the complexity in unstructured mesh models, some concepts have not yet been worked out in this version.
 
-Known issues left for future versions include:
+
+## Known issues
+
+Known issues left for future versions include: 
+
 * adaptive mesh topology (this could be supported by defining a `time_concatenation` attribute for a time-series of mesh topologies)
 * higher order element data; for an idea how such data could be stored see this other [proposal](https://publicwiki.deltares.nl/display/NETCDF/Finite+Element+based+CF+proposal+for+Unstructured+Grid+data+model).
 * subgrid data; the NetCDF pages by the Bundesanstalt für Wasserbau (BAW) contain some proposals on this topic ([see their pages (in German)](http://www.baw.de/methoden/index.php5/NetCDF)).
