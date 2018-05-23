@@ -1,0 +1,4 @@
+mkdocs<=0.16
+python-markdown-math
+markdown-checklist
+md-toc
