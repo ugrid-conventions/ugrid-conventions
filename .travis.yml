@@ -1,0 +1,24 @@
+language: generic
+
+sudo: false
+
+env:
+  global:
+    - secure: "DcHahYeGIZoqs4pVuCkbVajjsGoyGY9X14ilyENJwYrHvxllNL4YmUWtUdOX8rgCFLNyZaOcpJewQR1+2U62ZPVTPJcA2dpCOvIznb0Aq0S9KJDf5bH9cS2WK9F7HG7cUWfrT9bvaGGfMXNkxMPRlgnDDkVauXbAfcWLh7B14LU="
+
+before_install:
+  - wget http://bit.ly/miniconda -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - conda config --set always_yes yes --set changeps1 no --set show_channel_urls true
+  - conda update conda
+  - conda config --add channels conda-forge --force
+
+install:
+  - conda create --name TEST python=3.6 --file requirements.txt
+  - source activate TEST
+
+script:
+  - set -e
+  - mkdocs build --clean --verbose
+  - doctr deploy . --built-docs _site
