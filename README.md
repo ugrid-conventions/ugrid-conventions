@@ -1,5 +1,7 @@
 # UGRID Conventions
 
+[![Build Status](https://travis-ci.org/ugrid-conventions/ugrid-conventions.svg?branch=master)](https://travis-ci.org/ugrid-conventions/ugrid-conventions)
+
 <!-- TOC generated with "md_toc github README.md -i" -->
 [](TOC)
 
