@@ -6,35 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="UGRID Conventions">
-  
-  
-  <title>UGRID</title>
-  
-
+  <meta name="author" content="UGRID Team">
   <link rel="shortcut icon" href="./img/favicon.ico">
-
-  
+  <title>Home - UGRID</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="./css/theme.css" type="text/css" />
   <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="./css/highlight.css">
-
   
   <script>
     // Current page data
-    var mkdocs_page_name = "None";
+    var mkdocs_page_name = "Home";
     var mkdocs_page_input_path = "index.md";
     var mkdocs_page_url = "/";
   </script>
   
   <script src="./js/jquery-2.1.1.min.js"></script>
   <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script> 
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <script src="./js/mathjaxhelper.js"></script>
-
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
   
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -64,36 +54,38 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
+	  
           
-            <li>
-    <li class="toctree-l1 current">
-        <a class="current" href=".">Home</a>
-        
-            <ul>
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
             
-                <li class="toctree-l3"><a href="#ugrid-conventions-v10">UGRID Conventions (v1.0)</a></li>
-                
-                    <li><a class="toctree-l4" href="#introduction">Introduction</a></li>
-                
-                    <li><a class="toctree-l4" href="#topology">Topology</a></li>
-                
-                    <li><a class="toctree-l4" href="#data-defined-on-unstructured-meshes">Data defined on unstructured meshes</a></li>
-                
-                    <li><a class="toctree-l4" href="#zero-or-one-based-indexing">Zero or One-based indexing</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l2"><a href="#ugrid-conventions-v10">UGRID Conventions (v1.0)</a></li>
+    
+        <ul>
         
-    </li>
-<li>
+            <li><a class="toctree-l3" href="#introduction">Introduction</a></li>
+        
+            <li><a class="toctree-l3" href="#known-issues">Known issues</a></li>
+        
+            <li><a class="toctree-l3" href="#topology">Topology</a></li>
+        
+            <li><a class="toctree-l3" href="#data-defined-on-unstructured-meshes">Data defined on unstructured meshes</a></li>
+        
+            <li><a class="toctree-l3" href="#zero-or-one-based-indexing">Zero or One-based indexing</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="ugrid-subsetting/">subsetting</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="ugrid-subsetting/">subsetting</a>
+	    </li>
           
         </ul>
       </div>
@@ -120,9 +112,8 @@
     <li>Home</li>
     <li class="wy-breadcrumbs-aside">
       
-        
-          <a href="https://github.com/ugrid-conventions/ugrid-conventions" class="icon icon-github"> Edit on GitHub</a>
-        
+        <a href="https://github.com/ugrid-conventions/ugrid-conventions/edit/master/docs/index.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -132,17 +123,53 @@
             <div class="section">
               
                 <h1 id="ugrid-conventions-v10">UGRID Conventions (v1.0)<a class="headerlink" href="#ugrid-conventions-v10" title="Permanent link"></a></h1>
+<!-- TOC generated with "md_toc github index.md -i" -->
+
+<p><a href="./TOC"></a></p>
+<ul>
+<li><a href="#ugrid-conventions-v10">UGRID Conventions (v1.0)</a><ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#known-issues">Known issues</a></li>
+<li><a href="#topology">Topology</a><ul>
+<li><a href="#naming-conventions-for-geometrical-elements">Naming conventions for geometrical elements</a></li>
+<li><a href="#1d-network-topology">1D network topology</a></li>
+<li><a href="#2d-triangular-mesh-topology">2D triangular mesh topology</a></li>
+<li><a href="#2d-flexible-mesh-mixed-triangles-quadrilaterals-etc-topology">2D flexible mesh (mixed triangles, quadrilaterals, etc.) topology</a></li>
+<li><a href="#3d-layered-mesh-topology">3D layered mesh topology</a></li>
+<li><a href="#fully-3d-unstructured-ie-non-layered-mesh-topology">Fully 3D unstructured (i.e. non-layered) mesh topology</a></li>
+</ul>
+</li>
+<li><a href="#data-defined-on-unstructured-meshes">Data defined on unstructured meshes</a><ul>
+<li><a href="#data-variables">Data variables</a></li>
+<li><a href="#volume-and-flux-variables">Volume and flux variables</a></li>
+<li><a href="#location-index-set">Location index set</a></li>
+</ul>
+</li>
+<li><a href="#zero-or-one-based-indexing">Zero or One-based indexing</a></li>
+</ul>
+</li>
+</ul>
+<p><a href="./TOC"></a></p>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link"></a></h2>
-<p>This page describes a proposal for storing unstructured (or flexible mesh) model data in the Unidata Network Common Data Form (NetCDF) file. Our focus is on data for environmental applications and hence we start from the <a href="http://cf-convention.github.io/">Climate &amp; Forecast (CF) Metadata Conventions</a>. The CF Conventions have been the standard in climate research for many years, and are  being adopted by others as the metadata standard (e.g. <a href="https://earthdata.nasa.gov/data/standards-and-references/metadata-standards">NASA</a>,<a href="http://www.opengeospatial.org/standards/netcdf">Open Geospatial Consortium</a>). The CF conventions allow you to provide the geospatial and temporal coordinates for scientific data, but currently assumes that the horizontal topology may be inferred from the i,j indices of structured grids.  This proposal adds conventions for specifying the topology for unstructured (e.g. triangular) grids.  </p>
-<p>In its most basic form unstructured data may be stored as data defined at a series of points, the CF-conventions are then sufficient. However, it is often useful or even necessary to also know the topology of the underlying unstructured mesh: is it a one dimensional (1D) network, a two dimensional (2D) triangular mesh or more flexible mixed triangle/quadrilateral mesh, a 2D mesh with vertical layers, or a fully unstructured three dimensional (3D) mesh. This document describes the attribute conventions for storing the mesh topology and for associating variables with (specific locations on) the mesh topology. The conventions have been designed to store the output data of a combined 1D-2D-3D flow model with staggered data, but the metadata for a simple 1D network or 2D triangular mesh doesn&rsquo;t suffer from the genericity needed for the most complex models.</p>
+<p>This page describes a proposal for storing unstructured (or flexible mesh) model data in the Unidata Network Common Data Form (NetCDF) file.</p>
+<p>Our focus is on data for environmental applications and hence we start from the <a href="http://cf-convention.github.io/">Climate &amp; Forecast (CF) Metadata Conventions</a>.
+The CF Conventions have been the standard in climate research for many years, and are  being adopted by others as the metadata standard (e.g. <a href="https://earthdata.nasa.gov/data/standards-and-references/metadata-standards">NASA</a>,<a href="http://www.opengeospatial.org/standards/netcdf">Open Geospatial Consortium</a>).
+The CF conventions allow you to provide the geospatial and temporal coordinates for scientific data, but currently assumes that the horizontal topology may be inferred from the i,j indices of structured grids.
+This proposal adds conventions for specifying the topology for unstructured (e.g. triangular) grids.</p>
+<p>In its most basic form unstructured data may be stored as data defined at a series of points, the CF-conventions are then sufficient.
+However, it is often useful or even necessary to also know the topology of the underlying unstructured mesh: is it a one dimensional (1D) network, a two dimensional (2D) triangular mesh or more flexible mixed triangle/quadrilateral mesh, a 2D mesh with vertical layers, or a fully unstructured three dimensional (3D) mesh.
+This document describes the attribute conventions for storing the mesh topology and for associating variables with (specific locations on) the mesh topology. The conventions have been designed to store the output data of a combined 1D-2D-3D flow model with staggered data, but the metadata for a simple 1D network or 2D triangular mesh doesn&rsquo;t suffer from the genericity needed for the most complex models.</p>
 <p>Due to the complexity in unstructured mesh models, some concepts have not yet been worked out in this version.</p>
-<p>Known issues left for future versions include: 
-<em> adaptive mesh topology (this could be supported by defining a <code>time_concatenation</code> attribute for a time-series of mesh topologies)
-</em> higher order element data; for an idea how such data could be stored see this other <a href="https://publicwiki.deltares.nl/display/NETCDF/Finite+Element+based+CF+proposal+for+Unstructured+Grid+data+model">proposal</a>.
-<em> subgrid data; the NetCDF pages by the Bundesanstalt für Wasserbau (BAW) contain some proposals on this topic (<a href="http://www.baw.de/methoden/index.php5/NetCDF">see their pages (in German)</a>).
-</em> 3D fully unstructured meshes (some concepts are included here, but still somewhat limited in scope).
-<em> multiply-connected domains
-</em> ghost elements</p>
+<h2 id="known-issues">Known issues<a class="headerlink" href="#known-issues" title="Permanent link"></a></h2>
+<p>Known issues left for future versions include: </p>
+<ul>
+<li>adaptive mesh topology (this could be supported by defining a <code>time_concatenation</code> attribute for a time-series of mesh topologies)</li>
+<li>higher order element data; for an idea how such data could be stored see this other <a href="https://publicwiki.deltares.nl/display/NETCDF/Finite+Element+based+CF+proposal+for+Unstructured+Grid+data+model">proposal</a>.</li>
+<li>subgrid data; the NetCDF pages by the Bundesanstalt für Wasserbau (BAW) contain some proposals on this topic (<a href="http://www.baw.de/methoden/index.php5/NetCDF">see their pages (in German)</a>).</li>
+<li>3D fully unstructured meshes (some concepts are included here, but still somewhat limited in scope).</li>
+<li>multiply-connected domains</li>
+<li>ghost elements</li>
+</ul>
 <h2 id="topology">Topology<a class="headerlink" href="#topology" title="Permanent link"></a></h2>
 <h3 id="naming-conventions-for-geometrical-elements">Naming conventions for geometrical elements<a class="headerlink" href="#naming-conventions-for-geometrical-elements" title="Permanent link"></a></h3>
 <p>Inspired by Wikipedia&rsquo;s definition of <a href="http://en.wikipedia.org/wiki/Network_topology">network topology</a>, we define the mesh topology here as the interconnection of various geometrical elements of the mesh. The pure interconnectivity is independent of georeferencing the individual geometrical elements, but for the practical applications for which we are defining this CF extension, we&rsquo;ll always add coordinate data. Within a mesh, one can distinguish 0-, 1-, 2- and 3-dimensional elements. We need some names to identify these four types of elements; after discussion we propose the following names:</p>
@@ -214,9 +241,16 @@
 </tr>
 </tbody>
 </table>
-<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 1D network this should be 1. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>edge_node_connectivity</code> points to an index variable identifying for every edge to the indices of its begin and end nodes. The connectivity array will thus be a matrix of size nEdges x 2. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh1_edge_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default.</p>
-<p><em>The option to support both 0- and 1-based indexing was introduced to be able to support existing files with 1-based index tables using ncML.</em> See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details. </p>
-<p>The mesh_topology may optionally include an <code>edge_coordinates</code> attribute which points to the auxiliary coordinate variables associated with the characteristic location of the edge (commonly the midpoint). These auxiliary coordinate variables will have length nEdges, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
+<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 1D network this should be 1.
+The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, or other spatial coordinates, and optional elevation or other coordinates).
+These auxiliary coordinate variables will have length nNodes.
+The attribute <code>edge_node_connectivity</code> points to an index variable identifying for every edge to the indices of its begin and end nodes.
+The connectivity array will thus be a matrix of size nEdges x 2.
+For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh1_edge_nodes in the example below).
+Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default.</p>
+<p><em>The option to support both 0- and 1-based indexing was introduced to be able to support existing files with 1-based index tables using ncML.</em> See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
+<p>The mesh_topology may optionally include an <code>edge_coordinates</code> attribute which points to the auxiliary coordinate variables associated with the characteristic location of the edge (commonly the midpoint).
+These auxiliary coordinate variables will have length nEdges, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
 <p><em>This use of the <code>bounds</code> attribute is consistent with the CF-convention on the use of <code>bounds</code> for multi-dimensional coordinate variables with p-sided cells, but it may not strictly be supported by the CF-convention right now.</em></p>
 <p><img alt="image" src="./images/network.png" /></p>
 <p>Example:</p>
@@ -345,12 +379,12 @@ Mesh1_edge_ybnds:units = &quot;degrees_north&quot; ;
 </table>
 <p>*The &ldquo;Optionally required&rdquo; attribute <code>edge_node_connectivity</code> is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).</p>
 <p>*The &ldquo;Optionally required&rdquo; attributes <code>face_dimension</code> and  <code>edge_dimension</code> are required only if the dimension ordering is nonstandard in any of the connectivity variables for faces and edges, respectively.</p>
-<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 2-dimensional (triangular) mesh this should be 2. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>face_node_connectivity</code> points to an index variable identifying for every face (here consistently triangle) the indices of its three corner nodes. The corner nodes should be specified in anticlockwise (also referred to as counterclockwise) direction as viewed from above (consistent with the CF-convention for <code>bounds</code> of p-sided cells. The connectivity array will thus be a matrix of size nFaces x 3. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default. See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
+<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 2-dimensional (triangular) mesh this should be 2. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, or other spatial coordinates, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>face_node_connectivity</code> points to an index variable identifying for every face (here consistently triangle) the indices of its three corner nodes. The corner nodes should be specified in anticlockwise (also referred to as counterclockwise) direction as viewed from above (consistent with the CF-convention for <code>bounds</code> of p-sided cells. The connectivity array will thus be a matrix of size nFaces x 3. For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default. See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
 <p>The <code>face_dimension</code> attribute specifies which netcdf dimension is used to indicate the index of the face in the connectivity arrays. This is needed because some applications store the data with the fastest varying index first, and some with that index last. The default is to use the num_faces as fastest dimension; e.g. a (num_faces, 3) array for triangles, but some applications might use a (3, num_faces) order, in which case the <code>face_dimension</code> attribute is required to help the client code disambiguate. The <code>edge_dimension</code> attribute is similar for the edge connectivity arrays.</p>
 <p>In case you want to define variables on the edges of the triangular mesh topology you need to specify the <code>edge_node_connectivity</code> attribute to map edges to nodes. Although the face to node mapping implicitly also defines the location of the edges, it does not specify the global numbering of the edges. Again the indexing convention of <code>edge_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_edge_nodes in the example below) and 0-based indexing is the default.  Since it does not apply to edges globally, specifying the <code>boundary_node_connectivity</code> attribute described below does not (in and of itself) necessitate the need to specify the <code>edge_node_connectivity</code> attribute too.</p>
 <p>Optionally the topology may have the following attributes:
 <em> <code>face_edge_connectivity</code> pointing to an index variable identifying for every face (here consistently triangle) the indices of its three edges. The edges should be specified in anticlockwise direction as viewed from above. This connectivity array will thus be a matrix of size nFaces x 3. Again the indexing convention of <code>face_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_edges in the example below) and 0-based indexing is the default.
-</em> <code>face_face_connectivity</code> pointing to an index variable identifying all faces (here consistently triangle) that share an edge with each face, i.e. are neighbors. This connectivity array will thus be a matrix of size nFaces x 3 with a flag to note if the region &ldquo;out of mesh&rdquo; abuts an edge of a given face. Again the indexing convention of <code>face_face_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_links in the example below) and 0-based indexing is the default.
+</em> <code>face_face_connectivity</code> pointing to an index variable identifying all faces (here consistently triangle) that share an edge with each face, i.e. are neighbors. This connectivity array will thus be a matrix of size nFaces x 3. Again the indexing convention of <code>face_face_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable and 0-based indexing is the default. Attribute <code>_FillValue</code> must be present. Missing neighbor faces are expressed using _FillValue, e.g for edges at the boundary with only one neighbor face present. For details see definition of variable Mesh2_face_links below.
 <em> <code>edge_face_connectivity</code> pointing to an index variable identifying all faces that share the same edge, i. e. are neighbors to an edge. This connectivity array is thus a matrix of size nEdges x 2. It is intended to be used in combination with data defined on edges. The <code>start_index</code> attribute should be used to specify the indexing convention and 0-based indexing is the default. Attribute <code>_FillValue</code> must be present. Missing neighbor faces are expressed using _FillValue, e.g for edges at the boundary with only one neighbor face present. For details see definition of variable Mesh2_edge_face_links below.
 </em> <code>boundary_node_connectivity</code> pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>edge_node_connectivity</code>.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
 * <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
@@ -396,10 +430,10 @@ Mesh2_face_edges:long_name = &quot;Maps every triangular face to its three edges
 Mesh2_face_edges:start_index = 1 ;
 integer Mesh2_face_links(nMesh2_face, Three) ;
 Mesh2_face_links:cf_role = &quot;face_face_connectivity&quot; ;
-Mesh2_face_links:long_name = &quot;Indicates which other faces neighbor each face.&quot; ;
+Mesh2_face_links:long_name = &quot;neighbor faces for faces&quot; ;
 Mesh2_face_links:start_index = 1 ;
-Mesh2_face_links:flag_values = -1 ;
-Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+Mesh2_face_links:_FillValue = -999 ;
+Mesh2_face_links:comment = &quot;missing neighbor faces are indicated using _FillValue&quot; ;
 integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
 Mesh2_edge_face_links:cf_role = &quot;edge_face_connectivity&quot; ;
 Mesh2_edge_face_links:long_name = &quot;neighbor faces for edges&quot; ;
@@ -511,12 +545,12 @@ Mesh2_edge_y:units = &quot;degrees_north&quot; ;
 </table>
 <p>*The &ldquo;Optionally required&rdquo; attribute <code>edge_node_connectivity</code> is required only if you want to store data on the edges (i.e. if you mind the numbering order of the edges).</p>
 <p>*The &ldquo;Optionally required&rdquo; attributes <code>face_dimension</code> and  <code>edge_dimension</code> are required only if the dimension ordering is nonstandard in any of the connectivity variables for faces and edges, respectively.</p>
-<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 2-dimensional mesh this should be 2. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>face_node_connectivity</code> points to an index variable identifying for every face the indices of its corner nodes. The corner nodes should be specified in anticlockwise direction as viewed from above (consistent with the CF-convention for <code>bounds</code> of p-sided cells. The connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace; if a face has less corner nodes than MaxNumNodesPerFace then the last node indices shall be equal to <code>_FillValue</code> (which should obviously be larger than the number of nodes in the mesh). For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default. See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
+<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a 2-dimensional mesh this should be 2. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, or other spatial coordinates, and optional elevation or other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>face_node_connectivity</code> points to an index variable identifying for every face the indices of its corner nodes. The corner nodes should be specified in anticlockwise direction as viewed from above (consistent with the CF-convention for <code>bounds</code> of p-sided cells. The connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace; if a face has less corner nodes than MaxNumNodesPerFace then the last node indices shall be equal to <code>_FillValue</code> (which should obviously be larger than the number of nodes in the mesh). For the indexing one may use either 0- or 1-based indexing; the convention used should be specified using a <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_nodes in the example below). Consistent with the CF-conventions <a href="http://cf-convention.github.io/1.4.html#compression-by-gathering">compression</a> option, the connectivity indices are 0-based by default. See <a href="#zero-or-one">this section on zero or one-based indexing</a> for more details.</p>
 <p>The <code>face_dimension</code> attribute specifies which netcdf dimension is used to indicate the index of the face in the connectivity arrays. This is needed because some applications store the data with the fastest varying index first, and some with that index last. The default is to use the num_faces as fastest dimension; e.g. a (num_faces, 4) array for quads, but some applications might use a (4, num_faces) order, in which case the <code>face_dimension</code> attribute is required to help the client code disambiguate. The <code>edge_dimension</code> attribute is similar for the edge connectivity arrays.</p>
 <p>In case you want to define variables on the edges of the 2D mesh topology you need to specify the <code>edge_node_connectivity</code> attribute to map edges to nodes. Although the face to node mapping implicitly also defines the location of the edges, it does not specify the global numbering of the edges. Again the indexing convention of <code>edge_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_edge_nodes in the example below) and 0-based indexing is the default. Since it does not apply to edges globally, specifying the <code>boundary_node_connectivity</code> attribute described below does not (in and of itself) necessitate the need to specify the <code>edge_node_connectivity</code> attribute too.</p>
 <p>Optionally the topology may have the following attributes:
 <em> <code>face_edge_connectivity</code> pointing to an index variable identifying for every face the indices of its edges. The edges should be specified in anticlockwise direction as viewed from above. This connectivity array will be a matrix of size nFaces x MaxNumNodesPerFace. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last edge indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_edge_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_edges in the example below) and 0-based indexing is the default.
-</em> <code>face_face_connectivity</code> pointing to an index variable identifying all faces that share an edge with each face, i.e. are neighbors. This connectivity array will thus be a matrix of size nFaces x MaxNumNodesPerFace with a flag to note if the region &ldquo;out of mesh&rdquo; abuts an edge of a given face. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last face (column) indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_face_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_face_links in the example below) and 0-based indexing is the default.
+</em> <code>face_face_connectivity</code> pointing to an index variable identifying all faces that share an edge with each face, i.e. are neighbors. This connectivity array will thus be a matrix of size nFaces x MaxNumNodesPerFace. Again, if a face has less corners/edges than MaxNumNodesPerFace then the last face (column) indices shall be equal to <code>_FillValue</code>, and the indexing convention of <code>face_face_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable and 0-based indexing is the default. Missing neighbor faces are also expressed using _FillValue, e.g for edges at the boundary with only one neighbor face present. For details see definition of variable Mesh2_face_links below.
 <em> <code>edge_face_connectivity</code> pointing to an index variable identifying all faces that share the same edge, i. e. are neighbors to an edge. This connectivity array is thus a matrix of size nEdges x 2. It is intended to be used in combination with data defined on edges. The <code>start_index</code> attribute should be used to specify the indexing convention and 0-based indexing is the default. Attribute <code>_FillValue</code> must be present. Missing neighbor faces are expressed using _FillValue, e.g for edges at the boundary with only one neighbor face present. For details see definition of variable Mesh2_edge_face_links below.
 </em> <code>boundary_node_connectivity</code> pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of <code>boundary_node_connectivity</code> should be specified using the <code>start_index</code> attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the <code>boundary_node_connectivity</code> attribute may be specified independent of <code>edge_node_connectivity</code>.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
 * <code>face_coordinates</code> and/or <code>edge_coordinates</code> pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a <code>bounds</code> attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the <code>node_coordinates</code> variables).</p>
@@ -565,11 +599,10 @@ Mesh2_face_edges:_FillValue = 999999 ;
 Mesh2_face_edges:start_index = 1 ;
 integer Mesh2_face_links(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_links:cf_role = &quot;face_face_connectivity&quot; ;
-Mesh2_face_links:long_name = &quot;Indicates which other faces neighbor each face.&quot; ;
-Mesh2_face_links:_FillValue = 999999 ;
+Mesh2_face_links:long_name = &quot;neighbor faces for faces&quot; ;
 Mesh2_face_links:start_index = 1 ;
-Mesh2_face_links:flag_values = -1 ;
-Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+Mesh2_face_links:_FillValue = -999 ;
+Mesh2_face_links:comment = &quot;missing edges as well as missing neighbor faces are indicated using _FillValue&quot; ;
 integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
 Mesh2_edge_face_links:cf_role = &quot;edge_face_connectivity&quot; ;
 Mesh2_edge_face_links:long_name = &quot;neighbor faces for edges&quot; ;
@@ -666,11 +699,10 @@ Mesh2_face_edges:_FillValue = 999999 ;
 Mesh2_face_edges:start_index = 1 ;
 integer Mesh2_face_links(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_links:cf_role = &quot;face_face_connectivity&quot; ;
-Mesh2_face_links:long_name = &quot;Indicates which other faces neighbor each face.&quot; ;
-Mesh2_face_links:_FillValue = 999999 ;
+Mesh2_face_links:long_name = &quot;neighbor faces for faces&quot; ;
 Mesh2_face_links:start_index = 1 ;
-Mesh2_face_links:flag_values = -1 ;
-Mesh2_face_links:flag_meanings = &quot;out_of_mesh&quot; ;
+Mesh2_face_links:_FillValue = -999 ;
+Mesh2_face_links:comment = &quot;missing edges as well as missing neighbor faces are indicated using _FillValue&quot; ;
 integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
 Mesh2_edge_face_links:cf_role = &quot;edge_face_connectivity&quot; ;
 Mesh2_edge_face_links:long_name = &quot;neighbor faces for edges&quot; ;
@@ -835,7 +867,7 @@ Mesh2_surface:coordinates = &quot;Mesh2_face_x Mesh2_face_y&quot; ;
 </table>
 <p>*The &ldquo;Optionally required&rdquo; attributes <code>edge_node_connectivity</code> and <code>face_node_connectivity</code> are required only if you want to store data on the edges or faces respectively (i.e. if you mind the numbering order of the edges/faces).</p>
 <p>*The &ldquo;Optionally required&rdquo; attributes <code>volume_dimension</code>, <code>face_dimension</code> and  <code>edge_dimension</code> are required only if the dimension ordering is nonstandard in any of the connectivity variables for volumes, faces and nodes, respectively.</p>
-<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a fully 3-dimensional unstructured mesh this should be 3. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, elevation and optional other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>volume_node_connectivity</code> points to an index variable identifying for every volume the indices of its corner nodes. For faces in the horizontal plane, it was possible to prescribe the order of the nodes, but this is not possible for the nodes of generic 3D volumes. For this reason we introduce an additional attribute <code>volume_shape_type</code> which points to a flag variable that specifies for every volume its shape:</p>
+<p>The attribute <code>topology_dimension</code> indicates the highest dimensionality of the geometric elements; for a fully 3-dimensional unstructured mesh this should be 3. The attribute <code>node_coordinates</code> points to the auxiliary coordinate variables representing the node locations (latitude, longitude, or other spatial coordinates, elevation and optional other coordinates). These auxiliary coordinate variables will have length nNodes. The attribute <code>volume_node_connectivity</code> points to an index variable identifying for every volume the indices of its corner nodes. For faces in the horizontal plane, it was possible to prescribe the order of the nodes, but this is not possible for the nodes of generic 3D volumes. For this reason we introduce an additional attribute <code>volume_shape_type</code> which points to a flag variable that specifies for every volume its shape:</p>
 <table>
 <thead>
 <tr>
@@ -914,11 +946,11 @@ Mesh3D:topology_dimension = 3 ;
 Mesh3D:node_coordinates = &quot;Mesh3D_node_x Mesh3D_node_y Mesh3D_node_z&quot; ;
 Mesh3D:volume_shape_type = &quot;Mesh3D_vol_types&quot; ;
 Mesh3D:volume_node_connectivity = &quot;Mesh3D_vol_nodes&quot; ;
-Mesh3D:volume_dimension = nMesh3D_vol ; 
+Mesh3D:volume_dimension = nMesh3D_vol ;
 Mesh3D:face_node_connectivity = &quot;Mesh3D_face_nodes&quot; ; // attribute required if variables will be defined on faces
-Mesh3D:face_dimension = nMesh3D_face ; 
+Mesh3D:face_dimension = nMesh3D_face ;
 Mesh3D:edge_node_connectivity = &quot;Mesh3D_edge_nodes&quot; ; // attribute required if variables will be defined on edges
-Mesh3D:edge_dimension = nMesh3D_edge ; 
+Mesh3D:edge_dimension = nMesh3D_edge ;
 Mesh3D:edge_coordinates = &quot;Mesh3D_edge_x Mesh3D_edge_y Mesh3D_edge_z&quot; ; // optional attribute (requires edge_node_connectivity)
 Mesh3D:face_coordinates = &quot;Mesh3D_face_x Mesh3D_face_y Mesh3D_face_z&quot; ; // optional attribute (requires face_node_connectivity)
 Mesh3D:volume_coordinates = &quot;Mesh3D_vol_x Mesh3D_vol_y Mesh3D_vol_z&quot; ; // optional attribute
@@ -1054,7 +1086,7 @@ waterlevel:coordinates = &quot;lat lon&quot; ;
 
 <p>The <code>coordinates</code> attribute refers to the variables that contain the latitude and longitude coordinates. For a curvilinear grid these variables will share two spatial dimensions, here <code>nmax</code> and <code>mmax</code>: lat(nmax,mmax) and lon(nmax,mmax). In numerical models the various quantities are often computed at different locations of the mesh: staggered data. The standard CF-conventions don&rsquo;t offer specific support for this functionality and thus for every stagger location coordinates need to be provided separately: cell center coordinates, corner point coordinates, u-flux point coordinates, and v-flux point coordinates. The underlying topology of the mesh, i.e. how these coordinates (variable definition locations) relate to each other isn&rsquo;t stored in the file. This shortcoming is to some degree solved by the <a href="http://www.gfdl.noaa.gov/~vb/gridstd/gridstd.html">gridspec</a> proposal by <a href="http://www.gfdl.noaa.gov/~vb/">Venkatramani Balaji</a> and Zhi Liang. We introduce here attributes that link to the topological data defined above.</p>
 <h3 id="data-variables">Data variables<a class="headerlink" href="#data-variables" title="Permanent link"></a></h3>
-<p>The use of the <code>coordinates</code> attribute is copied from the CF-conventions. It is used to map the values of variables defined on the unstructured meshes directly to their location: latitude, longitude and optional elevation. To map the variable onto the topology of the underlying mesh, two new attributes have been introduced. First, the attribute <code>mesh</code> points to the mesh_topology variable containing the meta-data attributes of the mesh on which the variable has been defined. Second, the attribute <code>location</code> points to the (stagger) location within the mesh at which the variable is defined. Note that in this example the <code>coordinates</code> attribute is redundant since the coordinates could also be obtained by using the <code>face_coordinates</code> attribute of the &ldquo;Mesh2&rdquo; variable.</p>
+<p>The use of the <code>coordinates</code> attribute is copied from the CF-conventions. It is used to map the values of variables defined on the unstructured meshes directly to their location: latitude, longitude, or other spatial coordinates, and optional elevation. To map the variable onto the topology of the underlying mesh, two new attributes have been introduced. First, the attribute <code>mesh</code> points to the mesh_topology variable containing the meta-data attributes of the mesh on which the variable has been defined. Second, the attribute <code>location</code> points to the (stagger) location within the mesh at which the variable is defined. Note that in this example the <code>coordinates</code> attribute is redundant since the coordinates could also be obtained by using the <code>face_coordinates</code> attribute of the &ldquo;Mesh2&rdquo; variable.</p>
 <pre><code class="javascript">double Mesh2_waterlevel(time,nMesh2_face) ;
 Mesh2_waterlevel:standard_name = &quot;sea_surface_height_above_geoid&quot; ;
 Mesh2_waterlevel:units = &quot;m&quot; ;
@@ -1334,7 +1366,7 @@ Mesh1_edge_nodes =
 
   Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-	  
+      
         </div>
       </div>
 
@@ -1342,10 +1374,10 @@ Mesh1_edge_nodes =
 
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/ugrid-conventions/ugrid-conventions" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/ugrid-conventions/ugrid-conventions/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
       
@@ -1353,11 +1385,15 @@ Mesh1_edge_nodes =
       
     </span>
 </div>
+    <script>var base_url = '.';</script>
+    <script src="./js/theme.js"></script>
+      <script src="./search/require.js"></script>
+      <script src="./search/search.js"></script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 0.15.3
-Build Date UTC : 2016-04-06 21:08:26.032391
+MkDocs version : 0.17.3
+Build Date UTC : 2018-05-28 21:21:49
 -->
