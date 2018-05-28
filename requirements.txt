@@ -1,4 +1,5 @@
-mkdocs<=0.16
+mkdocs
 python-markdown-math
 markdown-checklist
 md-toc
+mdx_gh_links
