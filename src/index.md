@@ -416,7 +416,7 @@ Mesh2_edge_y:units = "degrees_north" ;
 
 ### 3D layered mesh topology
 
-For a 3D layered unstructured mesh topology this proposal follows the approach of the existing CF-conventions for structured meshes: horizontal and vertical dimensions are treated separately. For the horizontal plane a 2D unstructured mesh topology is defined, which is extruded in the vertical direction by means of a [vertical coordinate](http://cf-convention.github.io/1.4.html#vertical-coordinate). The example below matches the example in the previous section combined with a vertical coordinate according CF-conventions. This example introduces also the attributes `mesh` and `location` on the 2D variables "Mesh2_surface" and "Mesh2_depth". For more information about these attributes see the [data definition](#data-defined-on-unstructured-meshes) section below.
+For a 3D layered unstructured mesh topology this proposal follows the approach of the existing CF-conventions for structured meshes: horizontal and vertical dimensions are treated separately. For the horizontal plane a 2D unstructured mesh topology is defined, which is extruded in the vertical direction by means of a [vertical coordinate](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#vertical-coordinate). The example below matches the example in the previous section combined with a vertical coordinate according CF-conventions. This example introduces also the attributes `mesh` and `location` on the 2D variables "Mesh2_surface" and "Mesh2_depth". For more information about these attributes see the [data definition](#data-defined-on-unstructured-meshes) section below.
 
 ![image](./images/layered.png)
 
