@@ -1,5 +1,4 @@
 ./404.html
-./css/highlight.css
 ./css/theme.css
 ./css/theme_extra.css
 ./favicon.png
@@ -19,17 +18,14 @@
 ./images/triangles.png
 ./img/favicon.ico
 ./index.html
-./js/highlight.pack.js
 ./js/jquery-2.1.1.min.js
 ./js/modernizr-2.8.3.min.js
 ./js/theme.js
 ./search.html
-./search/lunr.min.js
-./search/mustache.min.js
-./search/require.js
-./search/search-results-template.mustache
-./search/search.js
+./search/lunr.js
+./search/main.js
 ./search/search_index.json
-./search/text.js
+./search/worker.js
 ./sitemap.xml
+./sitemap.xml.gz
 ./ugrid-subsetting/index.html
