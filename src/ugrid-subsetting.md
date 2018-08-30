@@ -33,7 +33,7 @@ The source code for the Hyrax implementation is here:
 
 The subsetting code in the Hyrax server is implemented by the [GridFields](http://www.stccmop.org/gridfields) library. The source code for the version of GridFields can be found here:
 
-[GridFields source](https://scm.opendap.org/svn/trunk/hyrax-dependencies/downloads/gridfields-1.0.1.tar.gz)
+[GridFields source](https://scm.opendap.org/svn/trunk/hyrax-dependencies/downloads/gridfields-1.0.3.tar.gz)
 
 
 The GridFields library has a much broader scope of capabilities than is utilized with this simple subsetting function, and could be used for a number of other UGRID-manipulating and evaluating tasks.
