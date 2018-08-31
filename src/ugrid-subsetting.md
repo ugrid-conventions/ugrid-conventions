@@ -4,13 +4,13 @@ UGRID Subsetting
 
 ## Introduction
 
-This project, and accompanying document, are all about a NetCDF standard for describing unstructured grids and the data/model results stored on them. Having such a standard is key to interoperability between different modeling systems and post-processing tools, etc. And once NetCDF is supported that access protocols like Open-source Project for a Network Data Access Protocol (OPeNDAP) can be used.
+This project, and accompanying document, are all about a NetCDF standard for describing unstructured grids and the data/model results stored on them. Having such a standard is key to interoperability between different modeling systems and post-processing tools, etc. Once NetCDF supports this access protocols like Open-source Project for a Network Data Access Protocol (OPeNDAP) can be used.
 
-However, there is an additional challenge. Modern unstructured grid models can use very large grids, and thus produce extremely large results sets. However, a particular client application may only need a spatial subset of that data. Ideally, there would be a way for a client to download only the portion of the model domain required.
+However, there is an additional challenge. Modern unstructured grid models can use very large grids and thus produce extremely large results sets. However, a particular client application may only need a spatial subset of that data. Ideally, there would be a way for a client to download only the portion of the model domain required.
 
-With structured grids, you can make good use of OPeNDAP's ability to slice arrays to get a subset of the data that is useful. However, with UGRIDs, data in a contiguous region in the spatial domain is generally not contiguous in the data arrays. So to do subsetting, the system needs to understand the topology of the grid, and select the appropriate discontiguous subset of the data and grid, and put all that together into a still-correct UGRID dataset.
+With structured grids, you can make good use of OPeNDAP's ability to slice arrays to get a subset of the data that is useful. However, with UGRIDs, data in a contiguous region in the spatial domain is generally not contiguous in the data arrays. So to do subsetting, the system needs to understand the topology of the grid, select the appropriate discontiguous subset of the data and grid, and put all that together into a still-correct UGRID dataset.
 
-This can be done on the client side, figuring out the grid geometry and requesting the required data via OPeNDAP. However, OPeNDAP does not support requesting discontiguous data, so it is necessary to make many small requests to the server and put it back together on the client. This not only means a lot of complex client-side code, but it's also painfully slow to do many small requests, rather than one large one. In fact, with some testing, for anything but tiny subsets, it's faster to grab the entire grid than do many small requests for a subset.
+This can be done on the client side, figuring out the grid geometry and requesting the required data via OPeNDAP. However, OPeNDAP does not support requesting discontiguous data, so it is necessary to make many small requests to the server and put it back together on the client. This not only means a lot of complex client-side code, but it's also painfully slow to do many small requests, rather than one large one. In fact, with some testing, for anything but tiny subsets, it's faster to grab the entire grid than make many small requests for a subset.
 
 ## OPeNDAP subsetting protocol
 
