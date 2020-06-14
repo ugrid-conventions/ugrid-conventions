@@ -32,10 +32,12 @@ import netCDF4
 
 
 ds = netCDF4.Dataset("netcdf4-ugrid-mesh1d.nc", "w")
+
 # Create dimensions
 node_dim = ds.createDimension("node", 5)
 edge_dim = ds.createDimension("edge", 4)
 connectivity_dim = ds.createDimension("nmax_edge", 2)
+
 # Create dummy variable to store topology information
 mesh1d = ds.createVariable("mesh1d", "i4")
 mesh1d[:] = 0
@@ -44,16 +46,19 @@ mesh1d.long_name= "Topology data of 1D mesh"
 mesh1d.topology_dimension= 1
 mesh1d.node_coordinates= "node_x node_y"
 mesh1d.edge_node_connectivity= "edge_nodes"
+
 # Create coordinates of nodes
 node_x = ds.createVariable("node_x", "f8", ("node",), fill_value=float("nan"))
 node_y = ds.createVariable("node_y", "f8", ("node",), fill_value=float("nan"))
 node_x[:] = np.array([0.0, 0.0, 10.0, 20.0, 30.0])
 node_y[:] = np.array([0.0, 10.0, 5.0, 4.0, 5.0])
+
 # Create coordinates of edges
 edge_x = ds.createVariable("edge_x", "f8", ("edge",), fill_value=float("nan"))
 edge_y = ds.createVariable("edge_y", "f8", ("edge",), fill_value=float("nan"))
 edge_x[:] = np.array([5.0, 5.0, 15.0, 25.0])
 edge_y[:] = np.array([2.5, 7.5, 4.5, 4.5])
+
 # Create variable describing connections between nodes
 edge_nodes = ds.createVariable("edge_nodes", "i8", ("edge", "nmax_edge"))
 edge_nodes[:] = np.array([
@@ -66,6 +71,7 @@ edge_nodes.cf_role = "edge_node_connectivity"
 edge_nodes.long_name = "Start and end nodes of mesh edges"
 edge_nodes.start_index = 0
 edge_nodes.coordinates = "edge_x edge_y"
+
 # Set some data on the nodes
 data_on_nodes = ds.createVariable(
     "data_on_nodes", "f8", ("node",), fill_value=float("nan")
@@ -73,6 +79,15 @@ data_on_nodes = ds.createVariable(
 data_on_nodes[:] = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
 data_on_nodes.mesh = "mesh1d"
 data_on_nodes.coordinates = "node_x node_y"
+
+# Set some data on the edges
+data_on_edges = ds.createVariable(
+    "data_on_edges", "f8", ("edge",), fill_value=float("nan")
+)
+data_on_edges[:] = np.array([1.0, 1.0, 2.0, 2.0])
+data_on_edges.mesh = "mesh1d"
+data_on_edges.coordinates = "edge_x edge_y"
+
 # Wrap up
 ds.Conventions = "CF-1.8 UGRID-1.0"
 ds.close()
