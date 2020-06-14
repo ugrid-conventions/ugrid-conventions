@@ -39,11 +39,11 @@ connectivity_dim = ds.createDimension("nmax_edge", 2)
 # Create dummy variable to store topology information
 mesh1d = ds.createVariable("mesh1d", "i4")
 mesh1d[:] = 0
-mesh1d.cf_role= 'mesh_topology'
-mesh1d.long_name= 'Topology data of 1D mesh'
+mesh1d.cf_role= "mesh_topology"
+mesh1d.long_name= "Topology data of 1D mesh"
 mesh1d.topology_dimension= 1
-mesh1d.node_coordinates= 'node_x node_y'
-mesh1d.edge_node_connectivity= 'edge_nodes'
+mesh1d.node_coordinates= "node_x node_y"
+mesh1d.edge_node_connectivity= "edge_nodes"
 # Create coordinates of nodes
 node_x = ds.createVariable("node_x", "f8", ("node",), fill_value=float("nan"))
 node_y = ds.createVariable("node_y", "f8", ("node",), fill_value=float("nan"))
@@ -62,8 +62,8 @@ edge_nodes[:] = np.array([
     [2, 3],
     [3, 4],
 ])
-edge_nodes.cf_role = 'edge_node_connectivity'
-edge_nodes.long_name = 'Start and end nodes of mesh edges'
+edge_nodes.cf_role = "edge_node_connectivity"
+edge_nodes.long_name = "Start and end nodes of mesh edges"
 edge_nodes.start_index = 0
 edge_nodes.coordinates = "edge_x edge_y"
 # Set some data on the nodes
@@ -74,7 +74,7 @@ data_on_nodes[:] = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
 data_on_nodes.mesh = "mesh1d"
 data_on_nodes.coordinates = "node_x node_y"
 # Wrap up
-ds.Conventions = 'CF-1.8 UGRID-1.0'
+ds.Conventions = "CF-1.8 UGRID-1.0"
 ds.close()
 ```
 
@@ -133,11 +133,11 @@ out = xr.Dataset()
 out["mesh1d"] = xr.DataArray(
     data=0,
     attrs={
-     'cf_role': 'mesh_topology',
-     'long_name': 'Topology data of 1D mesh',
-     'topology_dimension': 1,
-     'node_coordinates': 'node_x node_y',
-     'edge_node_connectivity': 'edge_nodes',
+     "cf_role": "mesh_topology",
+     "long_name": "Topology data of 1D mesh",
+     "topology_dimension": 1,
+     "node_coordinates": "node_x node_y",
+     "edge_node_connectivity": "edge_nodes",
     }
 )
 out = out.assign_coords(
@@ -165,9 +165,9 @@ out["edge_nodes"] = xr.DataArray(
     },
     dims=("edge", "nmax_connectivity"),
     attrs={
-        'cf_role': 'edge_node_connectivity',
-        'long_name': 'Start and end nodes of mesh edges',
-        'start_index': 0
+        "cf_role": "edge_node_connectivity",
+        "long_name": "Start and end nodes of mesh edges",
+        "start_index": 0
     }
 )
 out["data_on_nodes"] = xr.DataArray(
@@ -184,7 +184,7 @@ out["data_on_edges"] = xr.DataArray(
         "mesh": "mesh1d",
     }
 )
-out.attrs = {'Conventions': 'CF-1.8 UGRID-1.0'}
+out.attrs = {"Conventions": "CF-1.8 UGRID-1.0"}
 out.to_netcdf("xarray-ugrid-mesh1d.nc")
 ```
 
@@ -234,12 +234,12 @@ connectivity_dim = ds.createDimension("nmax_edge", 2)
 # Create dummy variable to store topology information
 mesh2d = ds.createVariable("mesh1d", "i4")
 mesh2d[:] = 0
-mesh2d.cf_role = 'mesh_topology'
-mesh2d.long_name = 'Topology data of 2D mesh'
+mesh2d.cf_role = "mesh_topology"
+mesh2d.long_name = "Topology data of 2D mesh"
 mesh2d.topology_dimension = 2
-mesh2d.node_coordinates = 'node_x node_y'
-mesh2d.face_node_connectivity = 'face_nodes'
-mesh2d.edge_node_connectivity = 'edge_nodes'
+mesh2d.node_coordinates = "node_x node_y"
+mesh2d.face_node_connectivity = "face_nodes"
+mesh2d.edge_node_connectivity = "edge_nodes"
 
 # Create coordinates of nodes
 node_x = ds.createVariable("node_x", "f8", ("node",), fill_value=float("nan"))
@@ -259,8 +259,8 @@ face_nodes[:] = np.array([
     [0, 1, 2, 3],
     [1, 4, 5, -1],
 ])
-face_nodes.cf_role = 'face_node_connectivity'
-face_nodes.long_name = 'Vertex nodes of mesh faces (counterclockwise)'
+face_nodes.cf_role = "face_node_connectivity"
+face_nodes.long_name = "Vertex nodes of mesh faces (counterclockwise)"
 face_nodes.start_index = 0
 
 # Create coordinates of edges
@@ -280,8 +280,8 @@ edge_nodes[:] = np.array([
     [4, 5],
     [5, 1],
 ])
-edge_nodes.cf_role = 'edge_node_connectivity'
-edge_nodes.long_name = 'Start and end nodes of mesh edges'
+edge_nodes.cf_role = "edge_node_connectivity"
+edge_nodes.long_name = "Start and end nodes of mesh edges"
 edge_nodes.start_index = 0
 
 # Set some data on the nodes
@@ -301,7 +301,7 @@ data_on_edges.mesh = "mesh2d"
 data_on_edges.coordinates = "edge_x edge_y"
 
 # Wrap up
-ds.Conventions = 'CF-1.8 UGRID-1.0'
+ds.Conventions = "CF-1.8 UGRID-1.0"
 ds.close()
 ```
 
@@ -346,12 +346,12 @@ out = xr.Dataset()
 out["mesh2d"] = xr.DataArray(
     data=0,
     attrs={
-     'cf_role': 'mesh_topology',
-     'long_name': 'Topology data of 2D mesh',
-     'topology_dimension': 2,
-     'node_coordinates': 'node_x node_y',
-     'face_node_connectivity': 'face_nodes',
-     'edge_node_connectivity': 'edge_nodes',
+     "cf_role": "mesh_topology",
+     "long_name": "Topology data of 2D mesh",
+     "topology_dimension": 2,
+     "node_coordinates": "node_x node_y",
+     "face_node_connectivity": "face_nodes",
+     "edge_node_connectivity": "edge_nodes",
     }
 )
 out = out.assign_coords(
@@ -377,10 +377,10 @@ out["face_nodes"] = xr.DataArray(
     },
     dims=["face", "nmax_face"],
     attrs={
-        'cf_role': 'face_node_connectivity',
-        'long_name': 'Vertex nodes of mesh faces (counterclockwise)',
-        'start_index': 0,
-        '_FillValue': -1,
+        "cf_role": "face_node_connectivity",
+        "long_name": "Vertex nodes of mesh faces (counterclockwise)",
+        "start_index": 0,
+        "_FillValue": -1,
     }
 )
 out["edge_nodes"] = xr.DataArray(
@@ -399,10 +399,10 @@ out["edge_nodes"] = xr.DataArray(
     },
     dims=["edge", "nmax_edge"],
     attrs={
-        'cf_role': 'edge_node_connectivity',
-        'long_name': 'Start and end nodes of mesh edges',
-        'start_index': 0,
-        '_FillValue': -1,
+        "cf_role": "edge_node_connectivity",
+        "long_name": "Start and end nodes of mesh edges",
+        "start_index": 0,
+        "_FillValue": -1,
     },
 )
 
@@ -420,7 +420,7 @@ out["data_on_edges"] = xr.DataArray(
         "mesh": "mesh2d",
     },
 )
-out.attrs = {'Conventions': 'CF-1.8 UGRID-1.0'}
+out.attrs = {"Conventions": "CF-1.8 UGRID-1.0"}
 out.to_netcdf("xarray-ugrid-mesh2d.nc")
 ```
 
