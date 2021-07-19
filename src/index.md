@@ -133,15 +133,18 @@ Mesh1_edge_x:standard_name = "longitude" ;
 Mesh1_edge_x:long_name = "Characteristic longitude of 1D network edge (e.g. midpoint of the edge)." ;
 Mesh1_edge_x:units = "degrees_east" ;
 Mesh1_edge_x:bounds = "Mesh1_edge_xbnds" ;
+
 double Mesh1_edge_y(nMesh1_edge) ;
 Mesh1_edge_y:standard_name = "latitude" ;
 Mesh1_edge_y:long_name = "Characteristic latitude of 1D network edge (e.g. midpoint of the edge)." ;
 Mesh1_edge_y:units = "degrees_north" ;
 Mesh1_edge_y:bounds = "Mesh1_edge_ybnds" ;
+
 double Mesh1_edge_xbnds(nMesh1_edge,Two) ;
 Mesh1_edge_xbnds:standard_name = "longitude" ;
 Mesh1_edge_xbnds:long_name = "Longitude bounds of 1D network edge (i.e. begin and end longitude)." ;
 Mesh1_edge_xbnds:units = "degrees_east" ;
+
 double Mesh1_edge_ybnds(nMesh1_edge,Two) ;
 Mesh1_edge_ybnds:standard_name = "latitude" ;
 Mesh1_edge_ybnds:long_name = "Latitude bounds of 1D network edge (i.e. begin and end latitude)." ;
@@ -201,7 +204,9 @@ Two = 2 ;
 Three = 3 ;
 
 variables:
+
 // Mesh topology
+
 integer Mesh2 ;
 Mesh2:cf_role = "mesh_topology" ;
 Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
@@ -216,10 +221,12 @@ Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_face_connectivity = "Mesh2_face_links" ; // optional attribute
 Mesh2:edge_face_connectivity = "Mesh2_edge_face_links" ; // optional attribute (requires edge_node_connectivity)
+
 integer Mesh2_face_nodes(nMesh2_face, Three) ;
 Mesh2_face_nodes:cf_role = "face_node_connectivity" ;
 Mesh2_face_nodes:long_name = "Maps every triangular face to its three corner nodes." ;
 Mesh2_face_nodes:start_index = 1 ;
+
 integer Mesh2_edge_nodes(nMesh2_edge, Two) ;
 Mesh2_edge_nodes:cf_role = "edge_node_connectivity" ;
 Mesh2_edge_nodes:long_name = "Maps every edge to the two nodes that it connects." ;
@@ -230,12 +237,14 @@ integer Mesh2_face_edges(nMesh2_face, Three) ;
 Mesh2_face_edges:cf_role = "face_edge_connectivity" ;
 Mesh2_face_edges:long_name = "Maps every triangular face to its three edges." ;
 Mesh2_face_edges:start_index = 1 ;
+
 integer Mesh2_face_links(nMesh2_face, Three) ;
 Mesh2_face_links:cf_role = "face_face_connectivity" ;
 Mesh2_face_links:long_name = "neighbor faces for faces" ;
 Mesh2_face_links:start_index = 1 ;
 Mesh2_face_links:_FillValue = -999 ;
 Mesh2_face_links:comment = "missing neighbor faces are indicated using _FillValue" ;
+
 integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
 Mesh2_edge_face_links:cf_role = "edge_face_connectivity" ;
 Mesh2_edge_face_links:long_name = "neighbor faces for edges" ;
@@ -244,10 +253,12 @@ Mesh2_edge_face_links:_FillValue = -999 ;
 Mesh2_edge_face_links:comment = "missing neighbor faces are indicated using _FillValue" ;
 
 // Mesh node coordinates
+
 double Mesh2_node_x(nMesh2_node) ;
 Mesh2_node_x:standard_name = "longitude" ;
 Mesh2_node_x:long_name = "Longitude of 2D mesh nodes." ;
 Mesh2_node_x:units = "degrees_east" ;
+
 double Mesh2_node_y(nMesh2_node) ;
 Mesh2_node_y:standard_name = "latitude" ;
 Mesh2_node_y:long_name = "Latitude of 2D mesh nodes." ;
@@ -258,14 +269,17 @@ double Mesh2_face_x(nMesh2_face) ;
 Mesh2_face_x:standard_name = "longitude" ;
 Mesh2_face_x:long_name = "Characteristics longitude of 2D mesh triangle (e.g. circumcenter coordinate)." ;
 Mesh2_face_x:units = "degrees_east" ;
+
 double Mesh2_face_y(nMesh2_face) ;
 Mesh2_face_y:standard_name = "latitude" ;
 Mesh2_face_y:long_name = "Characteristics latitude of 2D mesh triangle (e.g. circumcenter coordinate)." ;
 Mesh2_face_y:units = "degrees_north" ;
+
 double Mesh2_edge_x(nMesh2_edge) ;
 Mesh2_edge_x:standard_name = "longitude" ;
 Mesh2_edge_x:long_name = "Characteristic longitude of 2D mesh edge (e.g. midpoint of the edge)." ;
 Mesh2_edge_x:units = "degrees_east" ;
+
 double Mesh2_edge_y(nMesh2_edge) ;
 Mesh2_edge_y:standard_name = "latitude" ;
 Mesh2_edge_y:long_name = "Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge)." ;
@@ -329,6 +343,7 @@ Two = 2 ;
 
 variables:
 // Mesh topology
+
 integer Mesh2 ;
 Mesh2:cf_role = "mesh_topology" ;
 Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
@@ -343,11 +358,13 @@ Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_face_connectivity = "Mesh2_face_links" ; // optional attribute
 Mesh2:edge_face_connectivity = "Mesh2_edge_face_links" ; // optional attribute (requires edge_node_connectivity)
+
 integer Mesh2_face_nodes(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_nodes:cf_role = "face_node_connectivity" ;
 Mesh2_face_nodes:long_name = "Maps every face to its corner nodes." ;
 Mesh2_face_nodes:_FillValue = 999999 ;
 Mesh2_face_nodes:start_index = 1 ;
+
 integer Mesh2_edge_nodes(nMesh2_edge, Two) ;
 Mesh2_edge_nodes:cf_role = "edge_node_connectivity" ;
 Mesh2_edge_nodes:long_name = "Maps every edge to the two nodes that it connects." ;
@@ -359,12 +376,14 @@ Mesh2_face_edges:cf_role = "face_edge_connectivity" ;
 Mesh2_face_edges:long_name = "Maps every face to its edges." ;
 Mesh2_face_edges:_FillValue = 999999 ;
 Mesh2_face_edges:start_index = 1 ;
+
 integer Mesh2_face_links(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_links:cf_role = "face_face_connectivity" ;
 Mesh2_face_links:long_name = "neighbor faces for faces" ;
 Mesh2_face_links:start_index = 1 ;
 Mesh2_face_links:_FillValue = -999 ;
 Mesh2_face_links:comment = "missing edges as well as missing neighbor faces are indicated using _FillValue" ;
+
 integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
 Mesh2_edge_face_links:cf_role = "edge_face_connectivity" ;
 Mesh2_edge_face_links:long_name = "neighbor faces for edges" ;
@@ -388,21 +407,25 @@ Mesh2_face_x:standard_name = "longitude" ;
 Mesh2_face_x:long_name = "Characteristics longitude of 2D mesh face." ;
 Mesh2_face_x:units = "degrees_east" ;
 Mesh2_face_x:bounds = "Mesh2_face_xbnds" ;
+
 double Mesh2_face_y(nMesh2_face) ;
 Mesh2_face_y:standard_name = "latitude" ;
 Mesh2_face_y:long_name = "Characteristics latitude of 2D mesh face." ;
 Mesh2_face_y:units = "degrees_north" ;
 Mesh2_face_y:bounds = "Mesh2_face_ybnds" ;
+
 double Mesh2_face_xbnds(nMesh2_face,nMaxMesh2_face_nodes) ;
 Mesh2_face_xbnds:standard_name = "longitude" ;
 Mesh2_face_xbnds:long_name = "Longitude bounds of 2D mesh face (i.e. corner coordinates)." ;
 Mesh2_face_xbnds:units = "degrees_east" ;
 Mesh2_face_xbnds:_FillValue = 9.9692099683868690E36;
+
 double Mesh2_face_ybnds(nMesh2_face,nMaxMesh2_face_nodes) ;
 Mesh2_face_ybnds:standard_name = "latitude" ;
 Mesh2_face_ybnds:long_name = "Latitude bounds of 2D mesh face (i.e. corner coordinates)." ;
 Mesh2_face_ybnds:units = "degrees_north" ;
 Mesh2_face_ybnds:_FillValue = 9.9692099683868690E36;
+
 double Mesh2_edge_x(nMesh2_edge) ;
 Mesh2_edge_x:standard_name = "longitude" ;
 Mesh2_edge_x:long_name = "Characteristic longitude of 2D mesh edge (e.g. midpoint of the edge)." ;
@@ -411,6 +434,7 @@ double Mesh2_edge_y(nMesh2_edge) ;
 Mesh2_edge_y:standard_name = "latitude" ;
 Mesh2_edge_y:long_name = "Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge)." ;
 Mesh2_edge_y:units = "degrees_north" ;
+
 // bounds variables for edges skipped
 ```
 
@@ -433,6 +457,7 @@ Two = 2 ;
 
 variables:
 // Mesh topology
+
 integer Mesh2 ;
 Mesh2:cf_role = "mesh_topology" ;
 Mesh2:long_name = "Topology data of 2D unstructured mesh" ;
@@ -447,11 +472,13 @@ Mesh2:face_coordinates = "Mesh2_face_x Mesh2_face_y" ; // optional attribute
 Mesh2:face_edge_connectivity = "Mesh2_face_edges" ; // optional attribute (requires edge_node_connectivity)
 Mesh2:face_face_connectivity = "Mesh2_face_links" ; // optional attribute
 Mesh2:edge_face_connectivity = "Mesh2_edge_face_links" ; // optional attribute (requires edge_node_connectivity)
+
 integer Mesh2_face_nodes(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_nodes:cf_role = "face_node_connectivity" ;
 Mesh2_face_nodes:long_name = "Maps every face to its corner nodes." ;
 Mesh2_face_nodes:_FillValue = 999999 ;
 Mesh2_face_nodes:start_index = 1 ;
+
 integer Mesh2_edge_nodes(nMesh2_edge, Two) ;
 Mesh2_edge_nodes:cf_role = "edge_node_connectivity" ;
 Mesh2_edge_nodes:long_name = "Maps every edge to the two nodes that it connects." ;
@@ -463,12 +490,14 @@ Mesh2_face_edges:cf_role = "face_edge_connectivity" ;
 Mesh2_face_edges:long_name = "Maps every face to its edges." ;
 Mesh2_face_edges:_FillValue = 999999 ;
 Mesh2_face_edges:start_index = 1 ;
+
 integer Mesh2_face_links(nMesh2_face, nMaxMesh2_face_nodes) ;
 Mesh2_face_links:cf_role = "face_face_connectivity" ;
 Mesh2_face_links:long_name = "neighbor faces for faces" ;
 Mesh2_face_links:start_index = 1 ;
 Mesh2_face_links:_FillValue = -999 ;
 Mesh2_face_links:comment = "missing edges as well as missing neighbor faces are indicated using _FillValue" ;
+
 integer Mesh2_edge_face_links(nMesh2_edge, Two) ;
 Mesh2_edge_face_links:cf_role = "edge_face_connectivity" ;
 Mesh2_edge_face_links:long_name = "neighbor faces for edges" ;
@@ -481,6 +510,7 @@ double Mesh2_node_x(nMesh2_node) ;
 Mesh2_node_x:standard_name = "longitude" ;
 Mesh2_node_x:long_name = "Longitude of 2D mesh nodes." ;
 Mesh2_node_x:units = "degrees_east" ;
+
 double Mesh2_node_y(nMesh2_node) ;
 Mesh2_node_y:standard_name = "latitude" ;
 Mesh2_node_y:long_name = "Latitude of 2D mesh nodes." ;
@@ -492,25 +522,30 @@ Mesh2_face_x:standard_name = "longitude" ;
 Mesh2_face_x:long_name = "Characteristics longitude of 2D mesh face." ;
 Mesh2_face_x:units = "degrees_east" ;
 Mesh2_face_x:bounds = "Mesh2_face_xbnds" ;
+
 double Mesh2_face_y(nMesh2_face) ;
 Mesh2_face_y:standard_name = "latitude" ;
 Mesh2_face_y:long_name = "Characteristics latitude of 2D mesh face." ;
 Mesh2_face_y:units = "degrees_north" ;
 Mesh2_face_y:bounds = "Mesh2_face_ybnds" ;
+
 double Mesh2_face_xbnds(nMesh2_face,nMaxMesh2_face_nodes) ;
 Mesh2_face_xbnds:standard_name = "longitude" ;
 Mesh2_face_xbnds:long_name = "Longitude bounds of 2D mesh face (i.e. corner coordinates)." ;
 Mesh2_face_xbnds:units = "degrees_east" ;
 Mesh2_face_xbnds:_FillValue = 9.9692099683868690E36;
+
 double Mesh2_face_ybnds(nMesh2_face,nMaxMesh2_face_nodes) ;
 Mesh2_face_ybnds:standard_name = "latitude" ;
 Mesh2_face_ybnds:long_name = "Latitude bounds of 2D mesh face (i.e. corner coordinates)." ;
 Mesh2_face_ybnds:units = "degrees_north" ;
 Mesh2_face_ybnds:_FillValue = 9.9692099683868690E36;
+
 double Mesh2_edge_x(nMesh2_edge) ;
 Mesh2_edge_x:standard_name = "longitude" ;
 Mesh2_edge_x:long_name = "Characteristic longitude of 2D mesh edge (e.g. midpoint of the edge)." ;
 Mesh2_edge_x:units = "degrees_east" ;
+
 double Mesh2_edge_y(nMesh2_edge) ;
 Mesh2_edge_y:standard_name = "latitude" ;
 Mesh2_edge_y:long_name = "Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge)." ;
@@ -523,6 +558,7 @@ Mesh2_layers:standard_name = "ocean_sigma_coordinate" ;
 Mesh2_layers:long_name = "sigma at layer midpoints" ;
 Mesh2_layers:positive = "up" ;
 Mesh2_layers:formula_terms = "sigma: Mesh2_layers eta: Mesh2_surface depth: Mesh2_depth" ;
+
 double Mesh2_depth(nMesh2_node) ;
 Mesh2_depth:standard_name = "sea_floor_depth_below_geoid" ;
 Mesh2_depth:units = "m" ;
@@ -530,6 +566,7 @@ Mesh2_depth:positive = "down" ;
 Mesh2_depth:mesh = "Mesh2"
 Mesh2_depth:location = "node" ;
 Mesh2_depth:coordinates = "Mesh2_node_x Mesh2_node_y" ;
+
 double Mesh2_surface(nMesh2_node) ;
 Mesh2_surface:standard_name = "sea_surface_height_above_geoid" ;
 Mesh2_surface:units = "m" ;
@@ -643,12 +680,14 @@ Mesh3D:volume_face_connectivity = "Mesh3D_vol_faces" ; // optional attribute (re
 Mesh3D:volume_edge_connectivity = "Mesh3D_vol_edges" ; // optional attribute (requires edge_node_connectivity)
 Mesh3D:face_edge_connectivity = "Mesh3D_face_edges" ; // optional attribute (requires face_node_connectivity and edge_node_connectivity)
 Mesh3D:volume_volume_connectivity = "Mesh3D_vol_links" ; // optional attribute
+
 integer Mesh3D_vol_types(nMesh3D_vol) ;
 Mesh3D_vol_types:cf_role = "volume_shape_type" ;
 Mesh3D_vol_types:long_name = "Specifies the shape of the individual volumes." ;
 Mesh3D_vol_types:flag_range = 0b, 2b ;
 Mesh3D_vol_types:flag_values = 0b, 1b, 2b ;
 Mesh3D_vol_types:flag_meanings = "tetrahedron wedge hexahedron" ;
+
 integer Mesh3D_vol_nodes(nMesh3D_vol, nMaxMesh3D_vol_nodes) ;
 Mesh3D_vol_nodes:cf_role = "volume_node_connectivity" ;
 Mesh3D_vol_nodes:long_name = "Maps every volume to its corner nodes." ;
@@ -660,26 +699,31 @@ integer Mesh3D_edge_nodes(nMesh3D_edge, Two) ;
 Mesh3D_edge_nodes:cf_role = "edge_node_connectivity" ;
 Mesh3D_edge_nodes:long_name = "Maps every edge to the two nodes that it connects." ;
 Mesh3D_edge_nodes:start_index = 1 ;
+
 integer Mesh3D_face_nodes(nMesh3D_face, nMaxMesh3D_face_nodes) ;
 Mesh3D_face_nodes:cf_role = "face_node_connectivity" ;
 Mesh3D_face_nodes:long_name = "Maps every face to its corner nodes." ;
 Mesh3D_face_nodes:_FillValue = 999999 ;
 Mesh3D_face_nodes:start_index = 1 ;
+
 integer Mesh3D_vol_faces(nMesh3D_vol, nMaxMesh3D_vol_faces) ;
 Mesh3D_vol_faces:cf_role = "volume_face_connectivity" ;
 Mesh3D_vol_faces:long_name = "Maps every volume to its faces." ;
 Mesh3D_vol_faces:_FillValue = 999999 ;
 Mesh3D_vol_faces:start_index = 1 ;
+
 integer Mesh3D_vol_edges(nMesh3D_vol, nMaxMesh3D_vol_edges) ;
 Mesh3D_vol_edges:cf_role = "volume_edge_connectivity" ;
 Mesh3D_vol_edges:long_name = "Maps every volume to its edges." ;
 Mesh3D_vol_edges:_FillValue = 999999 ;
 Mesh3D_vol_edges:start_index = 1 ;
+
 integer Mesh3D_face_edges(nMesh3D_face, nMaxMesh3D_face_nodes) ;
 Mesh3D_face_edges:cf_role = "face_edge_connectivity" ;
 Mesh3D_face_edges:long_name = "Maps every face to its edges." ;
 Mesh3D_face_edges:_FillValue = 999999 ;
 Mesh3D_face_edges:start_index = 1 ;
+
 integer Mesh3D_vol_links(nMesh3D_vol, nMaxMesh3D_vol_faces) ;
 Mesh3D_vol_links:cf_role = "volume_volume_connectivity" ;
 Mesh3D_vol_links:long_name = "Indicates which other volumes neighbor each volume." ;
@@ -693,10 +737,12 @@ double Mesh3D_node_x(nMesh3D_node) ;
 Mesh3D_node_x:standard_name = "longitude" ;
 Mesh3D_node_x:long_name = "Longitude of 3D mesh nodes." ;
 Mesh3D_node_x:units = "degrees_east" ;
+
 double Mesh3D_node_y(nMesh3D_node) ;
 Mesh3D_node_y:standard_name = "latitude" ;
 Mesh3D_node_y:long_name = "Latitude of 3D mesh nodes." ;
 Mesh3D_node_y:units = "degrees_north" ;
+
 double Mesh3D_node_z(nMesh3D_node) ;
 Mesh3D_node_z:standard_name = "elevation" ;
 Mesh3D_node_z:long_name = "Elevation of 3D mesh nodes." ;
@@ -708,52 +754,63 @@ Mesh3D_vol_x:standard_name = "longitude" ;
 Mesh3D_vol_x:long_name = "Characteristics longitude of mesh volumes." ;
 Mesh3D_vol_x:units = "degrees_east" ;
 Mesh3D_vol_x:bounds = "Mesh3D_vol_xbnds" ;
+
 double Mesh3D_vol_y(nMesh3D_vol) ;
 Mesh3D_vol_y:standard_name = "latitude" ;
 Mesh3D_vol_y:long_name = "Characteristics latitude of mesh volumes." ;
 Mesh3D_vol_y:units = "degrees_north" ;
 Mesh3D_vol_y:bounds = "Mesh3D_vol_ybnds" ;
+
 double Mesh3D_vol_z(nMesh3D_vol) ;
 Mesh3D_vol_z:standard_name = "elevation" ;
 Mesh3D_vol_z:long_name = "Characteristics elevation of mesh volumes." ;
 Mesh3D_vol_z:units = "m" ;
 Mesh3D_vol_z:bounds = "Mesh3D_vol_zbnds" ;
+
 double Mesh3D_vol_xbnds(nMesh3D_vol,nMaxMesh3D_vol_nodes) ;
 Mesh3D_vol_xbnds:standard_name = "longitude" ;
 Mesh3D_vol_xbnds:long_name = "Longitude bounds of mesh volumes (i.e. corner coordinates)." ;
 Mesh3D_vol_xbnds:units = "degrees_east" ;
 Mesh3D_vol_xbnds:_FillValue = 9.9692099683868690E36;
+
 double Mesh3D_vol_ybnds(nMesh3D_vol,nMaxMesh3D_vol_nodes) ;
 Mesh3D_vol_ybnds:standard_name = "latitude" ;
 Mesh3D_vol_ybnds:long_name = "Latitude bounds of mesh volumes (i.e. corner coordinates)." ;
 Mesh3D_vol_ybnds:units = "degrees_north" ;
 Mesh3D_vol_ybnds:_FillValue = 9.9692099683868690E36;
+
 double Mesh3D_vol_zbnds(nMesh3D_vol,nMaxMesh3D_vol_nodes) ;
 Mesh3D_vol_zbnds:standard_name = "elevation" ;
 Mesh3D_vol_zbnds:long_name = "Elevation bounds of mesh volumes (i.e. corner coordinates)." ;
 Mesh3D_vol_zbnds:units = "m" ;
 Mesh3D_vol_zbnds:_FillValue = 9.9692099683868690E36;
+
 double Mesh3D_face_x(nMesh3D_face) ;
 Mesh3D_face_x:standard_name = "longitude" ;
 Mesh3D_face_x:long_name = "Characteristics longitude of mesh faces." ;
 Mesh3D_face_x:units = "degrees_east" ;
+
 double Mesh3D_face_y(nMesh3D_face) ;
 Mesh3D_face_y:standard_name = "latitude" ;
 Mesh3D_face_y:long_name = "Characteristics latitude of mesh faces." ;
 Mesh3D_face_y:units = "degrees_north" ;
+
 double Mesh3D_face_z(nMesh3D_face) ;
 Mesh3D_face_z:standard_name = "elevation" ;
 Mesh3D_face_z:long_name = "Characteristics elevation of mesh faces." ;
 Mesh3D_face_z:units = "m" ;
 // bounds variables for faces skipped
+
 double Mesh3D_edge_x(nMesh3D_edge) ;
 Mesh3D_edge_x:standard_name = "longitude" ;
 Mesh3D_edge_x:long_name = "Characteristic longitude of 2D mesh edge (e.g. midpoint of the edge)." ;
 Mesh3D_edge_x:units = "degrees_east" ;
+
 double Mesh3D_edge_y(nMesh3D_edge) ;
 Mesh3D_edge_y:standard_name = "latitude" ;
 Mesh3D_edge_y:long_name = "Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge)." ;
 Mesh3D_edge_y:units = "degrees_north" ;
+
 double Mesh3D_edge_z(nMesh3D_edge) ;
 Mesh3D_edge_z:standard_name = "latitude" ;
 Mesh3D_edge_z:long_name = "Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge)." ;
@@ -832,19 +889,23 @@ Mesh2_face_x:standard_name = "longitude" ;
 Mesh2_face_x:long_name = "Characteristics longitude of 2D mesh triangle (e.g. circumcenter coordinate)." ;
 Mesh2_face_x:units = "degrees_east" ;
 Mesh2_face_x:bounds = "Mesh2_face_xbnds" ;
+
 double Mesh2_face_y(nMesh2_face) ;
 Mesh2_face_y:standard_name = "latitude" ;
 Mesh2_face_y:long_name = "Characteristics latitude of 2D mesh triangle (e.g. circumcenter coordinate)." ;
 Mesh2_face_y:units = "degrees_north" ;
 Mesh2_face_y:bounds = "Mesh2_face_ybnds" ;
+
 double Mesh2_face_xbnds(nMesh2_face,Three) ;
 Mesh2_face_xbnds:standard_name = "longitude" ;
 Mesh2_face_xbnds:long_name = "Longitude bounds of 2D mesh triangle (i.e. corner coordinates)." ;
 Mesh2_face_xbnds:units = "degrees_east" ;
+
 double Mesh2_face_ybnds(nMesh2_face,Three) ;
 Mesh2_face_ybnds:standard_name = "latitude" ;
 Mesh2_face_ybnds:long_name = "Latitude bounds of 2D mesh triangle (i.e. corner coordinates)." ;
 Mesh2_face_ybnds:units = "degrees_north" ;
+
 double Mesh2_edge_x(nMesh2_edge) ;
 // as in 2D triangular mesh example
 double Mesh2_edge_y(nMesh2_edge) ;
@@ -857,6 +918,7 @@ Mesh2_volumes:units = "m3" ;
 Mesh2_volumes:mesh = "Mesh2" ;
 Mesh2_volumes:location = "face" ;
 Mesh2_volumes:coordinates = "Mesh2_face_x Mesh2_face_y" ;
+
 double Mesh2_fluxes(nMesh2_edge) ;
 Mesh2_fluxes:long_name = "flux across edge" ;
 Mesh2_fluxes:units = "m3 s-1" ;
@@ -897,16 +959,19 @@ Mesh2_node_x:standard_name = "longitude" ;
 Mesh2_node_x:long_name = "Longitude of 2D mesh nodes." ;
 Mesh2_node_x:units = "degrees_east" ;
 Mesh2_node_x:bounds = "Mesh2_node_xbnds" ;
+
 double Mesh2_node_y(nMesh2_node) ;
 Mesh2_node_y:standard_name = "latitude" ;
 Mesh2_node_y:long_name = "Latitude of 2D mesh nodes." ;
 Mesh2_node_y:units = "degrees_north" ;
 Mesh2_node_y:bounds = "Mesh2_node_ybnds" ;
+
 double Mesh2_node_xbnds(nMesh2_node, nMaxMesh2_bnds) ;
 Mesh2_node_xbnds:standard_name = "longitude" ;
 Mesh2_node_xbnds:long_name = "List of x-points that form outline of flow volume" ;
 Mesh2_node_xbnds:units = "degrees_east" ;
 Mesh2_node_xbnds:_FillValue = 9.9692099683868690E36;
+
 double Mesh2_node_ybnds(nMesh2_node, nMaxMesh2_bnds) ;
 Mesh2_node_ybnds:standard_name = "latitude" ;
 Mesh2_node_ybnds:units = "degrees_north" ;
@@ -930,6 +995,7 @@ Mesh2_volumes:units = "m3" ;
 Mesh2_volumes:mesh = "Mesh2" ;
 Mesh2_volumes:location = "node" ;
 Mesh2_volumes:coordinates = "Mesh2_node_x Mesh2_node_y" ;
+
 double Mesh2_fluxes(nMesh2_edge) ;
 Mesh2_fluxes:long_name = "flux along edge" ;
 Mesh2_fluxes:units = "m3 s-1" ;
@@ -960,10 +1026,12 @@ Mesh1_set:mesh = "Mesh1" ;
 Mesh1_set:location = "node" ;
 Mesh1_set:start_index = 1 ;
 Mesh1_set:coordinates = "Mesh1_set_x Mesh1_set_y" ;
+
 double Mesh1_set_x(nMesh1_set) ;
 Mesh1_set_x:standard_name = "longitude" ;
 Mesh1_set_x:long_name = "Characteristic longitude of set (e.g. longitude of node)." ;
 Mesh1_set_x:units = "degrees_east" ;
+
 double Mesh1_set_y(nMesh1_set) ;
 Mesh1_set_y:standard_name = "latitude" ;
 Mesh1_set_y:long_name = "Characteristic latitude of set (e.g. latitude of node)" ;
@@ -1000,6 +1068,7 @@ Mesh1:topology_dimension = 1 ;
 Mesh1:node_coordinates = "Mesh1_node_x Mesh1_node_y" ;
 Mesh1:edge_node_connectivity = "Mesh1_edge_nodes" ;
 Mesh1:edge_coordinates = "Mesh1_edge_x Mesh1_edge_y" ; // optional attribute
+
 integer Mesh1_edge_nodes(nMesh1_edge, Two) ;
 Mesh1_edge_nodes:cf_role = "edge_node_connectivity" ;
 Mesh1_edge_nodes:long_name = "Maps every edge/link to the two nodes that it connects." ;
@@ -1030,6 +1099,7 @@ nMesh1_edge = 4 ; // nEdges
 Two = 2;
 
 variables:
+
 // Mesh topology
 integer Mesh1 ;
 Mesh1:cf_role = "mesh_topology" ;
@@ -1038,6 +1108,7 @@ Mesh1:topology_dimension = 1 ;
 Mesh1:node_coordinates = "Mesh1_node_x Mesh1_node_y" ;
 Mesh1:edge_node_connectivity = "Mesh1_edge_nodes" ;
 Mesh1:edge_coordinates = "Mesh1_edge_x Mesh1_edge_y" ; // optional attribute
+
 integer Mesh1_edge_nodes(nMesh1_edge, Two) ;
 Mesh1_edge_nodes:cf_role = "edge_node_connectivity" ;
 Mesh1_edge_nodes:long_name = "Maps every edge/link to the two nodes that it connects." ;
