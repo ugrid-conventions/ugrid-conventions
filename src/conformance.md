@@ -62,15 +62,15 @@ For any mesh variable ..
 - all mesh connectivity and coordinate attributes must be varlists, that is ..
     - <a id="R105" href="#R105">R105</a> they are strings consisting of space-separated, valid netcdf variable names, and
     - <a id="R106" href="#R106">R106</a> the variables named all exist in the dataset
-- <a id="R107" href="#R107">R107</a> all elements of all mesh coordinate attributes must be
+- <a id="R107" href="#R107">R107</a> all mesh coordinate attributes must contain a single variable name
+- <a id="R108" href="#R108">R108</a> all elements of all mesh coordinate attributes must be
   [valid mesh coordinates](#mesh-coordinate-variables)
-- <a id="R108" href="#R108">R108</a> all elements of all mesh connectivity attributes must be
+- <a id="R109" href="#R109">R109</a> all mesh connectivity attributes must be
   [valid mesh connectivities](#mesh-connectivity-variables)
-- <a id="R109" href="#R109">R109</a> it must have a `node_coordinates` attribute
+- <a id="R110" href="#R110">R110</a> it must have a `node_coordinates` attribute
 - an `edge_node_connectivity` attribute ..
-    - <a id="R110" href="#R110">R110</a> *must not* be present, if `topology_dimension` is 0. [^5]
-    - <a id="R111" href="#R111">R111</a> *must* be present, if `topology_dimension` is 1. 
-    - <a id="R112" href="#R112">R112</a> *may* be present, if `topology_dimension` is 2.
+    - <a id="R111" href="#R111">R111</a> *must not* be present, if `topology_dimension` is 0. [^5]
+    - <a id="R112" href="#R112">R112</a> *must* be present, if `topology_dimension` is 1. 
 - <a id="R113" href="#R113">R113</a> a `face_node_connectivity` attribute must be present
     _if and only if_ `topology_dimension` is 2  
 - <a id="R114" href="#R114">R114</a> a `boundary_node_connectivity` attribute may be present,
@@ -97,15 +97,20 @@ For any mesh variable ..
   if the mesh has both a face dimension and an edge dimension
 - <a id="R121" href="#R121">R121</a> an `edge_face_connectivity` attribute may only exist
   if the mesh has both a face dimension and an edge dimension
+- <a id="R122" href="#R122">R122</a> a `face_dimension` attribute may only exist if the mesh has a 
+  [face dimension](#face-dimension)
+- <a id="R123" href="#R123">R123</a> an `edge_dimension` attribute may only exist if the mesh has an 
+  [edge dimension](#edge-dimension)
 
 ### Mesh variable recommendations
 
 - <a id="A101" href="#A101">A101</a> it should have no dimensions
 - <a id="A102" href="#A102">A102</a> it should not have a `standard_name` attribute
 - <a id="A103" href="#A103">A103</a> it should not have a `units` attribute
-- <a id="A104" href="#A104">A104</a> it should not share any of its element dimensions with other meshes
-  <br>( **NOTE** which therefore also means : a mesh variable will not share any element coordinates
-  or connectivities with other meshes )
+- <a id="A104" href="#A104">A104</a> it should not share any of its element dimensions with other meshes [^11]
+- <a id="A105" href="#A105">A105</a> if it has multiple element dimensions, they should all be different
+- <a id="A106" href="#A106">A106</a> it should not have any attributes ending in "_connectivity", "_coordinates" or 
+  "_dimension" which are not valid UGRID terms [^12]
 
 
 ## Mesh coordinate variables
@@ -138,8 +143,8 @@ For any mesh connectivity variable ..
 - <a id="R304" href="#R304">R304</a> it must exactly have two dimensions, of which
     - <a id="R305" href="#R305">R305</a> one is an element dimension of its parent mesh, and
     - <a id="R306" href="#R306">R306</a> the other is not an element dimension
-- <a id="R307" href="#R307">R307</a> its element dimension must be that of the _first_ location named in its `cf_role`
-- <a id="R308" href="#R308">R308</a> if it has a `cf_role` of `edge_node_connectivity` or `boundary_node_connectivity`,
+- <a id="R307" href="#R307">R307</a> its element dimension must be that of the _first_ location named in its `cf_role` [^13]
+- <a id="R308" href="#R308">R308</a> if it has a `cf_role` [^13] of `edge_node_connectivity` or `boundary_node_connectivity`,
   then its non-element dimension must have length 2
 - <a id="R309" href="#R309">R309</a> any `start_index` attribute must have one of the values (0, 1).
 - <a id="R310" href="#R310">R310</a> if it has a `cf_role` ending in `_node_connectivity`,
@@ -147,7 +152,7 @@ For any mesh connectivity variable ..
 
 ### Mesh connectivity variable recommendations
 - <a id="A301" href="#A301">A301</a> it should have _one and only one_ parent mesh [^1]
-- <a id="A302" href="#A302">A302</a> it should have an integral type
+- <a id="A302" href="#A302">A302</a> it should have an integer type
 - <a id="A303" href="#A303">A303</a> any `start_index` attribute should have the same type as the connectivity variable itself
 - <a id="A304" href="#A304">A304</a> if it has a `cf_role` ending in `_node_connectivity`,
   then it should ***not*** have a `_FillValue` attribute
@@ -169,16 +174,18 @@ For any location index set variable ..
 - <a id="R403" href="#R403">R403</a> it must have a `location` attribute, which is one of `face`, `edge` or `node`, and 
     - <a id="R404" href="#R404">R404</a> the corresponding location must exist in the parent mesh
 - <a id="R405" href="#R405">R405</a> it must have a single dimension
+- <a id="R406" href="#R406">R406</a> any `start_index` attribute must have one of the values (0, 1).
 
 ### Location index set variable recommendations
-- <a id="A401" href="#A401">A401</a> it should have an integral type
+- <a id="A401" href="#A401">A401</a> it should have an integer type
 - <a id="A402" href="#A402">A402</a> it should not contain any missing points
 - <a id="A403" href="#A403">A403</a> it should not have a `_FillValue` attribute
 - <a id="A404" href="#A404">A404</a> the length of its single dimension should be less than or equal to the corresponding
-  element dimension of its parent mesh
+  element dimension of its indicated mesh [^14]
 - <a id="A405" href="#A405">A405</a> its values should all be distinct, and 
     - <a id="A406" href="#A406">A406</a> they should all be valid indexes into the relevant element dimension
-      of its parent mesh [^3] [^8]
+      of its indicated mesh [^14] [^3] [^8]
+- <a id="A407" href="#A407">A407</a> any `start_index` attribute should have the same type as the location-index-set variable itself
 
 
 ## Mesh data variables
@@ -203,14 +210,15 @@ For any location index set variable ..
 ## Other recommendations
 
 - <a id="A901" href="#A901">A901</a> all dataset contents (dimension, variables and their attributes) should also be
-  CF compliant
-  <br> see: [CF conventions][cf_conventions]
+  CF compliant -- see: [CF conventions][cf_conventions].
 - <a id="A902" href="#A902">A902</a> there should be a global `Conventions` attribute,
     - <a id="A903" href="#A903">A903</a> which contains a string section of the form `UGRID-<X.Y>`,
       where "<X.Y\>" is an appropriate release version of the UGRID conventions. [^9]
-- <a id="A904" href="#A904">A904</a> no data variable should have a `cf_role` of any of the types defined here,
+- <a id="A904" href="#A904">A904</a> no netcdf variable should have a `cf_role` equal to any of the values defined here,
   unless it is one of the UGRID variable types defined here
   <br>-- i.e. a mesh, location index set, element coordinate, boundary or connectivity variable
+- <a id="A905" href="#A905">A905</a> all dataset variables should only have a `cf_role` which is _either_
+  one of the valid terms described here, _or_ one of the CF-defined `cf_role` values [^15]
 
 
 [^1]: From the given definitions, any mesh connectivity or -coordinate must logically _have_ a
@@ -226,7 +234,7 @@ allowing for any `start_index` offset.
 [^4]: For now at least, we _exclude_ mention of full-3d meshes, whose status is currently in question : 
 cf. [this GitHub discussion][volume_status], as this would add considerable complexity here.
 
-[^5]: For now, we _allow_ 0-d meshes (those with nodes only).
+[^5]: For now, we _allow_ 0-d meshes (those with nodes only).  Though, this is not explicitly mentioned in the UGRID v1.0 pages.
 
 [^6]: It is not supported to have boundaries in a 1-D mesh (I.E. one with only edges), though this is not logically
 impossible.  If a specific need arises, this could change in future.
@@ -242,11 +250,26 @@ since this requires loading all of their data.
 section 2.6.1.  However, the definition of UGRID release numbers is not yet finalised.
 
 [^10]: Providing stable statement references allows conformance statements to evolve without invalidating earlier
-versions of a checker program.  We also provide a linkable anchor for each one.
+versions of a checker program.  We also provide a linkable web anchor for each one.
+
+[^11] if a mesh does not share any element dimensions with other meshes, it follows that it also will not share any
+  element coordinates or connectivities with other meshes.
+
+[^12] invalid 'lookalike' attributes, which are not defined by UGRID, include such as :
+  "node_face_connectivity", "boundary_coordinates", "boundary_dimension" or "node_dimension".
+
+[^13] for checking purposes, the identity of a connectivity is actually defined by the referring attribute in the parent mesh.
+   However, if the connectivity is correctly formed, then its `cf_role` value will always be the same as this  -- cf:[R303](#R303).
+
+[^14] the 'indicated mesh' of a location-index-set is the mesh named in its `mesh` attribute
+
+[^15] in the present [latest CF version][cf_current_version] the only `cf_role` terms defined are the discrete-geometry
+  types : `timeseries_id`, `profile_id` and `trajectory_id`
 
 
 [volume_status]: https://github.com/ugrid-conventions/ugrid-conventions/issues/53#issuecomment-832138564
 [cf_conformance]: http://cfconventions.org/cf-conventions/conformance.html "CF Conventions Conformance pages"
 [cf_conventions]: https://cfconventions.org/ "CF metadata conventions"
+[cf_current_version]: https://cfconventions.org/Data/cf-conventions/cf-conventions-1.9/cf-conventions.html "CF version 1.9"
 [flake8_codes]: https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
 [pycodestyle_codes]: https://pycodestyle.pycqa.org/en/2.8.0/intro.html#error-codes
