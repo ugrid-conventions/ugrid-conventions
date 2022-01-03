@@ -215,9 +215,9 @@ For any location index set variable ..
     - <a id="A903" href="#A903">A903</a> which contains a string section of the form `UGRID-<X.Y>`,
       where "<X.Y\>" is an appropriate release version of the UGRID conventions. [^9]
 - <a id="A904" href="#A904">A904</a> no netcdf variable should have a `cf_role` equal to any of the values defined here,
-  unless it is one of the UGRID variable types defined here
-  <br>-- i.e. a mesh, location index set, element coordinate, boundary or connectivity variable
-- <a id="A905" href="#A905">A905</a> all dataset variables should only have a `cf_role` which is _either_
+  unless it is one of the UGRID variable types defined here to use one
+  <br>-- i.e. a mesh, location index set or connectivity variable
+- <a id="A905" href="#A905">A905</a> no dataset variable should have a `cf_role` which is not _either_
   one of the valid terms described here, _or_ one of the CF-defined `cf_role` values [^15]
 
 
