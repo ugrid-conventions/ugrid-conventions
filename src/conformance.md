@@ -1,18 +1,34 @@
-# Conformance rules for UGRID Conventions (v1.x)
+<p style="color:red;font-size:50px;font-style:oblique">
+.. DRAFT .. DRAFT .. DRAFT ..
+</p>
 
-[TOC]
+***Status : first draft***
+<br>_Hopefully, this can evolve into an agreed final form
+by the time of the next UGRID release._
 
-## Introduction
+# Conformance rules for UGRID Conventions v1.x
 
 This information is intended to follow the practice established by the
-[CF conformance pages][cf_conformance], as attached to the [CF conventions][cf_conventions]
+[CF conformance pages][cf_conformance], as attached to the [CF conventions][cf_conventions].
 
+In that spirit, this is likewise "intended to be a concise summary" of the
+main convention, and "if there are any discrepancies ... the conventions document
+is the ultimate authority."
+ 
 Each reference statement is provided with a short code :
 "Rxxx" for requirements and "Axxx" for advisory recommendations,
 in the manner of the [Flake8 error and warning codes][flake8_codes], and the [PyCodeStyle ones][pycodestyle_codes].
 <br>Future editions will maintain these reference numbers, but possibly add new ones.  They can be used as definitive
 references by a conformance-checker utility. [^10]
 
+**This version** is consistent with :
+
+  * UGRID v1.0 
+  * [CF version 1.9][cf_current_version]
+
+---
+
+[TOC]
 
 ## Preamble : terms and definitions
 - A ***mesh*** is a variable with a `cf_role` attribute of `"mesh_topology"`. [^2]
@@ -181,10 +197,10 @@ For any location index set variable ..
 - <a id="A402" href="#A402">A402</a> it should not contain any missing points
 - <a id="A403" href="#A403">A403</a> it should not have a `_FillValue` attribute
 - <a id="A404" href="#A404">A404</a> the length of its single dimension should be less than or equal to the corresponding
-  element dimension of its indicated mesh [^14]
+  element dimension of its parent mesh
 - <a id="A405" href="#A405">A405</a> its values should all be distinct, and 
     - <a id="A406" href="#A406">A406</a> they should all be valid indexes into the relevant element dimension
-      of its indicated mesh [^14] [^3] [^8]
+      of its parent mesh [^3] [^8]
 - <a id="A407" href="#A407">A407</a> any `start_index` attribute should have the same type as the location-index-set variable itself
 
 
@@ -206,8 +222,8 @@ For any location index set variable ..
       as given by it's own `mesh` and `location` properties, or by those of its `location_index_set`
 
 
-# Other
-## Other recommendations
+## Other
+### Other recommendations
 
 - <a id="A901" href="#A901">A901</a> all dataset contents (dimension, variables and their attributes) should also be
   CF compliant -- see: [CF conventions][cf_conventions].
@@ -218,7 +234,7 @@ For any location index set variable ..
   unless it is one of the UGRID variable types defined here to use one
   <br>-- i.e. a mesh, location index set or connectivity variable
 - <a id="A905" href="#A905">A905</a> no dataset variable should have a `cf_role` which is not _either_
-  one of the valid terms described here, _or_ one of the CF-defined `cf_role` values [^15]
+  one of the valid terms described here, _or_ one of the CF-defined `cf_role` values [^14]
 
 
 [^1]: From the given definitions, any mesh connectivity or -coordinate must logically _have_ a
@@ -239,7 +255,7 @@ cf. [this GitHub discussion][volume_status], as this would add considerable comp
 [^6]: It is not supported to have boundaries in a 1-D mesh (I.E. one with only edges), though this is not logically
 impossible.  If a specific need arises, this could change in future.
 
-[^7]: Since there is no provision for a "`boundary_dimension`" attribute, the boundary dimension is always the
+[^7]: Since there is no provision for a `boundary_dimension` attribute, the boundary dimension is always the
 _first_ dimension of a `boundary_node_connectivity`, and its second dimension must always be 2
 (i.e. it cannot be transposed).  If a specific need arises, this could change in future.
 
@@ -252,18 +268,16 @@ section 2.6.1.  However, the definition of UGRID release numbers is not yet fina
 [^10]: Providing stable statement references allows conformance statements to evolve without invalidating earlier
 versions of a checker program.  We also provide a linkable web anchor for each one.
 
-[^11] if a mesh does not share any element dimensions with other meshes, it follows that it also will not share any
+[^11]: if a mesh does not share any element dimensions with other meshes, it follows that it also will not share any
   element coordinates or connectivities with other meshes.
 
-[^12] invalid 'lookalike' attributes, which are not defined by UGRID, include such as :
+[^12]: invalid 'lookalike' attributes, which are not defined by UGRID, include such as :
   "node_face_connectivity", "boundary_coordinates", "boundary_dimension" or "node_dimension".
 
-[^13] for checking purposes, the identity of a connectivity is actually defined by the referring attribute in the parent mesh.
+[^13]: for checking purposes, the identity of a connectivity is actually defined by the referring attribute in the parent mesh.
    However, if the connectivity is correctly formed, then its `cf_role` value will always be the same as this  -- cf:[R303](#R303).
 
-[^14] the 'indicated mesh' of a location-index-set is the mesh named in its `mesh` attribute
-
-[^15] in the present [latest CF version][cf_current_version] the only `cf_role` terms defined are the discrete-geometry
+[^14]: in the present [latest CF version][cf_current_version] the only `cf_role` terms defined are the discrete-geometry
   types : `timeseries_id`, `profile_id` and `trajectory_id`
 
 
@@ -273,3 +287,4 @@ versions of a checker program.  We also provide a linkable web anchor for each o
 [cf_current_version]: https://cfconventions.org/Data/cf-conventions/cf-conventions-1.9/cf-conventions.html "CF version 1.9"
 [flake8_codes]: https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
 [pycodestyle_codes]: https://pycodestyle.pycqa.org/en/2.8.0/intro.html#error-codes
+
