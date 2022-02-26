@@ -163,14 +163,16 @@ For any mesh connectivity variable ..
 - <a id="R308" href="#R308">R308</a> if it has a `cf_role` [^13] of `edge_node_connectivity` or `boundary_node_connectivity`,
   then its non-element dimension must have length 2
 - <a id="R309" href="#R309">R309</a> any `start_index` attribute must have one of the values (0, 1).
-- <a id="R310" href="#R310">R310</a> if it has a `cf_role` ending in `_node_connectivity`,
+- <a id="R310" href="#R310">R310</a> if it has a `cf_role` of `edge_node_connectivity` or `boundary_node_connectivity`,
   then it must ***not*** contain any 'missing' indices
+- <a id="R311" href="#R311">R311</a> if it has a `cf_role` of `face_node_connectivity`, then each face index must contain
+  at least 3 non-'missing' indices
 
 ### Mesh connectivity variable recommendations
 - <a id="A301" href="#A301">A301</a> it should have _one and only one_ parent mesh [^1]
 - <a id="A302" href="#A302">A302</a> it should have an integer type
 - <a id="A303" href="#A303">A303</a> any `start_index` attribute should have the same type as the connectivity variable itself
-- <a id="A304" href="#A304">A304</a> if it has a `cf_role` ending in `_node_connectivity`,
+- <a id="A304" href="#A304">A304</a> if it has a `cf_role` of `edge_node_connectivity` or `boundary_node_connectivity`,
   then it should ***not*** have a `_FillValue` attribute
 - <a id="A305" href="#A305">A305</a> if it contains any "missing" indices, then it should have a `_FillValue` attribute :
   <br>I.E. it does *not* rely on a netcdf "default fill-value"
