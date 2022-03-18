@@ -147,7 +147,7 @@ For any mesh coordinate variable ..
 - if it has a `bounds` attribute, then
     - <a id="A205" href="#A205">A205</a> the data values of the bounds variable should match those calculated
       from the relevant UGRID element coordinates and connectivities [^8]
-
+- <a id="A206" href="#A206">A206</a> if its location is 'node', then it should not have a `bounds` attribute.
 
 ## Mesh connectivity variables
 ### Mesh connectivity variable requirements
