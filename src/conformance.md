@@ -203,7 +203,7 @@ For any location index set variable ..
 - <a id="A405" href="#A405">A405</a> its values should all be distinct, and 
     - <a id="A406" href="#A406">A406</a> they should all be valid indexes into the relevant element dimension
       of its parent mesh [^3] [^8]
-- <a id="A407" href="#A407">A407</a> any `start_index` attribute should have the same type as the location-index-set variable itself
+- <a id="A407" href="#A407">A407</a> any `start_index` attribute should have an integer type
 
 
 ## Mesh data variables
