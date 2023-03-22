@@ -78,7 +78,7 @@ For any mesh variable ..
 - all mesh connectivity and coordinate attributes must be varlists, that is ..
     - <a id="R105" href="#R105">R105</a> they are strings consisting of space-separated, valid netcdf variable names, and
     - <a id="R106" href="#R106">R106</a> the variables named all exist in the dataset
-- <a id="R107" href="#R107">R107</a> all mesh coordinate attributes must contain a single variable name
+- <a id="R107" href="#R107">R107</a> all mesh connectivity attributes must contain a single variable name
 - <a id="R108" href="#R108">R108</a> all elements of all mesh coordinate attributes must be
   [valid mesh coordinates](#mesh-coordinate-variables)
 - <a id="R109" href="#R109">R109</a> all mesh connectivity attributes must be
