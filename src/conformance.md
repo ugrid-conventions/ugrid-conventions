@@ -171,7 +171,7 @@ For any mesh connectivity variable ..
 ### Mesh connectivity variable recommendations
 - <a id="A301" href="#A301">A301</a> it should have _one and only one_ parent mesh [^1]
 - <a id="A302" href="#A302">A302</a> it should have an integer type
-- <a id="A303" href="#A303">A303</a> any `start_index` attribute should have the same type as the connectivity variable itself
+- <a id="A303" href="#A303">A303</a> any `start_index` attribute should have an integer type
 - <a id="A304" href="#A304">A304</a> if it has a `cf_role` of `edge_node_connectivity` or `boundary_node_connectivity`,
   then it should ***not*** have a `_FillValue` attribute
 - <a id="A305" href="#A305">A305</a> if it contains any "missing" indices, then it should have a `_FillValue` attribute :
