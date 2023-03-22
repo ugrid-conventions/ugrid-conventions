@@ -31,7 +31,7 @@ references by a conformance-checker utility. [^10]
 [TOC]
 
 ## Preamble : terms and definitions
-- A ***mesh*** is a variable with a `cf_role` attribute of `"mesh_topology"`. [^2]
+- A ***mesh variable*** is a variable with a `cf_role` attribute of `"mesh_topology"`. [^2]
 - A ***varlist*** is a string attribute consisting of a space-separated list of variable names
     - these must be names of variables existing in the same dataset : this is implicit in all uses
 - A ***coordinate attribute*** of a mesh is a varlist with one of the following names [^2] [^4]
