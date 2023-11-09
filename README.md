@@ -19,7 +19,7 @@ This document is a standard for storing unstructured grid
 (a.k.a. unstructured mesh, flexible mesh)
 model data in a Unidata Network Common Data Form (NetCDF) file.
 
-Note: It's recommended to give netCDF files adhering to the UGRID conventions the global attribute `Conventions = 'UGRID-1.0'`; if the file is also compliant with the Climate and Forecasting conventions then the global attribute can be extended to `Conventions = 'CF-1.6, UGRID-1.0'` with `1.6` replaced by the appropriate CF conventions version number. As of CF version 1.11 (draft), the CF-conventions include the UGRID 1.0 conventions by reference. In that case `Conventions = 'CF-1.11-draft'` or later CF-version attribute is sufficient.
+Note: It's recommended to give netCDF files adhering to the UGRID conventions the global attribute `Conventions = 'UGRID-1.0'`; if the file is also compliant with the Climate and Forecasting conventions then the global attribute can be extended to `Conventions = 'CF-1.6, UGRID-1.0'` with `1.6` replaced by the appropriate CF conventions version number. As of CF version 1.11, the CF-conventions include the UGRID 1.0 conventions by reference. In that case `Conventions = 'CF-1.11'` or later CF-version attribute is sufficient.
 * [Version 1.0](http://ugrid-conventions.github.io/ugrid-conventions/)
 
 The standard was developed over a period of several years through the
