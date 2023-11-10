@@ -26,9 +26,7 @@ The standard was developed over a period of several years through the
 [UGRID Google Group](https://groups.google.com/forum/#!forum/ugrid-interoperability)
 which had members from many different unstructured grid modeling communities
 (including SELFE, ELCIRC, FVCOM, ADCIRC).
-From these discussions Bert Jagers (Deltares) created the first draft of this document.
-We will likely propose this as a CF Standard once it has been fully tested by the community.
-
+From these discussions Bert Jagers (Deltares) created the first draft of this document, and the community worked to develop version 1.0.
 
 ## Contributors
 
