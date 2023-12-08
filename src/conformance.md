@@ -286,7 +286,7 @@ versions of a checker program.  We also provide a linkable web anchor for each o
 [volume_status]: https://github.com/ugrid-conventions/ugrid-conventions/issues/53#issuecomment-832138564
 [cf_conformance]: http://cfconventions.org/cf-conventions/conformance.html "CF Conventions Conformance pages"
 [cf_conventions]: https://cfconventions.org/ "CF metadata conventions"
-[cf_current_version]: https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html "CF version 1.9"
+[cf_current_version]: https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html "CF version 1.11"
 [flake8_codes]: https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
 [pycodestyle_codes]: https://pycodestyle.pycqa.org/en/2.8.0/intro.html#error-codes
 
