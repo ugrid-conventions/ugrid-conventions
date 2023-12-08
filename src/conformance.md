@@ -64,7 +64,7 @@ references by a conformance-checker utility. [^10]
   which is an element dimension of its parent mesh.
   N.B. there can only be one : see [R201](#R201) / [R304](#R304)
 - A ***location index set*** is a variable with a `cf_role` attribute of `"location_index_set"` [^2]
-- A ***mesh data variable*** is one with either a `mesh` or a `location_index_set` attribute.
+- A ***mesh data variable*** is a CF data variable with either a `mesh` or a `location_index_set` attribute.
 
 
 ## Mesh variables
