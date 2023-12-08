@@ -24,7 +24,7 @@ references by a conformance-checker utility. [^10]
 **This version** is consistent with :
 
   * UGRID v1.0 
-  * [CF version 1.9][cf_current_version]
+  * [CF version 1.11][cf_current_version]
 
 ---
 
