@@ -1,10 +1,11 @@
 <p style="color:red;font-size:50px;font-style:oblique">
-.. DRAFT .. DRAFT .. DRAFT ..
+.. DRAFT .. DRAFT ..
 </p>
 
-***Status : first draft***
+***Status : First Draft***
+
 <br>_Hopefully, this can evolve into an agreed final form
-by the time of the next UGRID release._
+by the time of the next UGRID release. Contirbutions are welcome._
 
 # Conformance rules for UGRID Conventions v1.x
 
@@ -30,7 +31,7 @@ references by a conformance-checker utility. [^10]
 
 [TOC]
 
-## Preamble : terms and definitions
+## Preamble : Terms and Definitions
 - A ***mesh variable*** is a variable with a `cf_role` attribute of `"mesh_topology"`. [^2]
 - A ***varlist*** is a string attribute consisting of a space-separated list of variable names
     - these must be names of variables existing in the same dataset : this is implicit in all uses
