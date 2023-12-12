@@ -1,26 +1,6 @@
 # UGRID Conventions (v1.0)
 
-<!-- TOC generated with "md_toc github index.md -i" -->
-[](TOC)
-
-- [UGRID Conventions (v1.0)](#ugrid-conventions-v10)
-    - [Introduction](#introduction)
-    - [Known issues](#known-issues)
-    - [Topology](#topology)
-        - [Naming conventions for geometrical elements](#naming-conventions-for-geometrical-elements)
-        - [1D network topology](#1d-network-topology)
-        - [2D triangular mesh topology](#2d-triangular-mesh-topology)
-        - [2D flexible mesh (mixed triangles, quadrilaterals, etc.) topology](#2d-flexible-mesh-mixed-triangles-quadrilaterals-etc-topology)
-        - [3D layered mesh topology](#3d-layered-mesh-topology)
-        - [Fully 3D unstructured (i.e. non-layered) mesh topology](#fully-3d-unstructured-ie-non-layered-mesh-topology)
-    - [Data defined on unstructured meshes](#data-defined-on-unstructured-meshes)
-        - [Data variables](#data-variables)
-        - [Volume and flux variables](#volume-and-flux-variables)
-        - [Location index set](#location-index-set)
-    - [Zero or One-based indexing](#zero-or-one-based-indexing)
-
-[](TOC)
-
+[TOC]
 
 ## Introduction
 

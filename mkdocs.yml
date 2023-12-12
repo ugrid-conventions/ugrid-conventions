@@ -8,11 +8,11 @@ repo_url: https://github.com/ugrid-conventions/ugrid-conventions
 pages:
   - Home: index.md
   - subsetting: ugrid-subsetting.md
+  - conformance: conformance.md
 
 markdown_extensions:
   - extra
   - smarty
-  - math
   - markdown_checklist.extension
   - toc:
       permalink: ""
