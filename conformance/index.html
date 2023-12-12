@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="UGRID Team" /><link rel="canonical" href="http://ugrid-conventions.github.io/ugrid-conventions/conformance/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>conformance - UGRID</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "conformance";
+        var mkdocs_page_input_path = "conformance.md";
+        var mkdocs_page_url = "/ugrid-conventions/conformance/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', "UA-9133259-16", "UGRID.github.io");
+        ga('send', 'pageview');
+      </script>
+    
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> UGRID
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">conformance</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#preamble-terms-and-definitions">Preamble : terms and definitions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mesh-variables">Mesh variables</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-variable-requirements">Mesh variable requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-variable-recommendations">Mesh variable recommendations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mesh-coordinate-variables">Mesh coordinate variables</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-coordinate-variable-requirements">Mesh coordinate variable requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-coordinate-variable-recommendations">Mesh coordinate variable recommendations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mesh-connectivity-variables">Mesh connectivity variables</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-connectivity-variable-requirements">Mesh connectivity variable requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-connectivity-variable-recommendations">Mesh connectivity variable recommendations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#location-index-set-variables">Location index set variables</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#location-index-set-variable-requirements">Location index set variable requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#location-index-set-variable-recommendations">Location index set variable recommendations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mesh-data-variables">Mesh data variables</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mesh-data-variable-requirements">Mesh data variable requirements</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#other">Other</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#other-recommendations">Other recommendations</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">UGRID</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">conformance</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ugrid-conventions/ugrid-conventions/edit/master/docs/conformance.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p style="color:red;font-size:50px;font-style:oblique">
+.. DRAFT .. DRAFT .. DRAFT ..
+</p>
+
+<p><strong><em>Status : first draft</em></strong>
+<br><em>Hopefully, this can evolve into an agreed final form
+by the time of the next UGRID release.</em></p>
+<h1 id="conformance-rules-for-ugrid-conventions-v1x">Conformance rules for UGRID Conventions v1.x<a class="headerlink" href="#conformance-rules-for-ugrid-conventions-v1x" title="Permanent link"></a></h1>
+<p>This information is intended to follow the practice established by the
+<a href="http://cfconventions.org/cf-conventions/conformance.html" title="CF Conventions Conformance pages">CF conformance pages</a>, as attached to the <a href="https://cfconventions.org/" title="CF metadata conventions">CF conventions</a>.</p>
+<p>In that spirit, this is likewise &ldquo;intended to be a concise summary&rdquo; of the
+main convention, and &ldquo;if there are any discrepancies &hellip; the conventions document
+is the ultimate authority.&rdquo;</p>
+<p>Each reference statement is provided with a short code :
+&ldquo;Rxxx&rdquo; for requirements and &ldquo;Axxx&rdquo; for advisory recommendations,
+in the manner of the <a href="https://flake8.pycqa.org/en/4.0.1/user/error-codes.html">Flake8 error and warning codes</a>, and the <a href="https://pycodestyle.pycqa.org/en/2.8.0/intro.html#error-codes">PyCodeStyle ones</a>.
+<br>Future editions will maintain these reference numbers, but possibly add new ones.  They can be used as definitive
+references by a conformance-checker utility. <sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup></p>
+<p><strong>This version</strong> is consistent with :</p>
+<ul>
+<li>UGRID v1.0 </li>
+<li><a href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html" title="CF version 1.11">CF version 1.11</a></li>
+</ul>
+<hr />
+<div class="toc">
+<ul>
+<li><a href="#conformance-rules-for-ugrid-conventions-v1x">Conformance rules for UGRID Conventions v1.x</a><ul>
+<li><a href="#preamble-terms-and-definitions">Preamble : terms and definitions</a></li>
+<li><a href="#mesh-variables">Mesh variables</a><ul>
+<li><a href="#mesh-variable-requirements">Mesh variable requirements</a></li>
+<li><a href="#mesh-variable-recommendations">Mesh variable recommendations</a></li>
+</ul>
+</li>
+<li><a href="#mesh-coordinate-variables">Mesh coordinate variables</a><ul>
+<li><a href="#mesh-coordinate-variable-requirements">Mesh coordinate variable requirements</a></li>
+<li><a href="#mesh-coordinate-variable-recommendations">Mesh coordinate variable recommendations</a></li>
+</ul>
+</li>
+<li><a href="#mesh-connectivity-variables">Mesh connectivity variables</a><ul>
+<li><a href="#mesh-connectivity-variable-requirements">Mesh connectivity variable requirements</a></li>
+<li><a href="#mesh-connectivity-variable-recommendations">Mesh connectivity variable recommendations</a></li>
+</ul>
+</li>
+<li><a href="#location-index-set-variables">Location index set variables</a><ul>
+<li><a href="#location-index-set-variable-requirements">Location index set variable requirements</a></li>
+<li><a href="#location-index-set-variable-recommendations">Location index set variable recommendations</a></li>
+</ul>
+</li>
+<li><a href="#mesh-data-variables">Mesh data variables</a><ul>
+<li><a href="#mesh-data-variable-requirements">Mesh data variable requirements</a></li>
+</ul>
+</li>
+<li><a href="#other">Other</a><ul>
+<li><a href="#other-recommendations">Other recommendations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="preamble-terms-and-definitions">Preamble : terms and definitions<a class="headerlink" href="#preamble-terms-and-definitions" title="Permanent link"></a></h2>
+<ul>
+<li>A <strong><em>mesh variable</em></strong> is a variable with a <code>cf_role</code> attribute of <code>"mesh_topology"</code>. <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
+<li>A <strong><em>varlist</em></strong> is a string attribute consisting of a space-separated list of variable names<ul>
+<li>these must be names of variables existing in the same dataset : this is implicit in all uses</li>
+</ul>
+</li>
+<li>A <strong><em>coordinate attribute</em></strong> of a mesh is a varlist with one of the following names <sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup> <sup id="fnref2:4"><a class="footnote-ref" href="#fn:4">4</a></sup><ul>
+<li><code>node_coordinates</code></li>
+<li><code>edge_coordinates</code></li>
+<li><code>face_coordinates</code></li>
+</ul>
+</li>
+<li>A <strong><em>connectivity attribute</em></strong> of a mesh is a varlist with one of the following names <sup id="fnref3:2"><a class="footnote-ref" href="#fn:2">2</a></sup> <sup id="fnref3:4"><a class="footnote-ref" href="#fn:4">4</a></sup><ul>
+<li><code>edge_node_connectivity</code></li>
+<li><code>face_node_connectivity</code></li>
+<li><code>face_edge_connectivity</code></li>
+<li><code>edge_face_connectivity</code></li>
+<li><code>face_face_connectivity</code></li>
+<li><code>boundary_node_connectivity</code></li>
+</ul>
+</li>
+<li>A <strong><em>mesh coordinate</em></strong> is a variable listed in a coordinate attribute of a mesh</li>
+<li>A <strong><em>mesh connectivity</em></strong> is a variable listed in a connectivity attribute of a mesh <sup id="fnref4:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
+<li>A mesh is the <strong><em>parent mesh</em></strong> of those mesh coordinates or mesh connectivities which are included in any of 
+  its coordinate or connectivity attributes :
+  This <em>defines</em> the &ldquo;parent mesh&rdquo; of any mesh coordinate or mesh connectivity. <sup id="fnref3:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
+<li>The <strong><em>parent mesh</em></strong> of a location index set is that named in its <code>mesh</code> attribute</li>
+<li>the <strong><em>element dimensions</em></strong> of a mesh are those indexing its elements (i.e. nodes, edges or faces),
+  or mesh boundaries, within any of its mesh coordinates and mesh connectivities.<ul>
+<li>the <strong>node</strong> dimension is the single dimension of the node coordinates (should all be the same)</li>
+<li>if there is an <code>edge_node_connectivity</code>, then there is an <strong>edge</strong> dimension
+  (see <a href="#edge-dimension">below</a> for how this is determined)</li>
+<li>if there is a <code>face_node_connectivity</code>, then there is a <strong>face</strong> dimension
+  (see <a href="#face-dimension">below</a> for how this is determined)</li>
+<li>if there is a <code>boundary_node_connectivity</code>, then there is a <strong>boundary</strong> dimension
+  (see <a href="#boundary-dimension">below</a> for how this is determined)</li>
+</ul>
+</li>
+<li>the <strong><em>element dimension</em></strong> of a mesh connectivity or mesh coordinate is that one of its dimensions
+  which is an element dimension of its parent mesh.
+  N.B. there can only be one : see <a href="#R201">R201</a> / <a href="#R304">R304</a></li>
+<li>A <strong><em>location index set</em></strong> is a variable with a <code>cf_role</code> attribute of <code>"location_index_set"</code> <sup id="fnref5:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
+<li>A <strong><em>mesh data variable</em></strong> is a CF data variable with either a <code>mesh</code> or a <code>location_index_set</code> attribute.</li>
+</ul>
+<h2 id="mesh-variables">Mesh variables<a class="headerlink" href="#mesh-variables" title="Permanent link"></a></h2>
+<h3 id="mesh-variable-requirements">Mesh variable requirements<a class="headerlink" href="#mesh-variable-requirements" title="Permanent link"></a></h3>
+<p>For any mesh variable ..</p>
+<ul>
+<li><a id="R101" href="#R101">R101</a> it must have a <code>cf_role</code> attribute,<ul>
+<li><a id="R102" href="#R102">R102</a> with the value <code>"mesh_topology"</code></li>
+</ul>
+</li>
+<li><a id="R103" href="#R103">R103</a> it must have a <code>topology_dimension</code> attribute, <ul>
+<li><a id="R104" href="#R104">R104</a> whose value is an integer between 0 and 2. <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> <sup id="fnref2:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
+</ul>
+</li>
+<li>all mesh connectivity and coordinate attributes must be varlists, that is ..<ul>
+<li><a id="R105" href="#R105">R105</a> they are strings consisting of space-separated, valid netcdf variable names, and</li>
+<li><a id="R106" href="#R106">R106</a> the variables named all exist in the dataset</li>
+</ul>
+</li>
+<li><a id="R107" href="#R107">R107</a> all mesh connectivity attributes must contain a single variable name</li>
+<li><a id="R108" href="#R108">R108</a> all elements of all mesh coordinate attributes must be
+  <a href="#mesh-coordinate-variables">valid mesh coordinates</a></li>
+<li><a id="R109" href="#R109">R109</a> all mesh connectivity attributes must be
+  <a href="#mesh-connectivity-variables">valid mesh connectivities</a></li>
+<li><a id="R110" href="#R110">R110</a> it must have a <code>node_coordinates</code> attribute</li>
+<li>an <code>edge_node_connectivity</code> attribute ..<ul>
+<li><a id="R111" href="#R111">R111</a> <em>must not</em> be present, if <code>topology_dimension</code> is 0. <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
+<li><a id="R112" href="#R112">R112</a> <em>must</em> be present, if <code>topology_dimension</code> is 1. </li>
+</ul>
+</li>
+<li><a id="R113" href="#R113">R113</a> a <code>face_node_connectivity</code> attribute must be present
+    <em>if and only if</em> <code>topology_dimension</code> is 2  </li>
+<li><a id="R114" href="#R114">R114</a> a <code>boundary_node_connectivity</code> attribute may be present,
+  <em>only if</em> <code>topology_dimension</code> is 2 <sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup></li>
+<li>if the mesh has an <code>edge_node_connectivity</code>, then it has an <a id="edge-dimension"><strong>edge dimension</strong></a>, which<ul>
+<li><strong><em>either</em></strong> is given by the <code>edge_dimension</code> attribute, <em>if there is one</em>, in which case<ul>
+<li><a id="R115" href="#R115">R115</a> <code>edge_dimension</code> must be the name of a dataset dimension</li>
+</ul>
+</li>
+<li><strong><em>or</em></strong>, <em>if there is no <code>edge_dimension</code> attribute</em>, the edge dimension is the <em>first</em> dimension of the <code>edge_node_connectivity</code> </li>
+<li>when an edge dimension exists ..<ul>
+<li><a id="R116" href="#R116">R116</a> if any edge connectivity has the edge dimension as its <em>second</em> dimension,
+  (instead of its first), then the mesh <em>must</em> have an <code>edge_dimension</code> attribute</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>if the mesh has a <code>face_node_connectivity</code>, then it has a <a id="face-dimension"><strong>face dimension</strong></a>, which ..<ul>
+<li><strong><em>either</em></strong> is given by the <code>face_dimension</code> attribute, <em>if there is one</em>, in which case<ul>
+<li><a id="R117" href="#R117">R117</a> <code>face_dimension</code> must be the name of a dataset dimension</li>
+</ul>
+</li>
+<li><strong><em>or</em></strong>, <em>if there is no <code>face_dimension</code> attribute</em>, the edge dimension is the <em>first</em> dimension of the <code>face_node_connectivity</code> </li>
+<li>when a face dimension exists ..<ul>
+<li><a id="R118" href="#R118">R118</a> if any face connectivity has the face dimension as its <em>second</em> dimension,
+  (instead of its first), then the mesh <em>must</em> have a <code>face_dimension</code> attribute</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>if the mesh has a <code>boundary_node_connectivity</code>, then it has a <a id="boundary-dimension"><strong>boundary dimension</strong></a>,
+  which is the first dimension of the <code>boundary_node_connectivity</code> variable <sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup></li>
+<li><a id="R119" href="#R119">R119</a> a <code>face_face_connectivity</code> attribute may only exist
+  if the mesh has a face dimension</li>
+<li><a id="R120" href="#R120">R120</a> a <code>face_edge_connectivity</code> attribute may only exist
+  if the mesh has both a face dimension and an edge dimension</li>
+<li><a id="R121" href="#R121">R121</a> an <code>edge_face_connectivity</code> attribute may only exist
+  if the mesh has both a face dimension and an edge dimension</li>
+<li><a id="R122" href="#R122">R122</a> a <code>face_dimension</code> attribute may only exist if the mesh has a 
+  <a href="#face-dimension">face dimension</a></li>
+<li><a id="R123" href="#R123">R123</a> an <code>edge_dimension</code> attribute may only exist if the mesh has an 
+  <a href="#edge-dimension">edge dimension</a></li>
+</ul>
+<h3 id="mesh-variable-recommendations">Mesh variable recommendations<a class="headerlink" href="#mesh-variable-recommendations" title="Permanent link"></a></h3>
+<ul>
+<li><a id="A101" href="#A101">A101</a> it should have no dimensions</li>
+<li><a id="A102" href="#A102">A102</a> it should not have a <code>standard_name</code> attribute</li>
+<li><a id="A103" href="#A103">A103</a> it should not have a <code>units</code> attribute</li>
+<li><a id="A104" href="#A104">A104</a> it should not share any of its element dimensions with other meshes <sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup></li>
+<li><a id="A105" href="#A105">A105</a> if it has multiple element dimensions, they should all be different</li>
+<li><a id="A106" href="#A106">A106</a> it should not have any attributes ending in &ldquo;_connectivity&rdquo;, &ldquo;_coordinates&rdquo; or 
+  &ldquo;_dimension&rdquo; which are not valid UGRID terms <sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup></li>
+</ul>
+<h2 id="mesh-coordinate-variables">Mesh coordinate variables<a class="headerlink" href="#mesh-coordinate-variables" title="Permanent link"></a></h2>
+<p>For any mesh coordinate variable ..</p>
+<h3 id="mesh-coordinate-variable-requirements">Mesh coordinate variable requirements<a class="headerlink" href="#mesh-coordinate-variable-requirements" title="Permanent link"></a></h3>
+<ul>
+<li><a id="R201" href="#R201">R201</a> it must map a single dimension<ul>
+<li><a id="R202" href="#R202">R202</a> which is the appropriate element dimension of the parent mesh</li>
+</ul>
+</li>
+<li><a id="R203" href="#R203">R203</a> any <code>bounds</code> attribute must refer to a suitable CF bounds variable matching its own properties and dimensions</li>
+</ul>
+<h3 id="mesh-coordinate-variable-recommendations">Mesh coordinate variable recommendations<a class="headerlink" href="#mesh-coordinate-variable-recommendations" title="Permanent link"></a></h3>
+<ul>
+<li><a id="A201" href="#A201">A201</a> it should have <em>one and only one</em> parent mesh <sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
+<li><a id="A202" href="#A202">A202</a> it should have a floating-point data type</li>
+<li><a id="A203" href="#A203">A203</a> it should have a <code>standard_name</code> attribute which is a valid CF standard-name
+  <br>(see : <a href="http://cfconventions.org/cf-conventions/conformance.html" title="CF Conventions Conformance pages">CF conformance</a> section 3.3)</li>
+<li><a id="A204" href="#A204">A204</a> it should have a <code>units</code> attribute which is a valid CF unit
+  <br>(see <a href="http://cfconventions.org/cf-conventions/conformance.html" title="CF Conventions Conformance pages">CF conformance</a> section 3.1)</li>
+<li>if it has a <code>bounds</code> attribute, then<ul>
+<li><a id="A205" href="#A205">A205</a> the data values of the bounds variable should match those calculated
+  from the relevant UGRID element coordinates and connectivities <sup id="fnref3:8"><a class="footnote-ref" href="#fn:8">8</a></sup></li>
+</ul>
+</li>
+<li><a id="A206" href="#A206">A206</a> if its location is &lsquo;node&rsquo;, then it should not have a <code>bounds</code> attribute.</li>
+</ul>
+<h2 id="mesh-connectivity-variables">Mesh connectivity variables<a class="headerlink" href="#mesh-connectivity-variables" title="Permanent link"></a></h2>
+<h3 id="mesh-connectivity-variable-requirements">Mesh connectivity variable requirements<a class="headerlink" href="#mesh-connectivity-variable-requirements" title="Permanent link"></a></h3>
+<p>For any mesh connectivity variable ..</p>
+<ul>
+<li><a id="R301" href="#R301">R301</a> it must have a <code>cf_role</code> attribute, which<ul>
+<li><a id="R302" href="#R302">R302</a> is a valid connectivity attribute name, and </li>
+<li><a id="R303" href="#R303">R303</a> matches its referring connectivity attribute in the parent mesh</li>
+</ul>
+</li>
+<li><a id="R304" href="#R304">R304</a> it must exactly have two dimensions, of which<ul>
+<li><a id="R305" href="#R305">R305</a> one is an element dimension of its parent mesh, and</li>
+<li><a id="R306" href="#R306">R306</a> the other is not an element dimension</li>
+</ul>
+</li>
+<li><a id="R307" href="#R307">R307</a> its element dimension must be that of the <em>first</em> location named in its <code>cf_role</code> <sup id="fnref:13"><a class="footnote-ref" href="#fn:13">13</a></sup></li>
+<li><a id="R308" href="#R308">R308</a> if it has a <code>cf_role</code> <sup id="fnref2:13"><a class="footnote-ref" href="#fn:13">13</a></sup> of <code>edge_node_connectivity</code> or <code>boundary_node_connectivity</code>,
+  then its non-element dimension must have length 2</li>
+<li><a id="R309" href="#R309">R309</a> any <code>start_index</code> attribute must have one of the values (0, 1).</li>
+<li><a id="R310" href="#R310">R310</a> if it has a <code>cf_role</code> of <code>edge_node_connectivity</code> or <code>boundary_node_connectivity</code>,
+  then it must <strong><em>not</em></strong> contain any &lsquo;missing&rsquo; indices</li>
+<li><a id="R311" href="#R311">R311</a> if it has a <code>cf_role</code> of <code>face_node_connectivity</code>, then each face index must contain
+  at least 3 non-&lsquo;missing&rsquo; indices</li>
+</ul>
+<h3 id="mesh-connectivity-variable-recommendations">Mesh connectivity variable recommendations<a class="headerlink" href="#mesh-connectivity-variable-recommendations" title="Permanent link"></a></h3>
+<ul>
+<li><a id="A301" href="#A301">A301</a> it should have <em>one and only one</em> parent mesh <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
+<li><a id="A302" href="#A302">A302</a> it should have an integer type</li>
+<li><a id="A303" href="#A303">A303</a> any <code>start_index</code> attribute should have an integer type</li>
+<li><a id="A304" href="#A304">A304</a> if it has a <code>cf_role</code> of <code>edge_node_connectivity</code> or <code>boundary_node_connectivity</code>,
+  then it should <strong><em>not</em></strong> have a <code>_FillValue</code> attribute</li>
+<li><a id="A305" href="#A305">A305</a> if it contains any &ldquo;missing&rdquo; indices, then it should have a <code>_FillValue</code> attribute :
+  <br>I.E. it does <em>not</em> rely on a netcdf &ldquo;default fill-value&rdquo;</li>
+<li>if there is a <code>_FillValue</code> attribute, then<ul>
+<li><a id="A306" href="#A306">A306</a> it should have the same type as the connectivity variable itself, and</li>
+<li><a id="A307" href="#A307">A307</a> it should have a negative value</li>
+</ul>
+</li>
+<li><a id="A308" href="#A308">A308</a> all its non-missing values should be valid indices into the relevant dimension of
+  the parent mesh, i.e. the <em>second</em> location named in the <code>cf_role</code> <sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup> <sup id="fnref2:8"><a class="footnote-ref" href="#fn:8">8</a></sup>.</li>
+</ul>
+<h2 id="location-index-set-variables">Location index set variables<a class="headerlink" href="#location-index-set-variables" title="Permanent link"></a></h2>
+<p>For any location index set variable ..</p>
+<h3 id="location-index-set-variable-requirements">Location index set variable requirements<a class="headerlink" href="#location-index-set-variable-requirements" title="Permanent link"></a></h3>
+<ul>
+<li><a id="R401" href="#R401">R401</a> it must have a <code>cf_role</code> attribute with the value <code>"location_index_set"</code></li>
+<li><a id="R402" href="#R402">R402</a> it must have a <code>mesh</code> attribute,
+  which is a string containing the name of a valid mesh variable in the dataset</li>
+<li><a id="R403" href="#R403">R403</a> it must have a <code>location</code> attribute, which is one of <code>face</code>, <code>edge</code> or <code>node</code>, and <ul>
+<li><a id="R404" href="#R404">R404</a> the corresponding location must exist in the parent mesh</li>
+</ul>
+</li>
+<li><a id="R405" href="#R405">R405</a> it must have a single dimension</li>
+<li><a id="R406" href="#R406">R406</a> any <code>start_index</code> attribute must have one of the values (0, 1).</li>
+</ul>
+<h3 id="location-index-set-variable-recommendations">Location index set variable recommendations<a class="headerlink" href="#location-index-set-variable-recommendations" title="Permanent link"></a></h3>
+<ul>
+<li><a id="A401" href="#A401">A401</a> it should have an integer type</li>
+<li><a id="A402" href="#A402">A402</a> it should not contain any missing points</li>
+<li><a id="A403" href="#A403">A403</a> it should not have a <code>_FillValue</code> attribute</li>
+<li><a id="A404" href="#A404">A404</a> the length of its single dimension should be less than or equal to the corresponding
+  element dimension of its parent mesh</li>
+<li><a id="A405" href="#A405">A405</a> its values should all be distinct, and <ul>
+<li><a id="A406" href="#A406">A406</a> they should all be valid indexes into the relevant element dimension
+  of its parent mesh <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> <sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup></li>
+</ul>
+</li>
+<li><a id="A407" href="#A407">A407</a> any <code>start_index</code> attribute should have an integer type</li>
+</ul>
+<h2 id="mesh-data-variables">Mesh data variables<a class="headerlink" href="#mesh-data-variables" title="Permanent link"></a></h2>
+<h3 id="mesh-data-variable-requirements">Mesh data variable requirements<a class="headerlink" href="#mesh-data-variable-requirements" title="Permanent link"></a></h3>
+<ul>
+<li>if there is a <code>mesh</code> attribute<ul>
+<li><a id="R501" href="#R501">R501</a> there must be no <code>location_index_set</code> attribute</li>
+<li><a id="R502" href="#R502">R502</a> the <code>mesh</code> must be the name of a valid mesh variable in the dataset</li>
+<li><a id="R503" href="#R503">R503</a> there must be a <code>location</code> attribute,<ul>
+<li><a id="R504" href="#R504">R504</a> which is one of <code>face</code>, <code>edge</code> or <code>node</code>, and </li>
+<li><a id="R505" href="#R505">R505</a> the corresponding dimension must exist in the parent mesh</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>if there is a <code>location_index_set</code> attribute<ul>
+<li><a id="R506" href="#R506">R506</a> there must be no <code>mesh</code> attribute</li>
+<li><a id="R507" href="#R507">R507</a> there must be no <code>location</code> attribute</li>
+<li><a id="R508" href="#R508">R508</a> the <code>location_index_set</code> must name a valid location index set variable in the dataset</li>
+</ul>
+</li>
+<li>its dimensions ..<ul>
+<li><a id="R509" href="#R509">R509</a> must contain one and only one mesh element dimension, which</li>
+<li><a id="R510" href="#R510">R510</a> is the appropriate element dimension of its mesh and location,
+  as given by it&rsquo;s own <code>mesh</code> and <code>location</code> properties, or by those of its <code>location_index_set</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link"></a></h2>
+<h3 id="other-recommendations">Other recommendations<a class="headerlink" href="#other-recommendations" title="Permanent link"></a></h3>
+<ul>
+<li><a id="A901" href="#A901">A901</a> all dataset contents (dimension, variables and their attributes) should also be
+  CF compliant &ndash; see: <a href="https://cfconventions.org/" title="CF metadata conventions">CF conventions</a>.</li>
+<li><a id="A902" href="#A902">A902</a> there should be a global <code>Conventions</code> attribute,<ul>
+<li><a id="A903" href="#A903">A903</a> which contains a string section of the form <code>UGRID-&lt;X.Y&gt;</code>,
+  where &ldquo;&lt;X.Y&gt;&rdquo; is an appropriate release version of the UGRID conventions. <sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup></li>
+</ul>
+</li>
+<li><a id="A904" href="#A904">A904</a> no netcdf variable should have a <code>cf_role</code> equal to any of the values defined here,
+  unless it is one of the UGRID variable types defined here to use one
+  <br>&ndash; i.e. a mesh, location index set or connectivity variable</li>
+<li><a id="A905" href="#A905">A905</a> no dataset variable should have a <code>cf_role</code> which is not <em>either</em>
+  one of the valid terms described here, <em>or</em> one of the CF-defined <code>cf_role</code> values <sup id="fnref:14"><a class="footnote-ref" href="#fn:14">14</a></sup></li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>From the given definitions, any mesh connectivity or -coordinate must logically <em>have</em> a
+parent mesh.  We <em>intend</em> that it should always have exactly and only one.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>for correctness testing (only), we may broaden the definitions of these items in order to detect some obvious
+errors.  For example, we will attempt to check as a mesh variable any variable that <em>either</em> has a <code>cf_role</code> of <code>mesh_topology</code>
+<em>or</em> is named in the <code>mesh</code> attribute of a data variable or location index set variable.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>&ldquo;valid&rdquo; element indices are values within the range of the corresponding element dimension of the parent mesh,
+allowing for any <code>start_index</code> offset.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>For now at least, we <em>exclude</em> mention of full-3d meshes, whose status is currently in question : 
+cf. <a href="https://github.com/ugrid-conventions/ugrid-conventions/issues/53#issuecomment-832138564">this GitHub discussion</a>, as this would add considerable complexity here.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:4" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>For now, we <em>allow</em> 0-d meshes (those with nodes only).  Though, this is not explicitly mentioned in the UGRID v1.0 pages.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>It is not supported to have boundaries in a 1-D mesh (I.E. one with only edges), though this is not logically
+impossible.  If a specific need arises, this could change in future.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>Since there is no provision for a <code>boundary_dimension</code> attribute, the boundary dimension is always the
+<em>first</em> dimension of a <code>boundary_node_connectivity</code>, and its second dimension must always be 2
+(i.e. it cannot be transposed).  If a specific need arises, this could change in future.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>Requirements on <em>values</em> of variables may not always be practical to check,
+since this requires loading all of their data.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:8" title="Jump back to footnote 8 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>The form of the global <code>Conventions</code> attribute is determined by the <a href="http://cfconventions.org/cf-conventions/conformance.html" title="CF Conventions Conformance pages">CF conformance pages</a>,
+section 2.6.1.  However, the definition of UGRID release numbers is not yet finalised.&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>Providing stable statement references allows conformance statements to evolve without invalidating earlier
+versions of a checker program.  We also provide a linkable web anchor for each one.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>if a mesh does not share any element dimensions with other meshes, it follows that it also will not share any
+  element coordinates or connectivities with other meshes.&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>invalid &lsquo;lookalike&rsquo; attributes, which are not defined by UGRID, include such as :
+  &ldquo;node_face_connectivity&rdquo;, &ldquo;boundary_coordinates&rdquo;, &ldquo;boundary_dimension&rdquo; or &ldquo;node_dimension&rdquo;.&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>for checking purposes, the identity of a connectivity is actually defined by the referring attribute in the parent mesh.
+   However, if the connectivity is correctly formed, then its <code>cf_role</code> value will always be the same as this  &ndash; cf:<a href="#R303">R303</a>.&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 13 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:13" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>in the present <a href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html" title="CF version 1.11">latest CF version</a> the only <code>cf_role</code> terms defined are the discrete-geometry
+  types : <code>timeseries_id</code>, <code>profile_id</code> and <code>trajectory_id</code>&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ugrid-conventions/ugrid-conventions" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
