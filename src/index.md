@@ -812,9 +812,9 @@ Mesh3D_edge_y:long_name = "Characteristic latitude of 2D mesh edge (e.g. midpoin
 Mesh3D_edge_y:units = "degrees_north" ;
 
 double Mesh3D_edge_z(nMesh3D_edge) ;
-Mesh3D_edge_z:standard_name = "latitude" ;
-Mesh3D_edge_z:long_name = "Characteristic latitude of 2D mesh edge (e.g. midpoint of the edge)." ;
-Mesh3D_edge_z:units = "degrees_north" ;
+Mesh3D_edge_z:standard_name = "elevation" ;
+Mesh3D_edge_z:long_name = "Characteristic elevation of 2D mesh edge (e.g. midpoint of the edge)." ;
+Mesh3D_edge_z:units = "m" ;
 // bounds variables for edges skipped
 ```
 
