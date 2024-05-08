@@ -57,7 +57,7 @@ The UGRID conventions are developed in public at <https://github.com/ugrid-conve
 Anybody is welcome to contribute using the common open-source GitHub workflow ([fork and branch](https://gist.github.com/Chaser324/ce0505fbed06b947d962)).
 
 The definitive source of the conventions can be found in the ``src`` directory in the ``master`` branch.
-To generate the HTML from of the conventions, ``mkdocs`` is used.
+To generate the HTML form of the conventions, ``mkdocs`` is used.
 The ``requirements.txt`` file in the UGRID repository is the recommended approach to installing the necessary tools:
 
 ```
