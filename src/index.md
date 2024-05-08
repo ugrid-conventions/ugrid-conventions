@@ -24,7 +24,7 @@ Known issues left for future versions include:
 
 * adaptive mesh topology (this could be supported by defining a `time_concatenation` attribute for a time-series of mesh topologies)
 * higher order element data; for an idea how such data could be stored see this other [proposal](https://publicwiki.deltares.nl/display/NETCDF/Finite+Element+based+CF+proposal+for+Unstructured+Grid+data+model).
-* subgrid data; the NetCDF pages by the Bundesanstalt für Wasserbau (BAW) contain some proposals on this topic ([see their pages (in German)](http://www.baw.de/methoden/index.php5/NetCDF)).
+* subgrid data; the NetCDF pages by the Bundesanstalt für Wasserbau (BAW) contain some proposals on this topic ([see their pages](https://wiki.baw.de/en/index.php/NetCDF)).
 * 3D fully unstructured meshes (some concepts are included here, but still somewhat limited in scope).
 * multiply-connected domains
 * ghost elements
