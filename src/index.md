@@ -73,7 +73,7 @@ These auxiliary coordinate variables will have length nEdges, and may have in tu
 
 _This use of the `bounds` attribute is consistent with the CF-convention on the use of `bounds` for multi-dimensional coordinate variables with p-sided cells, but it may not strictly be supported by the CF-convention right now._
 
-![image](./images/network.png)
+![1D network topology diagram showing nodes and edges connectivity](./images/network.png)
 
 Example:
 ```javascript
@@ -171,7 +171,7 @@ Optionally the topology may have the following attributes:
 * `boundary_node_connectivity` pointing to an nBoundaryEdges X 2 index variable identifying for every edge of each boundary the two nodes that it connects.  Again the indexing convention of `boundary_node_connectivity` should be specified using the `start_index` attribute to the index variable (i.e. Mesh2_boundary_nodes) and 0-based indexing is the default.  Although constructed of edges, boundaries represent a different quantity than general edge data and thus the `boundary_node_connectivity` attribute may be specified independent of `edge_node_connectivity`.  Information about the nature of each boundary edge (e.g. open/closed, land/water, grouping, etc.) may optionally be stored in ancillary boundary-type variables of size nBoundaryEdges X 1.
 * `face_coordinates` and/or `edge_coordinates` pointing to the auxiliary coordinate variables associated with the characteristic location of the faces and edges. These auxiliary coordinate variables will have length nFaces and nEdges respectively, and may have in turn a `bounds` attribute that specifies the bounding coordinates of the face or edge (thereby duplicating the data in the `node_coordinates` variables).
 
-![image](./images/triangles.png)
+![Triangular mesh showing faces, nodes, edges and their connectivity](./images/triangles.png)
 
 Example:
 ```javascript
@@ -309,7 +309,7 @@ Optionally the topology may have the following attributes:
 
 _The use of `_FillValue` to indicate faces with fewer nodes than MaxNumNodesPerFace extends to the coordinate bounds variables; this is an extension of the current convention._
 
-![image](./images/mixedmesh.png)
+![Flexible 2D mesh with mixed triangles and quadrilaterals illustrating variable nodes per face](./images/mixedmesh.png)
 
 Example:
 ```javascript
@@ -422,7 +422,7 @@ Mesh2_edge_y:units = "degrees_north" ;
 
 For a 3D layered unstructured mesh topology this proposal follows the approach of the existing CF-conventions for structured meshes: horizontal and vertical dimensions are treated separately. For the horizontal plane a 2D unstructured mesh topology is defined, which is extruded in the vertical direction by means of a [vertical coordinate](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#vertical-coordinate). The example below matches the example in the previous section combined with a vertical coordinate according CF-conventions. This example introduces also the attributes `mesh` and `location` on the 2D variables "Mesh2_surface" and "Mesh2_depth". For more information about these attributes see the [data definition](#data-defined-on-unstructured-meshes) section below.
 
-![image](./images/layered.png)
+![Layered 3D mesh concept: 2D unstructured mesh extruded vertically into layers](./images/layered.png)
 
 Example:
 ```javascript
@@ -623,7 +623,7 @@ Optionally the topology may have the following attributes:
 
 * `volume_coordinates`, `face_coordinates` and/or `edge_coordinates` pointing to the auxiliary coordinate variables associated with the characteristic location of the volumes, faces and edges. These auxiliary coordinate variables will have length nVolumes, nFaces and nEdges respectively, and may have in turn a `bounds` attribute that specifies the corner coordinates of the volume, face or edge (thereby duplicating the data in the `node_coordinates` variables). The order in which the corner coordinates of the volumes is given by the volume geometry type.
 
-![image](./images/mesh3d.png)
+![3D unstructured mesh illustrating volumes and faces connectivity](./images/mesh3d.png)
 
 Example:
 ```python
@@ -830,7 +830,7 @@ The order of dimensions on a data variable is arbitrary, so nTimeSteps x nLayers
 
 The same mesh geometry can be used in different ways to schematize the hydrodynamic volumes and fluxes. Let's take a simple triangular mesh. From a finite volume point of view this mesh will generally be interpreted as consisting of two volumes with triangular base. However, others may use a continuous Galerkin finite element method that can be shown to be equivalent to a subdivision into four volumes. In the former case the two faces correspond to volumes and the fluxes _cross_ the edges. In the latter case the volumes are defined surrounding the four nodes and the fluxes are directed _along_ the edges. The two abbreviated "ncdumps" below show how the basic 2D triangular mesh definition can be extended to include this data. The coordinate variables for the volume data now include `bounds` attributes to define the surface area of the volumes. Note the subtle difference in the long names between the flux variables in the two cases; the `standard_name` attribute has to make a more formal distinction between the two cases.
 
-![image](./images/fv_triangles.png) ![image](./images/fv_nodes.png)
+![Finite-volume interpretation on triangular faces: volumes at faces](./images/fv_triangles.png) ![Continuous Galerkin variant: volumes around nodes with fluxes along edges](./images/fv_nodes.png)
 
 Variant 1: Volume at faces:
 ```javascript
@@ -992,7 +992,7 @@ The location index set is an integer variable that contains the indices of the l
 
 Contrary to a coordinate variable, the index set doesn't have to be monotonic. So, it can be used for creating subsets of the original locations as well as for renumbering the locations. If the `location_index_set` attribute is used on a variable, then the `mesh` and `location` attributes should not also be used on that variable.
 
-![image](./images/network_location_map.png)
+![Subset of nodes highlighted for location index set on a simple network](./images/network_location_map.png)
 
 ```javascript
 dimensions:
@@ -1030,7 +1030,7 @@ The indexing using by the CF [compression](http://cfconventions.org/Data/cf-conv
 
 Example of 0-based indexing:
 
-![image](./images/0-based_index.png)
+![Diagram of 1D network with edges numbered using 0-based indexing](./images/0-based_index.png)
 
 ```javascript
 dimensions:
@@ -1069,7 +1069,7 @@ Mesh1_edge_nodes =
 
 Example of 1-based indexing:
 
-![image](./images/1-based_index.png)
+![Diagram of 1D network with edges numbered using 1-based indexing](./images/1-based_index.png)
 
 ```javascript
 dimensions:

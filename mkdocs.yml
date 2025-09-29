@@ -23,7 +23,6 @@ markdown_extensions:
 theme: readthedocs
 docs_dir: src
 site_dir: _site
-google_analytics: ['UA-9133259-16', 'UGRID.github.io']
 
 plugins:
     - search
