@@ -2,21 +2,22 @@ name: MkDocs Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548  # v6.1.0
         with:
-          python-version: '3.12'
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |
@@ -27,8 +28,9 @@ jobs:
         run: |
           mkdocs build --strict
 
-      - name: Upload site artifact
-        uses: actions/upload-artifact@v4
+      - name: Deploy
+        if: success() && github.event_name == 'release'
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e  # v4.0.0
         with:
-          name: mkdocs-site
-          path: _site
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _site/
