@@ -125,7 +125,7 @@
 
 <p><strong><em>Status : First Draft</em></strong></p>
 <p><br><em>Hopefully, this can evolve into an agreed final form
-by the time of the next UGRID release. Contirbutions are welcome.</em></p>
+by the time of the next UGRID release. Contributions are welcome.</em></p>
 <h1 id="conformance-rules-for-ugrid-conventions-v1x">Conformance rules for UGRID Conventions v1.x<a class="headerlink" href="#conformance-rules-for-ugrid-conventions-v1x" title="Permanent link"></a></h1>
 <p>This information is intended to follow the practice established by the
 <a href="http://cfconventions.org/cf-conventions/conformance.html" title="CF Conventions Conformance pages">CF conformance pages</a>, as attached to the <a href="https://cfconventions.org/" title="CF metadata conventions">CF conventions</a>.</p>
@@ -139,7 +139,7 @@ in the manner of the <a href="https://flake8.pycqa.org/en/4.0.1/user/error-codes
 references by a conformance-checker utility. <sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup></p>
 <p><strong>This version</strong> is consistent with :</p>
 <ul>
-<li>UGRID v1.0 </li>
+<li>UGRID v1.0</li>
 <li><a href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.11/cf-conventions.html" title="CF version 1.11">CF version 1.11</a></li>
 </ul>
 <hr />
@@ -203,7 +203,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 </li>
 <li>A <strong><em>mesh coordinate</em></strong> is a variable listed in a coordinate attribute of a mesh</li>
 <li>A <strong><em>mesh connectivity</em></strong> is a variable listed in a connectivity attribute of a mesh <sup id="fnref4:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
-<li>A mesh is the <strong><em>parent mesh</em></strong> of those mesh coordinates or mesh connectivities which are included in any of 
+<li>A mesh is the <strong><em>parent mesh</em></strong> of those mesh coordinates or mesh connectivities which are included in any of
   its coordinate or connectivity attributes :
   This <em>defines</em> the &ldquo;parent mesh&rdquo; of any mesh coordinate or mesh connectivity. <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
 <li>The <strong><em>parent mesh</em></strong> of a location index set is that named in its <code>mesh</code> attribute</li>
@@ -232,7 +232,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li><a id="R102" href="#R102">R102</a> with the value <code>"mesh_topology"</code></li>
 </ul>
 </li>
-<li><a id="R103" href="#R103">R103</a> it must have a <code>topology_dimension</code> attribute, <ul>
+<li><a id="R103" href="#R103">R103</a> it must have a <code>topology_dimension</code> attribute,<ul>
 <li><a id="R104" href="#R104">R104</a> whose value is an integer between 0 and 2. <sup id="fnref3:4"><a class="footnote-ref" href="#fn:4">4</a></sup> <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
 </ul>
 </li>
@@ -249,11 +249,11 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li><a id="R110" href="#R110">R110</a> it must have a <code>node_coordinates</code> attribute</li>
 <li>an <code>edge_node_connectivity</code> attribute ..<ul>
 <li><a id="R111" href="#R111">R111</a> <em>must not</em> be present, if <code>topology_dimension</code> is 0. <sup id="fnref2:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
-<li><a id="R112" href="#R112">R112</a> <em>must</em> be present, if <code>topology_dimension</code> is 1. </li>
+<li><a id="R112" href="#R112">R112</a> <em>must</em> be present, if <code>topology_dimension</code> is 1.</li>
 </ul>
 </li>
 <li><a id="R113" href="#R113">R113</a> a <code>face_node_connectivity</code> attribute must be present
-    <em>if and only if</em> <code>topology_dimension</code> is 2  </li>
+    <em>if and only if</em> <code>topology_dimension</code> is 2</li>
 <li><a id="R114" href="#R114">R114</a> a <code>boundary_node_connectivity</code> attribute may be present,
   <em>only if</em> <code>topology_dimension</code> is 2 <sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup></li>
 <li>if the mesh has an <code>edge_node_connectivity</code>, then it has an <a id="edge-dimension"><strong>edge dimension</strong></a>, which<ul>
@@ -261,7 +261,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li><a id="R115" href="#R115">R115</a> <code>edge_dimension</code> must be the name of a dataset dimension</li>
 </ul>
 </li>
-<li><strong><em>or</em></strong>, <em>if there is no <code>edge_dimension</code> attribute</em>, the edge dimension is the <em>first</em> dimension of the <code>edge_node_connectivity</code> </li>
+<li><strong><em>or</em></strong>, <em>if there is no <code>edge_dimension</code> attribute</em>, the edge dimension is the <em>first</em> dimension of the <code>edge_node_connectivity</code></li>
 <li>when an edge dimension exists ..<ul>
 <li><a id="R116" href="#R116">R116</a> if any edge connectivity has the edge dimension as its <em>second</em> dimension,
   (instead of its first), then the mesh <em>must</em> have an <code>edge_dimension</code> attribute</li>
@@ -274,7 +274,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li><a id="R117" href="#R117">R117</a> <code>face_dimension</code> must be the name of a dataset dimension</li>
 </ul>
 </li>
-<li><strong><em>or</em></strong>, <em>if there is no <code>face_dimension</code> attribute</em>, the edge dimension is the <em>first</em> dimension of the <code>face_node_connectivity</code> </li>
+<li><strong><em>or</em></strong>, <em>if there is no <code>face_dimension</code> attribute</em>, the edge dimension is the <em>first</em> dimension of the <code>face_node_connectivity</code></li>
 <li>when a face dimension exists ..<ul>
 <li><a id="R118" href="#R118">R118</a> if any face connectivity has the face dimension as its <em>second</em> dimension,
   (instead of its first), then the mesh <em>must</em> have a <code>face_dimension</code> attribute</li>
@@ -290,9 +290,9 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
   if the mesh has both a face dimension and an edge dimension</li>
 <li><a id="R121" href="#R121">R121</a> an <code>edge_face_connectivity</code> attribute may only exist
   if the mesh has both a face dimension and an edge dimension</li>
-<li><a id="R122" href="#R122">R122</a> a <code>face_dimension</code> attribute may only exist if the mesh has a 
+<li><a id="R122" href="#R122">R122</a> a <code>face_dimension</code> attribute may only exist if the mesh has a
   <a href="#face-dimension">face dimension</a></li>
-<li><a id="R123" href="#R123">R123</a> an <code>edge_dimension</code> attribute may only exist if the mesh has an 
+<li><a id="R123" href="#R123">R123</a> an <code>edge_dimension</code> attribute may only exist if the mesh has an
   <a href="#edge-dimension">edge dimension</a></li>
 </ul>
 <h3 id="mesh-variable-recommendations">Mesh variable recommendations<a class="headerlink" href="#mesh-variable-recommendations" title="Permanent link"></a></h3>
@@ -302,7 +302,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li><a id="A103" href="#A103">A103</a> it should not have a <code>units</code> attribute</li>
 <li><a id="A104" href="#A104">A104</a> it should not share any of its element dimensions with other meshes <sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup></li>
 <li><a id="A105" href="#A105">A105</a> if it has multiple element dimensions, they should all be different</li>
-<li><a id="A106" href="#A106">A106</a> it should not have any attributes ending in &ldquo;_connectivity&rdquo;, &ldquo;_coordinates&rdquo; or 
+<li><a id="A106" href="#A106">A106</a> it should not have any attributes ending in &ldquo;_connectivity&rdquo;, &ldquo;_coordinates&rdquo; or
   &ldquo;_dimension&rdquo; which are not valid UGRID terms <sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup></li>
 </ul>
 <h2 id="mesh-coordinate-variables">Mesh coordinate variables<a class="headerlink" href="#mesh-coordinate-variables" title="Permanent link"></a></h2>
@@ -335,7 +335,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <p>For any mesh connectivity variable ..</p>
 <ul>
 <li><a id="R301" href="#R301">R301</a> it must have a <code>cf_role</code> attribute, which<ul>
-<li><a id="R302" href="#R302">R302</a> is a valid connectivity attribute name, and </li>
+<li><a id="R302" href="#R302">R302</a> is a valid connectivity attribute name, and</li>
 <li><a id="R303" href="#R303">R303</a> matches its referring connectivity attribute in the parent mesh</li>
 </ul>
 </li>
@@ -377,7 +377,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li><a id="R401" href="#R401">R401</a> it must have a <code>cf_role</code> attribute with the value <code>"location_index_set"</code></li>
 <li><a id="R402" href="#R402">R402</a> it must have a <code>mesh</code> attribute,
   which is a string containing the name of a valid mesh variable in the dataset</li>
-<li><a id="R403" href="#R403">R403</a> it must have a <code>location</code> attribute, which is one of <code>face</code>, <code>edge</code> or <code>node</code>, and <ul>
+<li><a id="R403" href="#R403">R403</a> it must have a <code>location</code> attribute, which is one of <code>face</code>, <code>edge</code> or <code>node</code>, and<ul>
 <li><a id="R404" href="#R404">R404</a> the corresponding location must exist in the parent mesh</li>
 </ul>
 </li>
@@ -391,7 +391,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li><a id="A403" href="#A403">A403</a> it should not have a <code>_FillValue</code> attribute</li>
 <li><a id="A404" href="#A404">A404</a> the length of its single dimension should be less than or equal to the corresponding
   element dimension of its parent mesh</li>
-<li><a id="A405" href="#A405">A405</a> its values should all be distinct, and <ul>
+<li><a id="A405" href="#A405">A405</a> its values should all be distinct, and<ul>
 <li><a id="A406" href="#A406">A406</a> they should all be valid indexes into the relevant element dimension
   of its parent mesh <sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup> <sup id="fnref3:8"><a class="footnote-ref" href="#fn:8">8</a></sup></li>
 </ul>
@@ -405,7 +405,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li><a id="R501" href="#R501">R501</a> there must be no <code>location_index_set</code> attribute</li>
 <li><a id="R502" href="#R502">R502</a> the <code>mesh</code> must be the name of a valid mesh variable in the dataset</li>
 <li><a id="R503" href="#R503">R503</a> there must be a <code>location</code> attribute,<ul>
-<li><a id="R504" href="#R504">R504</a> which is one of <code>face</code>, <code>edge</code> or <code>node</code>, and </li>
+<li><a id="R504" href="#R504">R504</a> which is one of <code>face</code>, <code>edge</code> or <code>node</code>, and</li>
 <li><a id="R505" href="#R505">R505</a> the corresponding dimension must exist in the parent mesh</li>
 </ul>
 </li>
@@ -457,7 +457,7 @@ errors.  For example, we will attempt to check as a mesh variable any variable t
 allowing for any <code>start_index</code> offset.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 <li id="fn:4">
-<p>For now at least, we <em>exclude</em> mention of full-3d meshes, whose status is currently in question : 
+<p>For now at least, we <em>exclude</em> mention of full-3d meshes, whose status is currently in question :
 cf. <a href="https://github.com/ugrid-conventions/ugrid-conventions/issues/53#issuecomment-832138564">this GitHub discussion</a>, as this would add considerable complexity here.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:4" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 <li id="fn:5">
