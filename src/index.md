@@ -20,7 +20,7 @@ Due to the complexity in unstructured mesh models, some concepts have not yet be
 
 ## Known issues
 
-Known issues left for future versions include: 
+Known issues left for future versions include:
 
 * adaptive mesh topology (this could be supported by defining a `time_concatenation` attribute for a time-series of mesh topologies)
 * higher order element data; for an idea how such data could be stored see this other [proposal](https://publicwiki.deltares.nl/display/NETCDF/Finite+Element+based+CF+proposal+for+Unstructured+Grid+data+model).

@@ -206,7 +206,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "face";
-      
+
     int Numlimdt(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :standard_name = "*Numlimdt";
@@ -215,7 +215,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "face";
-      
+
     double taus(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :standard_name = "taucurrent";
@@ -224,7 +224,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "face";
-      
+
     double unorm(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :standard_name = "sea_water_speed";
@@ -232,7 +232,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "node";
-      
+
     double u0(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :standard_name = "sea_water_speed_old";
@@ -270,7 +270,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "face";
-      
+
     double ucy(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :standard_name = "northward_sea_water_velocity";
@@ -279,14 +279,14 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "face";
-      
+
     double czs(time=5, nFlowElem=202096);
       :long_name = "Chezy roughness";
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :units = "m0.5s-1";
       :mesh = "Mesh2D";
       :location = "face";
-      
+
     double windx(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :long_name = "eastward air velocity on cell center";
@@ -294,7 +294,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "face";
-      
+
     double windy(time=5, nFlowElem=202096);
       :coordinates = "FlowElem_xcc FlowElem_ycc";
       :long_name = "northward air velocity on cell center";
@@ -302,7 +302,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "face";
-      
+
     double windxu(time=5, nFlowLink=361553);
       :coordinates = "FlowLink_xu FlowLink_yu";
       :long_name = "eastward air velocity on flow links";
@@ -311,7 +311,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "node";
-      
+
     double windyu(time=5, nFlowLink=361553);
       :coordinates = "FlowElem_xu FlowElem_yu";
       :long_name = "northward air velocity on flow links";
@@ -320,7 +320,7 @@ netcdf C:/Users/rsignell/Downloads/S8_map.nc {
       :grid_mapping = "projected_coordinate_system";
       :mesh = "Mesh2D";
       :location = "node";
-      
+
   // global attributes:
   :institution = "Deltares";
   :references = "http://www.deltares.nl";
