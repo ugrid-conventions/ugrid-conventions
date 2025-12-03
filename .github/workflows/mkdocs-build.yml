@@ -1,9 +1,16 @@
-name: MkDocs Build
+name: Documentation
+
+# no permissions by default
+permissions: {}
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
 
 jobs:
   build:
