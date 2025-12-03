@@ -22,16 +22,6 @@
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
       <script>hljs.highlightAll();</script> 
-      <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-        ga('create', "UA-9133259-16", "UGRID.github.io");
-        ga('send', 'pageview');
-      </script>
-    
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -54,7 +44,7 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Conformance</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Conformance</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#preamble-terms-and-definitions">Preamble : Terms and Definitions</a>
     </li>
@@ -196,13 +186,13 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li>these must be names of variables existing in the same dataset : this is implicit in all uses</li>
 </ul>
 </li>
-<li>A <strong><em>coordinate attribute</em></strong> of a mesh is a varlist with one of the following names <sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup> <sup id="fnref2:4"><a class="footnote-ref" href="#fn:4">4</a></sup><ul>
+<li>A <strong><em>coordinate attribute</em></strong> of a mesh is a varlist with one of the following names <sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup> <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup><ul>
 <li><code>node_coordinates</code></li>
 <li><code>edge_coordinates</code></li>
 <li><code>face_coordinates</code></li>
 </ul>
 </li>
-<li>A <strong><em>connectivity attribute</em></strong> of a mesh is a varlist with one of the following names <sup id="fnref3:2"><a class="footnote-ref" href="#fn:2">2</a></sup> <sup id="fnref3:4"><a class="footnote-ref" href="#fn:4">4</a></sup><ul>
+<li>A <strong><em>connectivity attribute</em></strong> of a mesh is a varlist with one of the following names <sup id="fnref3:2"><a class="footnote-ref" href="#fn:2">2</a></sup> <sup id="fnref2:4"><a class="footnote-ref" href="#fn:4">4</a></sup><ul>
 <li><code>edge_node_connectivity</code></li>
 <li><code>face_node_connectivity</code></li>
 <li><code>face_edge_connectivity</code></li>
@@ -215,7 +205,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 <li>A <strong><em>mesh connectivity</em></strong> is a variable listed in a connectivity attribute of a mesh <sup id="fnref4:2"><a class="footnote-ref" href="#fn:2">2</a></sup></li>
 <li>A mesh is the <strong><em>parent mesh</em></strong> of those mesh coordinates or mesh connectivities which are included in any of 
   its coordinate or connectivity attributes :
-  This <em>defines</em> the &ldquo;parent mesh&rdquo; of any mesh coordinate or mesh connectivity. <sup id="fnref3:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
+  This <em>defines</em> the &ldquo;parent mesh&rdquo; of any mesh coordinate or mesh connectivity. <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
 <li>The <strong><em>parent mesh</em></strong> of a location index set is that named in its <code>mesh</code> attribute</li>
 <li>the <strong><em>element dimensions</em></strong> of a mesh are those indexing its elements (i.e. nodes, edges or faces),
   or mesh boundaries, within any of its mesh coordinates and mesh connectivities.<ul>
@@ -243,7 +233,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 </ul>
 </li>
 <li><a id="R103" href="#R103">R103</a> it must have a <code>topology_dimension</code> attribute, <ul>
-<li><a id="R104" href="#R104">R104</a> whose value is an integer between 0 and 2. <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> <sup id="fnref2:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
+<li><a id="R104" href="#R104">R104</a> whose value is an integer between 0 and 2. <sup id="fnref3:4"><a class="footnote-ref" href="#fn:4">4</a></sup> <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
 </ul>
 </li>
 <li>all mesh connectivity and coordinate attributes must be varlists, that is ..<ul>
@@ -258,7 +248,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
   <a href="#mesh-connectivity-variables">valid mesh connectivities</a></li>
 <li><a id="R110" href="#R110">R110</a> it must have a <code>node_coordinates</code> attribute</li>
 <li>an <code>edge_node_connectivity</code> attribute ..<ul>
-<li><a id="R111" href="#R111">R111</a> <em>must not</em> be present, if <code>topology_dimension</code> is 0. <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
+<li><a id="R111" href="#R111">R111</a> <em>must not</em> be present, if <code>topology_dimension</code> is 0. <sup id="fnref2:5"><a class="footnote-ref" href="#fn:5">5</a></sup></li>
 <li><a id="R112" href="#R112">R112</a> <em>must</em> be present, if <code>topology_dimension</code> is 1. </li>
 </ul>
 </li>
@@ -335,7 +325,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
   <br>(see <a href="http://cfconventions.org/cf-conventions/conformance.html" title="CF Conventions Conformance pages">CF conformance</a> section 3.1)</li>
 <li>if it has a <code>bounds</code> attribute, then<ul>
 <li><a id="A205" href="#A205">A205</a> the data values of the bounds variable should match those calculated
-  from the relevant UGRID element coordinates and connectivities <sup id="fnref3:8"><a class="footnote-ref" href="#fn:8">8</a></sup></li>
+  from the relevant UGRID element coordinates and connectivities <sup id="fnref2:8"><a class="footnote-ref" href="#fn:8">8</a></sup></li>
 </ul>
 </li>
 <li><a id="A206" href="#A206">A206</a> if its location is &lsquo;node&rsquo;, then it should not have a <code>bounds</code> attribute.</li>
@@ -365,7 +355,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 </ul>
 <h3 id="mesh-connectivity-variable-recommendations">Mesh connectivity variable recommendations<a class="headerlink" href="#mesh-connectivity-variable-recommendations" title="Permanent link"></a></h3>
 <ul>
-<li><a id="A301" href="#A301">A301</a> it should have <em>one and only one</em> parent mesh <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
+<li><a id="A301" href="#A301">A301</a> it should have <em>one and only one</em> parent mesh <sup id="fnref3:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
 <li><a id="A302" href="#A302">A302</a> it should have an integer type</li>
 <li><a id="A303" href="#A303">A303</a> any <code>start_index</code> attribute should have an integer type</li>
 <li><a id="A304" href="#A304">A304</a> if it has a <code>cf_role</code> of <code>edge_node_connectivity</code> or <code>boundary_node_connectivity</code>,
@@ -378,7 +368,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
 </ul>
 </li>
 <li><a id="A308" href="#A308">A308</a> all its non-missing values should be valid indices into the relevant dimension of
-  the parent mesh, i.e. the <em>second</em> location named in the <code>cf_role</code> <sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup> <sup id="fnref2:8"><a class="footnote-ref" href="#fn:8">8</a></sup>.</li>
+  the parent mesh, i.e. the <em>second</em> location named in the <code>cf_role</code> <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> <sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>.</li>
 </ul>
 <h2 id="location-index-set-variables">Location index set variables<a class="headerlink" href="#location-index-set-variables" title="Permanent link"></a></h2>
 <p>For any location index set variable ..</p>
@@ -403,7 +393,7 @@ references by a conformance-checker utility. <sup id="fnref:10"><a class="footno
   element dimension of its parent mesh</li>
 <li><a id="A405" href="#A405">A405</a> its values should all be distinct, and <ul>
 <li><a id="A406" href="#A406">A406</a> they should all be valid indexes into the relevant element dimension
-  of its parent mesh <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> <sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup></li>
+  of its parent mesh <sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup> <sup id="fnref3:8"><a class="footnote-ref" href="#fn:8">8</a></sup></li>
 </ul>
 </li>
 <li><a id="A407" href="#A407">A407</a> any <code>start_index</code> attribute should have an integer type</li>
